@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interface Caisse POS</title>
+</head>
+<body>
+    <h1>Interface de Caisse (Web/Chromium)</h1>
+    <button onclick="imprimerTest()">Imprimer Reçu</button>
+    <button onclick="ouvrirTiroirTest()">Ouvrir Tiroir-Caisse</button>
+    <div id="status">Statut: Prêt.</div>
+    <script>
+        function imprimerTest() {
+            const saleData = { transactionId: "TID-12345", total: 99.99, client: "Jean Dupont" };
+            if (typeof AndroidPOS !== 'undefined') {
+                document.getElementById('status').textContent = "Statut: Impression demandée...";
+                AndroidPOS.printReceipt(JSON.stringify(saleData)); 
+                AndroidPOS.log("Impression lancée depuis JS.");
+            } else {
+                document.getElementById('status').textContent = "ERREUR: Le pont AndroidPOS n'est pas disponible.";
+            }
+        }
+        function ouvrirTiroirTest() {
+            if (typeof AndroidPOS !== 'undefined') {
+                document.getElementById('status').textContent = "Statut: Ouverture du tiroir-caisse demandée.";
+                AndroidPOS.openCashDrawer(); 
+            }
+        }
+        function handlePrintResponse(success) {
+            if (success) {
+                document.getElementById('status').textContent = "Statut: Impression terminée avec SUCCÈS.";
+            } else {
+                document.getElementById('status').textContent = "Statut: ÉCHEC de l'impression. Vérifiez la connexion.";
+            }
+        }
+    </script>
+</body>
+</html>
