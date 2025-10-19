@@ -19,10 +19,13 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Email et mot de passe requis')
         }
 
-        const user = await db.employee.findUnique({ where: { email: credentials.email } })
-        if (!user) throw new Error('Identifiants invalides')
+  const user = await db.employee.findUnique({ where: { email: credentials.email } })
+  if (!user) throw new Error('Identifiants invalides')
 
-        const valid = await bcrypt.compare(credentials.password, user.password)
+  // prisma client types may be stale until `prisma generate` has been run against the
+  // PostgreSQL schema in the repo. Cast to any to access password at runtime.
+  const storedPassword = (user as any).password
+  const valid = await bcrypt.compare(credentials.password, storedPassword)
         if (!valid) throw new Error('Identifiants invalides')
 
         // Expose minimal user fields to session
