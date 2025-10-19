@@ -4,6 +4,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import bcrypt from 'bcryptjs'
 import { db } from './db'
 import { getServerSession } from 'next-auth/next'
+import type { Employee } from '@prisma/client'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db as any),
@@ -14,28 +15,28 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' }
       },
-      async authorize(credentials) {
+          async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Email et mot de passe requis')
         }
 
-  const user = await db.employee.findUnique({ where: { email: credentials.email } })
-  if (!user) throw new Error('Identifiants invalides')
+      const user = await db.employee.findUnique({ where: { email: credentials.email } })
+      if (!user) throw new Error('Identifiants invalides')
 
-  // prisma client types may be stale until `prisma generate` has been run against the
-  // PostgreSQL schema in the repo. Cast to any to access password at runtime.
-  const storedPassword = (user as any).password
-  const valid = await bcrypt.compare(credentials.password, storedPassword)
-        if (!valid) throw new Error('Identifiants invalides')
+      // user is typed by Prisma. Ensure password exists and compare it.
+      const storedPassword: string | undefined = (user as Employee).password
+      if (!storedPassword) throw new Error('Compte invalide')
+      const valid = await bcrypt.compare(credentials.password, storedPassword)
+      if (!valid) throw new Error('Identifiants invalides')
 
-        // Expose minimal user fields to session
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          restaurantId: user.restaurantId
-        } as any
+      // Expose minimal user fields to session
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        restaurantId: user.restaurantId
+      } as any
       }
     })
   ],
