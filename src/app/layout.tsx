@@ -14,24 +14,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "GESTION RESTAURANT - Gestion de restaurant",
+  description:
+    "GESTION RESTAURANT — Point of sale and restaurant management built with Next.js, TypeScript, Tailwind CSS, and shadcn/ui.",
+  keywords: [
+    "GESTION RESTAURANT",
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "shadcn/ui",
+    "restaurant",
+    "POS",
+  ],
+  authors: [{ name: "GESTION RESTAURANT Team" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "GESTION RESTAURANT",
+    description: "Restaurant management and POS system",
+    url: "/",
+    siteName: "GESTION RESTAURANT",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    title: "GESTION RESTAURANT",
+    description: "Restaurant management and POS system",
   },
 };
 

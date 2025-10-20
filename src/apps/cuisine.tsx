@@ -125,7 +125,9 @@ export default function CuisineApp() {
       ));
     });
 
-    return () => newSocket.close();
+    return () => {
+      newSocket.close();
+    }
   }, []);
 
   const updateOrderStatus = (orderId: string, newStatus: KitchenOrder['status']) => {

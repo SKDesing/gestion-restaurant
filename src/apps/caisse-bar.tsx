@@ -68,7 +68,9 @@ export default function CaisseBarApp() {
       setOrders(prev => [order, ...prev.slice(0, 19)]);
     });
 
-    return () => newSocket.close();
+    return () => {
+      newSocket.close();
+    }
   }, []);
 
   const addToCart = (item: Omit<CartItem, 'quantity'>) => {

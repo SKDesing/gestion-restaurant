@@ -23,8 +23,33 @@ import {
   Trash2
 } from 'lucide-react'
 
+// Types
+type Campaign = {
+  id: string
+  name: string
+  subject: string
+  type: string
+  status: string
+  totalRecipients: number
+  openedCount: number
+  clickedCount: number
+  sentAt?: string
+  scheduledAt?: string
+  createdAt?: string
+}
+
+type Subscriber = {
+  id: string
+  name: string
+  email: string
+  loyaltyPoints: number
+  frequency: string
+  preferredTime: string
+  subscribedAt: string
+}
+
 // Mock data pour les campagnes
-const mockCampaigns = [
+const mockCampaigns: Campaign[] = [
   {
     id: '1',
     name: 'Offre Spéciale Été',
@@ -61,7 +86,7 @@ const mockCampaigns = [
 ]
 
 // Mock data pour les abonnés
-const mockSubscribers = [
+const mockSubscribers: Subscriber[] = [
   {
     id: '1',
     name: 'Marie Dupont',
@@ -92,8 +117,8 @@ const mockSubscribers = [
 ]
 
 export default function NewsletterDemo() {
-  const [campaigns, setCampaigns] = useState(mockCampaigns)
-  const [subscribers, setSubscribers] = useState(mockSubscribers)
+  const [campaigns, setCampaigns] = useState<Campaign[]>(mockCampaigns)
+  const [subscribers, setSubscribers] = useState<Subscriber[]>(mockSubscribers)
   const [newCampaign, setNewCampaign] = useState({
     name: '',
     subject: '',
@@ -108,13 +133,13 @@ export default function NewsletterDemo() {
     preferredTime: '10:00'
   })
 
-  const calculateOpenRate = (campaign: any) => {
-    if (campaign.totalRecipients === 0) return 0
+  const calculateOpenRate = (campaign: Campaign): string => {
+    if (campaign.totalRecipients === 0) return '0.0'
     return ((campaign.openedCount / campaign.totalRecipients) * 100).toFixed(1)
   }
 
-  const calculateClickRate = (campaign: any) => {
-    if (campaign.openedCount === 0) return 0
+  const calculateClickRate = (campaign: Campaign): string => {
+    if (campaign.openedCount === 0) return '0.0'
     return ((campaign.clickedCount / campaign.openedCount) * 100).toFixed(1)
   }
 
@@ -128,13 +153,16 @@ export default function NewsletterDemo() {
   }
 
   const handleCreateCampaign = () => {
-    const campaign = {
+    const campaign: Campaign = {
       id: Date.now().toString(),
-      ...newCampaign,
+      name: newCampaign.name,
+      subject: newCampaign.subject,
+      type: newCampaign.type,
       status: 'DRAFT',
       totalRecipients: 0,
       openedCount: 0,
       clickedCount: 0,
+      scheduledAt: newCampaign.scheduledAt || undefined,
       createdAt: new Date().toISOString()
     }
     setCampaigns(prev => [campaign, ...prev])
@@ -181,7 +209,7 @@ export default function NewsletterDemo() {
       loyaltyPoints: 0,
       subscribedAt: new Date().toISOString()
     }
-    setSubscribers(prev => [subscriber, ...prev])
+  setSubscribers(prev => [subscriber, ...prev])
     setNewSubscriber({
       name: '',
       email: '',
@@ -193,11 +221,11 @@ export default function NewsletterDemo() {
   const totalStats = {
     totalCampaigns: campaigns.length,
     totalSubscribers: subscribers.length,
-    avgOpenRate: campaigns.filter(c => c.status === 'SENT').length > 0 
+    avgOpenRate: campaigns.filter(c => c.status === 'SENT').length > 0
       ? (campaigns.filter(c => c.status === 'SENT')
-          .reduce((acc, c) => acc + parseFloat(calculateOpenRate(c)), 0) / 
+          .reduce((acc, c) => acc + parseFloat(calculateOpenRate(c)), 0) /
           campaigns.filter(c => c.status === 'SENT').length).toFixed(1)
-      : 0,
+      : '0.0',
     totalSent: campaigns.reduce((acc, c) => acc + c.totalRecipients, 0)
   }
 

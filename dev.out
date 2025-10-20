@@ -1,0 +1,47 @@
+nohup: les entrées sont ignorées
+> Ready on http://127.0.0.1:4000
+> Socket.IO server running at ws://127.0.0.1:4000/api/socketio
+ ✓ Compiled /middleware in 344ms (207 modules)
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 908ms (586 modules)
+ GET /api/auth/csrf 200 in 1973ms
+prisma:query SELECT "public"."employees"."id", "public"."employees"."name", "public"."employees"."email", "public"."employees"."password", "public"."employees"."phone", "public"."employees"."role"::text, "public"."employees"."salary", "public"."employees"."hireDate", "public"."employees"."status"::text, "public"."employees"."address", "public"."employees"."birthDate", "public"."employees"."notes", "public"."employees"."restaurantId", "public"."employees"."createdAt", "public"."employees"."updatedAt" FROM "public"."employees" WHERE ("public"."employees"."email" = $1 AND 1=1) LIMIT $2 OFFSET $3
+ POST /api/auth/callback/credentials 302 in 221ms
+ ○ Compiling / ...
+ ✓ Compiled / in 4s (1214 modules)
+ POST / 200 in 4421ms
+ GET /api/auth/session 200 in 335ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 578ms (819 modules)
+ GET /auth/login?callbackUrl=%2F 404 in 766ms
+ GET /auth/login?callbackUrl=%2F.well-known%2Fappspecific%2Fcom.chrome.devtools.json 404 in 35ms
+ GET /auth/login?callbackUrl=%2F 404 in 50ms
+ GET /auth/login?callbackUrl=%2F.well-known%2Fappspecific%2Fcom.chrome.devtools.json 404 in 40ms
+ ✓ Compiled in 561ms (640 modules)
+ ✓ Compiled /_not-found in 455ms (819 modules)
+ GET /auth/login?callbackUrl=%2F 404 in 551ms
+ GET /auth/login?callbackUrl=%2F 404 in 20ms
+ GET /auth/login?callbackUrl=%2F 404 in 83ms
+ GET /auth/login?callbackUrl=%2F.well-known%2Fappspecific%2Fcom.chrome.devtools.json 404 in 41ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 2.4s (399 modules)
+ GET /favicon.ico 200 in 2649ms
+ GET /auth/login?callbackUrl=%2F 404 in 123ms
+ GET /auth/login?callbackUrl=%2F.well-known%2Fappspecific%2Fcom.chrome.devtools.json 404 in 35ms
+ GET /favicon.ico 200 in 22ms
+ GET /auth/login 404 in 38ms
+ ○ Compiling /auth/login ...
+ ✓ Compiled /auth/login in 4.7s (1134 modules)
+ GET /auth/login?callbackUrl=%2F 200 in 4815ms
+ GET /auth/login?callbackUrl=%2F 200 in 23ms
+ ✓ Compiled /favicon.ico in 238ms (466 modules)
+ GET /favicon.ico 200 in 365ms
+ GET /favicon.ico 200 in 9ms
+ GET /auth/login?callbackUrl=%2F 200 in 270ms
+ ✓ Compiled in 700ms (1150 modules)
+ GET /favicon.ico 200 in 285ms
+ GET /favicon.ico 200 in 17ms
+ GET /auth/login?callbackUrl=%2F 200 in 70ms
+ GET /favicon.ico 200 in 9ms
+ GET /favicon.ico 200 in 10ms
+ GET /auth/login 200 in 123ms
