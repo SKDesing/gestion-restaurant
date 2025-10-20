@@ -84,7 +84,7 @@ add @esbuild/android-arm64 0.25.10
 add @esbuild/android-arm 0.25.10
 add @esbuild/aix-ppc64 0.25.10
 
-added 85 packages, and audited 966 packages in 2s
+added 85 packages, and audited 966 packages in 3s
 
 307 packages are looking for funding
   run `npm fund` for details
