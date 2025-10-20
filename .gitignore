@@ -76,3 +76,22 @@ tmp-*
 
 # IDE run logs
 *.log
+
+# Audit & ephemeral artifacts
+cookiejar.txt
+csrf_*.json
+session_*.json
+signin_*.txt
+signin_raw.txt
+csrf_raw.txt
+signin_out.txt
+session_raw.txt
+build_output.txt
+tsc_output.txt
+lint_output*.txt
+audit_*.sh
+audit_*.json
+audit_*.txt
+logs/
+server_test_prod.pid
+deploy.sh
