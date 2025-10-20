@@ -20,16 +20,30 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Email et mot de passe requis')
         }
 
-      const user = await db.employee.findUnique({ where: { email: credentials.email } })
-      if (!user) throw new Error('Identifiants invalides')
+            console.log('[NextAuth] authorize: attempt for email=', credentials.email)
+        const user = await (db as any).employee.findUnique({ where: { email: credentials.email } })
+            if (!user) {
+              console.log('[NextAuth] authorize: user not found for', credentials.email)
+              throw new Error('Identifiants invalides')
+            }
 
-    // user is typed by Prisma. Ensure password exists and compare it.
-    type EmployeeWithPassword = Employee & { password?: string }
-    const userWithPassword = user as unknown as EmployeeWithPassword
-    const storedPassword: string | undefined = userWithPassword.password
-    if (!storedPassword) throw new Error('Compte invalide')
-    const valid = await bcrypt.compare(credentials.password, storedPassword)
-      if (!valid) throw new Error('Identifiants invalides')
+            // user is typed by Prisma. Ensure password exists and compare it.
+            type EmployeeWithPassword = Employee & { password?: string }
+            const userWithPassword = user as unknown as EmployeeWithPassword
+            const storedPassword: string | undefined = userWithPassword.password
+            if (!storedPassword) {
+              console.log('[NextAuth] authorize: no stored password for user', credentials.email)
+              throw new Error('Compte invalide')
+            }
+
+            // Avoid logging the full hash; log length only for debug
+            console.log('[NextAuth] authorize: storedPassword length=', storedPassword.length)
+            const valid = await bcrypt.compare(credentials.password, storedPassword)
+            console.log('[NextAuth] authorize: bcrypt.compare result=', valid)
+            if (!valid) {
+              console.log('[NextAuth] authorize: invalid credentials for', credentials.email)
+              throw new Error('Identifiants invalides')
+            }
 
       // Expose minimal user fields to session
           return {

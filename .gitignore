@@ -63,3 +63,16 @@ prompt
 server.log
 dev.out
 .dev_pid
+
+# Android builds
+android-pos-app-clean/release/
+*.apk
+
+# Local databases and temp
+*.db
+*.sqlite
+tmp/
+tmp-*
+
+# IDE run logs
+*.log
