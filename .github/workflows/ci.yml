@@ -4,57 +4,75 @@ on:
   push:
     branches: [ main, 'audit/**' ]
   pull_request:
-    branches: [ main ]
+    name: CI
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: gestion_restaurant_test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd="pg_isready -U postgres" --health-interval=10s --health-timeout=5s --health-retries=5
+    on:
+      push:
+        branches: [ main, 'audit/**' ]
+      pull_request:
+        branches: [ main ]
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    jobs:
+      build-and-test:
+        name: Build, typecheck, test
+        runs-on: ubuntu-latest
+        services:
+          postgres:
+            image: postgres:14
+            env:
+              POSTGRES_USER: prisma
+              POSTGRES_PASSWORD: prisma
+              POSTGRES_DB: gestion_test
+            ports:
+              - 5432:5432
+            options: >-
+              --health-cmd="pg_isready -U prisma -d gestion_test" --health-interval=10s --health-timeout=5s --health-retries=5
 
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm ci
+          - name: Setup Node.js
+            uses: actions/setup-node@v4
+            with:
+              node-version: '20'
 
-      - name: Generate Prisma client
-        run: npx prisma generate
+          - name: Install dependencies
+            run: npm ci
 
-      - name: TypeScript check
-        run: npx tsc --noEmit
+          - name: Wait for Postgres
+            run: |
+              for i in {1..30}; do
+                pg_isready -h localhost -p 5432 -U prisma && break || sleep 1
+              done
 
-      - name: Lint
-        run: npm run lint --if-present
+          - name: Generate Prisma client
+            env:
+              DATABASE_URL: postgresql://prisma:prisma@localhost:5432/gestion_test
+            run: npx prisma generate
 
-      - name: Run tests
-        run: npm test --if-present
+          - name: Apply migrations (best-effort)
+            env:
+              DATABASE_URL: postgresql://prisma:prisma@localhost:5432/gestion_test
+            run: npx prisma migrate deploy || true
 
-      - name: Build Next.js
-        run: npm run build
-name: CI
+          - name: Seed database (if present)
+            env:
+              DATABASE_URL: postgresql://prisma:prisma@localhost:5432/gestion_test
+            run: npx tsx prisma/seed.ts || true
 
-on:
-  push:
-    branches: [ main, master, feature/** ]
-  name: CI
+          - name: TypeScript check
+            run: npx tsc --noEmit
 
-  on:
+          - name: Lint
+            run: npm run lint --if-present
+
+          - name: Run tests
+            run: npm test --if-present
+
+          - name: Build Next.js
+            run: npm run build
+
     push:
       branches: [ main, master, feature/** ]
     pull_request:
