@@ -1,0 +1,14 @@
+* 687175a chore: add .eslintignore to reduce lint noise
+* 86e7973 chore(audit): bump react-syntax-highlighter to ^15.6.6 and update lockfile/config
+* 289a6bf fix: gate auth logs for production; upgrade react-syntax-highlighter to v5.8.0
+* 58767ca chore: audit fixes, build deps, add .gitignore, and debug auth logging
+* f397312 chore: ensure Tailwind packages are in dependencies so Next can resolve @tailwindcss/postcss at build time
+* 773a768 chore(ci/docker): add CI workflow, docker-compose; fix server binding and seed; build artifacts and Android packaging fixes
+* e6577a7 chore: improve auth login UX; remove accidental runtime logs and ignore them
+* 6339136 feat(auth): add minimal auth pages for login/register to satisfy middleware; fix android build script; export assets and build APK
+* b3073fb chore(ci): add CI workflow, production Dockerfile and docker-compose; fix NextAuth route and auth typing
+* 0d7d95c chore: apply runtime fixes (socket app-router noop, lucide imports, auth password cast) and add migration + lockfile
+* a9d99c8 feat(auth+db): switch prisma to postgresql, add employee password, add NextAuth config and middleware, add pg and adapter deps
+* 573d721 chore: add .env.example (Postgres/NextAuth/Redis)
+* 47904be chore: allow .env.example in git by exception in .gitignore
+* fdccf13 feat(android): add android-pos-app-clean build script, wrapper and README

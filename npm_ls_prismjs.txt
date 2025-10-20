@@ -1,0 +1,6 @@
+nextjs_tailwind_shadcn_ts@0.1.0 /home/soufiane/Bureau/gestion restaurant
+└─┬ @mdxeditor/editor@3.47.0
+  └─┬ @lexical/markdown@0.35.0
+    └─┬ @lexical/code@0.35.0
+      └── prismjs@1.30.0
+

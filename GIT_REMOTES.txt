@@ -1,0 +1,2 @@
+origin	git@github.com:SKDesing/gestion-restaurant.git (fetch)
+origin	git@github.com:SKDesing/gestion-restaurant.git (push)

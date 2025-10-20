@@ -1,0 +1,68 @@
+=== ANALYSE D'INCOHERENCES ===
+
+--- Next.js Config vs Package.json ---
+next-auth/prisma-adapter": "^1.0.4
+next": "^15.3.5
+next-auth": "^4.24.11
+next-intl": "^4.3.4
+next-themes": "^0.4.6
+next": "15.3.5
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  // Removed `output: "export"` to allow dynamic API routes and middleware
+  /* config options here */
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // 禁用 Next.js 热重载，由 nodemon 处理重编译
+  reactStrictMode: false,
+  webpack: (config, { dev }) => {
+    if (dev) {
+      // 禁用 webpack 的热模块替换
+      config.watchOptions = {
+        ignored: ['**/*'], // 忽略所有文件变化
+      };
+    }
+    return config;
+  },
+  eslint: {
+
+--- Prisma Schema vs .env ---
+  provider = "prisma-client-js"
+  provider = "postgresql"
+.env.example:DATABASE_URL="postgresql://restaurant:restaurant_password@localhost:5432/restaurant_db"
+.env.example:DEV_DATABASE_URL="file:./dev.db"
+.env:DATABASE_URL="postgresql://restaurant:restaurant_password@localhost:5432/restaurant_db"
+
+--- NextAuth Configuration ---
+./src/lib/auth.ts
+./tmp/auth_test_4001.js
+./.git/logs/refs/heads/feature/auth-postgres
+./.git/logs/refs/remotes/origin/feature/auth-postgres
+./.git/refs/heads/feature/auth-postgres
+./.git/refs/remotes/origin/feature/auth-postgres
+.env.example:# NEXTAUTH
+.env.example:NEXTAUTH_URL="http://localhost:3000"
+.env.example:NEXTAUTH_SECRET="change_me_to_a_strong_random_value"
+.env:NEXTAUTH_URL="http://127.0.0.1:4000"
+.env:NEXTAUTH_SECRET="change_me_to_a_strong_random_value"
+
+--- Docker Configuration ---
+-rw-rw-r-- 1 soufiane soufiane  596 oct.  20 01:21 docker-compose.prod.yml
+-rw-rw-r-- 1 soufiane soufiane 1185 oct.  20 03:33 docker-compose.yml
+-rw-rw-r-- 1 soufiane soufiane  614 oct.  20 02:03 Dockerfile
+b61a40025fbb   redis:7-alpine                                                    "docker-entrypoint.s…"   16 hours ago   Up 5 hours                      0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp       gestionrestaurant-redis-1
+0e1de3236345   postgres:15-alpine                                                "docker-entrypoint.s…"   16 hours ago   Up 5 hours (healthy)            0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp       gestionrestaurant-postgres-1
+3a9d9c57f862   gestion-restaurant:local                                          "docker-entrypoint.s…"   18 hours ago   Up 18 hours                     0.0.0.0:5000->4000/tcp, [::]:5000->4000/tcp       gr_test2
+3cc6a9ee3102   postgres:15-alpine                                                "docker-entrypoint.s…"   19 hours ago   Up 19 hours                     0.0.0.0:55432->5432/tcp, [::]:55432->5432/tcp     gestion_test_postgres
+d4a1f7ad6fde   nginx:alpine                                                      "/docker-entrypoint.…"   3 days ago     Restarting (1) 38 seconds ago                                                     gestionderestaurantcapverdienportugaisetbresilien-nginx-1
+b6c90c24638f   gestionderestaurantcapverdienportugaisetbresilien-app             "docker-entrypoint.s…"   3 days ago     Exited (1) 39 hours ago                                                           gestionderestaurantcapverdienportugaisetbresilien-app-1
+faaf252279da   gestionderestaurantcapverdienportugaisetbresilien-python-worker   "bash -c 'source /ap…"   3 days ago     Restarting (1) 46 seconds ago                                                     gestionderestaurantcapverdienportugaisetbresilien-python-worker-1
+ee7004884fc3   gestionderestaurantcapverdienportugaisetbresilien-worker          "docker-entrypoint.s…"   3 days ago     Restarting (1) 34 seconds ago                                                     gestionderestaurantcapverdienportugaisetbresilien-worker-1
+5e904542ddc3   grafana/grafana:latest                                            "/run.sh"                3 days ago     Up 39 hours                     0.0.0.0:3001->3000/tcp, [::]:3001->3000/tcp       gestionderestaurantcapverdienportugaisetbresilien-grafana-1
+b06c4c94a44d   mongo:6                                                           "docker-entrypoint.s…"   3 days ago     Up 39 hours                     0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp   gestionderestaurantcapverdienportugaisetbresilien-mongodb-1
+6cbfa31c74a9   timescale/timescaledb:latest-pg14                                 "docker-entrypoint.s…"   3 days ago     Up 39 hours                     0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp       gestionderestaurantcapverdienportugaisetbresilien-timescaledb-1
+38d68a1f195f   redis:7-alpine                                                    "docker-entrypoint.s…"   3 days ago     Up 39 hours                     0.0.0.0:6380->6379/tcp, [::]:6380->6379/tcp       gestionderestaurantcapverdienportugaisetbresilien-redis-1
+dfe31893c723   postgres:15-alpine                                                "docker-entrypoint.s…"   3 days ago     Up 39 hours                     0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp       gestionderestaurantcapverdienportugaisetbresilien-postgres-1
+e13b8b181955   prom/prometheus:latest                                            "/bin/prometheus --c…"   3 days ago     Up 39 hours                     0.0.0.0:9090->9090/tcp, [::]:9090->9090/tcp       gestionderestaurantcapverdienportugaisetbresilien-prometheus-1
