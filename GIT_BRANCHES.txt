@@ -1,4 +1,4 @@
-* audit/fix-react-syntax-highlighter                687175a [en avance de 1] chore: add .eslintignore to reduce lint noise
+* audit/fix-react-syntax-highlighter                31a9e20 [en avance de 2] feat(tablets): add Chromium multi-window launcher + bar/admin pages; temp debug removed
   feature/auth-postgres                             289a6bf fix: gate auth logs for production; upgrade react-syntax-highlighter to v5.8.0
   main                                              fdccf13 feat(android): add android-pos-app-clean build script, wrapper and README
   remotes/origin/audit/fix-react-syntax-highlighter 86e7973 chore(audit): bump react-syntax-highlighter to ^15.6.6 and update lockfile/config

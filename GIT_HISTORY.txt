@@ -1,3 +1,4 @@
+* 31a9e20 feat(tablets): add Chromium multi-window launcher + bar/admin pages; temp debug removed
 * 687175a chore: add .eslintignore to reduce lint noise
 * 86e7973 chore(audit): bump react-syntax-highlighter to ^15.6.6 and update lockfile/config
 * 289a6bf fix: gate auth logs for production; upgrade react-syntax-highlighter to v5.8.0

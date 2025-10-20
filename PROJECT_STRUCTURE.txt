@@ -40,16 +40,32 @@
 │   └── settings.gradle
 ├── audit_audit_err.log
 ├── audit_audit_summary_err.log
+├── audit_fix_apply.txt
+├── audit_fix_plan.txt
 ├── audit_report_full.json
 ├── audit_report.md
 ├── AUDIT_REPORT.md
 ├── audit_summary.txt
 ├── audit_timestamp.txt
+├── auth_cookies_4001.txt
+├── auth_cookies.txt
+├── auth_debug_body.txt
+├── auth_debug_cookies.txt
+├── auth_debug_headers.txt
+├── auth_json_body.txt
+├── auth_json_cookies.txt
+├── auth_json_headers.txt
+├── auth_signin_headers.txt
+├── AUTH_TEST_REPORT.md
+├── build_after_audit_fix.log
 ├── components.json
+├── CONFIG_FILES.txt
 ├── DATABASE_SUMMARY.md
 ├── db
 │   └── custom.db
 ├── debug_server_4001.log
+├── DEPENDENCIES_SNAPSHOT.json
+├── deploy.sh
 ├── dev.log
 ├── dev.out
 ├── docker-compose.prod.yml
@@ -73,51 +89,19 @@
 ├── next_build_run.log
 ├── next.config.ts
 ├── next-env.d.ts
+├── nextjs_build.log
 ├── npm_audit_full.err
 ├── npm_audit_full.json
 ├── npm_audit_prod.err
 ├── npm_audit_prod.json
 ├── npm_audit_readable.err
 ├── npm_audit_readable.txt
+├── npm_ci.log
 ├── npm_ls_prismjs.txt
 ├── npm_ls_refractor.txt
 ├── npm_ls_rsh.txt
 ├── npm_why_prismjs.txt
 ├── npm_why_refractor.txt
-├── out
-│   ├── 404.html
-│   ├── accueil.html
-│   ├── accueil.txt
-│   ├── caisse-avancee.html
-│   ├── caisse-avancee.txt
-│   ├── caisse.html
-│   ├── caisse.txt
-│   ├── cuisine-alertes.html
-│   ├── cuisine-alertes.txt
-│   ├── cuisine-avancee.html
-│   ├── cuisine-avancee.txt
-│   ├── cuisine.html
-│   ├── cuisine.txt
-│   ├── favicon.ico
-│   ├── index.html
-│   ├── index.txt
-│   ├── logo.svg
-│   ├── newsletter-demo.html
-│   ├── newsletter-demo.txt
-│   ├── _next
-│   │   ├── static
-│   │   │   ├── chunks
-│   │   │   ├── css
-│   │   │   ├── media
-│   │   │   └── TTirYd588bpdY63f1SfKv
-│   │   └── TTirYd588bpdY63f1SfKv
-│   ├── personnel.html
-│   ├── personnel.txt
-│   ├── robots.txt
-│   ├── serveur.html
-│   ├── serveur.txt
-│   ├── service-alertes.html
-│   └── service-alertes.txt
 ├── outdated_err.log
 ├── OUTDATED_PACKAGES.err
 ├── OUTDATED_PACKAGES.json
@@ -126,6 +110,7 @@
 ├── OUTDATED_READABLE.txt
 ├── package.json
 ├── package-lock.json
+├── package-lock.json.backup
 ├── postcss.config.mjs
 ├── prisma
 │   ├── migrations
@@ -135,6 +120,7 @@
 │   ├── schema.prisma
 │   ├── schema.prisma.backup
 │   └── seed.ts
+├── prisma_generate.log
 ├── PROJECT_STRUCTURE.txt
 ├── public
 │   ├── logo.svg
@@ -142,9 +128,17 @@
 ├── README.dev.md
 ├── README.md
 ├── README_RESTAURANT.md
+├── RUNTIME_TEST_REPORT.md
+├── scripts
+│   ├── launch-tablets.sh
+│   ├── restart-tablet.sh
+│   ├── run_initial_audit.sh
+│   └── stop-tablets.sh
 ├── SECRETS_REPORT.md
 ├── SECRETS_SCAN.txt
+├── SECURITY_MATRIX.md
 ├── server-4001.log
+├── server-4001.pid
 ├── server-admin.log
 ├── server-admin.ts
 ├── server-caisse.log
@@ -154,10 +148,14 @@
 ├── server.log
 ├── server-serveur.log
 ├── server-serveur.ts
+├── server_test.log
+├── server_test.pid
 ├── server.ts
 ├── src
 │   ├── app
 │   │   ├── accueil
+│   │   │   └── page.tsx
+│   │   ├── admin
 │   │   │   └── page.tsx
 │   │   ├── api
 │   │   │   ├── alertes
@@ -165,6 +163,7 @@
 │   │   │   ├── auth
 │   │   │   ├── categories
 │   │   │   ├── cleaning
+│   │   │   ├── debug-auth
 │   │   │   ├── employees
 │   │   │   ├── haccp-alerts
 │   │   │   ├── health
@@ -183,6 +182,8 @@
 │   │   ├── auth
 │   │   │   ├── login
 │   │   │   └── register
+│   │   ├── bar
+│   │   │   └── page.tsx
 │   │   ├── caisse
 │   │   │   └── page.tsx
 │   │   ├── caisse-avancee
@@ -286,13 +287,13 @@
 │   ├── auth_test_4001.js
 │   ├── package.json
 │   └── package-lock.json
+├── ts_build.log
 ├── TS_CHECK.txt
 ├── tsconfig.check.json
-├── tsconfig.check.tsbuildinfo
 ├── tsconfig.json
 ├── tsconfig.tsbuildinfo
 ├── TS_ERRORS_RUN.txt
 ├── TS_ERRORS.txt
 └── VULNERABILITY_PATHS.txt
 
-76 directories, 220 files
+72 directories, 225 files

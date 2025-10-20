@@ -18,11 +18,11 @@ const authOptions: NextAuthOptions = {
         const append = (msg: string) => {
           try {
             const line = `${new Date().toISOString()} ${msg}`;
-            // eslint-disable-next-line no-console
+            // log to stderr (acceptable here for runtime diagnostics)
             console.error(line);
           } catch (err) {
             // swallow to avoid crashing auth flow
-            // eslint-disable-next-line no-console
+            // log to stderr; avoid throwing from logger
             console.error('Failed logging debug message', err);
           }
         };
@@ -61,8 +61,7 @@ const authOptions: NextAuthOptions = {
           return user;
         } catch (e) {
           append(`Auth error: ${(e as Error).message}`);
-          // also log stack to stderr
-          // eslint-disable-next-line no-console
+          // also log stack to stderr for debugging
           console.error('Auth error', e);
           return null;
         }

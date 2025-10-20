@@ -1,21 +1,21 @@
 # Audit Initial - $(date +"%Y-%m-%d %H:%M:%S")
 
 ## Structure Projet
-`$(cat PROJECT_STRUCTURE.txt | sed -e "s/`/`\\`/g")`
+$(cat PROJECT_STRUCTURE.txt 2>/dev/null || echo 'N/A')
 
 ## Fichiers Configuration
-`$(cat CONFIG_FILES.txt | sed -e "s/`/`\\`/g")`
+$(cat CONFIG_FILES.txt 2>/dev/null || echo 'N/A')
 
 ## État Git
-**Branche Actuelle:** `$(git branch --show-current 2>/dev/null || echo "unknown")`
+**Branche Actuelle:** $(git branch --show-current 2>/dev/null || echo 'unknown')
 **Derniers Commits:**
-`$(cat GIT_HISTORY.txt | sed -e "s/`/`\\`/g")`
+$(cat GIT_HISTORY.txt 2>/dev/null || echo 'N/A')
 
 ## Dépendances
-`$(cat DEPENDENCIES_SNAPSHOT.json | sed -e "s/`/`\\`/g")`
+$(cat DEPENDENCIES_SNAPSHOT.json 2>/dev/null || echo 'N/A')
 
 ## Incohérences Détectées
-`$(cat INCOHERENCES.txt | sed -e "s/`/`\\`/g")`
+$(cat INCOHERENCES.txt 2>/dev/null || echo 'N/A')
 
 ## Actions Requises
-À compléter après analyse
+- À revoir manuellement: NextAuth cookie settings in production, Docker env vars, and any tracked .env files.
