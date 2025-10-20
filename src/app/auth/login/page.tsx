@@ -1,12 +1,21 @@
 "use client";
-import React, { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams?.get('callbackUrl') || '/';
+  const [callbackUrl, setCallbackUrl] = useState<string>('/');
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const cb = params.get('callbackUrl') || '/';
+      setCallbackUrl(cb);
+    } catch (e) {
+      setCallbackUrl('/');
+    }
+  }, []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
