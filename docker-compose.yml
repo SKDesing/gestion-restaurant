@@ -1,4 +1,31 @@
 version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_URL
+      - NEXTAUTH_SECRET
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gestion_restaurant
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+version: '3.8'
 
 services:
   postgres:
