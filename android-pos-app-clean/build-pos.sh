@@ -35,12 +35,15 @@ echo "1) Export Next.js (next build && next export)"
 GRADLE_WRAPPER="./gradlew"
 cd "$NEXT_PROJECT_DIR"
 if [ -f package.json ]; then
-  # Use npm if available, prefer pnpm/yarn if project uses them? Keep simple: npm.
-  if command -v npm >/dev/null 2>&1; then
+  # Prefer pnpm when available, fallback to npm
+  if command -v pnpm >/dev/null 2>&1; then
+    pnpm run build --if-present
+    pnpm run export --if-present
+  elif command -v npm >/dev/null 2>&1; then
     npm run build --if-present
     npm run export --if-present
   else
-    echo "npm introuvable, saute l'étape d'export (attendu: dossier $OUT_DIR existant)"
+    echo "pnpm/npm introuvable, saute l'étape d'export (attendu: dossier $OUT_DIR existant)"
   fi
 else
   echo "package.json introuvable dans $NEXT_PROJECT_DIR, saute l'export" 

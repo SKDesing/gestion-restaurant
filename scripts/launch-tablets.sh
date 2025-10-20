@@ -70,7 +70,7 @@ echo -e "${YELLOW}🔍 Checking Next.js server...${NC}"
 if ! curl -s "$BASE_URL" > /dev/null; then
   echo -e "${YELLOW}⚠️  Server not running. Starting dev server...${NC}"
   mkdir -p logs
-  npm run dev > logs/nextjs.log 2>&1 &
+  pnpm dev > logs/nextjs.log 2>&1 &
   SERVER_PID=$!
   echo "$SERVER_PID" > /tmp/nextjs-server.pid
   echo -e "${BLUE}⏳ Waiting for server start (15s)...${NC}"

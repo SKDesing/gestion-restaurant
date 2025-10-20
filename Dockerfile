@@ -1,43 +1,46 @@
-FROM node:20-alpine AS base
+FROM node:20-alpine AS deps
 WORKDIR /app
 
-# Install deps
-COPY package*.json pnpm-lock.yaml* ./
+# Install pnpm via corepack
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy package files and lockfile
+COPY package.json pnpm-lock.yaml ./
+
+# Install production deps only in deps stage
 RUN apk add --no-cache libc6-compat
-RUN npm ci --production
+RUN pnpm install --frozen-lockfile --prod
 
-# Copy sources
-COPY . .
-
-# Build
-RUN npm run build
-
-FROM node:20-alpine AS runner
-WORKDIR /app
-ENV NODE_ENV=production
-COPY --from=base /app/.next ./.next
-COPY --from=base /app/public ./public
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/package.json ./package.json
-
-EXPOSE 3000
-CMD [ "npm", "run", "start" ]
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
-# Install all dependencies so build (next build) can run (typescript is a devDependency)
-RUN npm install
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+COPY package.json pnpm-lock.yaml ./
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ENV DATABASE_URL="postgresql://postgres:postgres@localhost:5432/gestion"
+
 # Ensure Prisma client is generated for the build
-RUN npx prisma generate || true
-RUN npm run build
-RUN npm prune --production
+RUN pnpm exec prisma generate || true
+
+# Build
+RUN pnpm build
 
 FROM node:20-alpine AS runner
 WORKDIR /app
-ENV NODE_ENV=production
-COPY --from=builder /app .
-EXPOSE 4000
-# Run the server using node (tsx may be available but we start with the compiled server entry)
-CMD ["npx", "tsx", "server.ts"]
+
+ENV NODE_ENV production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+ENV PORT 3000
+
+CMD ["node", "server.js"]

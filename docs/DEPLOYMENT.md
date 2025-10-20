@@ -3,9 +3,10 @@
 This document describes how to deploy the `gestion-restaurant` application using Docker and GitHub Actions.
 
 Prerequisites:
+
 - Docker and docker-compose
 - An environment with PostgreSQL (or the included docker-compose service)
-- Secrets set in GitHub (DATABASE_URL, NEXTAUTH_SECRET, MAILCOW_*, etc.)
+- Secrets set in GitHub (DATABASE*URL, NEXTAUTH_SECRET, MAILCOW*\*, etc.)
 
 Quickstart (local):
 
@@ -19,5 +20,5 @@ docker compose up -d --build
 3. Seed the database (if needed):
 
 ```bash
-docker compose exec app npm run prisma:seed
+docker compose exec app pnpm run prisma:seed
 ```

@@ -90,18 +90,13 @@
 ├── next.config.ts
 ├── next-env.d.ts
 ├── nextjs_build.log
-├── npm_audit_full.err
-├── npm_audit_full.json
-├── npm_audit_prod.err
-├── npm_audit_prod.json
-├── npm_audit_readable.err
-├── npm_audit_readable.txt
-├── npm_ci.log
-├── npm_ls_prismjs.txt
-├── npm_ls_refractor.txt
-├── npm_ls_rsh.txt
-├── npm_why_prismjs.txt
-├── npm_why_refractor.txt
+├── audit_reports/
+│   ├── pnpm_audit_full.err
+│   ├── pnpm_audit_full.json
+│   ├── pnpm_audit_prod.err
+│   ├── pnpm_audit_prod.json
+│   ├── pnpm_audit_readable.err
+│   └── pnpm_audit_readable.txt
 ├── outdated_err.log
 ├── OUTDATED_PACKAGES.err
 ├── OUTDATED_PACKAGES.json
@@ -109,7 +104,7 @@
 ├── OUTDATED_READABLE.err
 ├── OUTDATED_READABLE.txt
 ├── package.json
-├── package-lock.json
+├── pnpm-lock.yaml
 ├── package-lock.json.backup
 ├── postcss.config.mjs
 ├── prisma

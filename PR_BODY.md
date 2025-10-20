@@ -9,30 +9,35 @@ Finaliser l'intégration PostgreSQL et résoudre les vulnérabilités de sécuri
 ## ✅ Changements principaux
 
 ### 🔐 **Sécurité**
+
 - ✅ Fix vulnerabilities react-syntax-highlighter (6.1.0 → 15.6.1)
 - ✅ Suppression logs debug sensibles dans NextAuth
 - ✅ Ajout `.gitignore` pour fichiers temporaires/sensibles
 - ✅ Nettoyage artifacts d'audit (cookiejar, csrf_raw, logs/)
 
 ### 🗄️ **Base de données PostgreSQL**
+
 - ✅ Intégration complète avec Prisma
 - ✅ Seed script avec bcrypt hashing (salt rounds = 10)
 - ✅ User test validé: `michel.manager@legourmetmoderne.fr`
 - ✅ Connexion DB vérifiée et fonctionnelle
 
 ### 🛠️ **Infrastructure & DevOps**
+
 - ✅ Scripts d'audit documentés (`scripts/audit/`)
 - ✅ Rapports générés (`audit_report.md`, `audit_fix_plan.txt`)
 - ✅ Deploy script amélioré (`deploy.sh`)
 - ✅ Cleanup fichiers temporaires (build, lint, tsc outputs)
 
 ### 📱 **Nouvelles fonctionnalités**
+
 - ✅ Chromium multi-window launcher pour tablettes
 - ✅ Pages bar/admin pour affichage kiosque
 - ✅ API admin tenants (`/api/admin/tenants/create`)
 - ✅ Mailcow integration (`src/lib/mailcow/`)
 
 ### 🔧 **Routes API améliorées**
+
 - ✅ `src/app/api/auth/[...nextauth]/route.ts` - Error handling + logging
 - ✅ Toutes les routes API mises à jour (30+ fichiers)
 - ✅ Suppression logo obsolète (`public/logo.svg`)
@@ -47,7 +52,7 @@ Finaliser l'intégration PostgreSQL et résoudre les vulnérabilités de sécuri
 ✅ NextAuth CSRF token endpoint
 ✅ Credentials validation (bcrypt)
 ✅ Session creation & retrieval
-✅ npm audit (0 critical, 3 moderate)
+✅ pnpm audit (0 critical, 3 moderate)
 ✅ TypeScript compilation (tsc clean)
 ✅ Next.js build (successful)
 ✅ Lint (eslint passed)
@@ -72,26 +77,31 @@ e7b3994 docs(audit): add audit reports and plan
 ## 🔍 Review Checklist
 
 ### **Sécurité**
+
 - [ ] Vérifier que `.env.example` est à jour (sans credentials réelles)
 - [ ] Confirmer bcrypt salt rounds = 10
 - [ ] Valider que logs ne contiennent plus de passwords
 
 ### **Base de données**
+
 - [ ] Tester seed script en local
 - [ ] Vérifier migrations Prisma
 - [ ] Confirmer connexion PostgreSQL
 
 ### **Code**
+
 - [ ] Review API routes changes (30+ fichiers)
 - [ ] Valider error handling dans NextAuth
 - [ ] Vérifier TypeScript types
 
 ### **Tests**
+
 - [ ] Tester login flow complet
 - [ ] Vérifier session persistence
 - [ ] Tester endpoints API principaux
 
 ### **Déploiement**
+
 - [ ] Vérifier build production
 - [ ] Tester avec DATABASE_URL production
 - [ ] Valider variables d'environnement
@@ -113,10 +123,10 @@ NEXTAUTH_SECRET=your-secret-here
 
 ```bash
 # Local
-npm install
-npx prisma migrate deploy
-npx prisma db seed
-npm run build
+pnpm install
+pnpm exec prisma migrate deploy
+pnpm exec prisma db seed
+pnpm run build
 
 # Production (Vercel)
 vercel --prod
@@ -154,5 +164,6 @@ vercel --prod
 ---
 
 **Test login credentials:**
+
 - Email: `michel.manager@legourmetmoderne.fr`
 - Password: `ChangeMe123!`
