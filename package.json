@@ -135,5 +135,11 @@
   "bugs": {
     "url": "https://github.com/SKDesing/gestion-restaurant/issues"
   },
-  "homepage": "https://github.com/SKDesing/gestion-restaurant#readme"
+  "homepage": "https://github.com/SKDesing/gestion-restaurant#readme",
+  "lint-staged": {
+    "*.{js,ts,tsx,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }
