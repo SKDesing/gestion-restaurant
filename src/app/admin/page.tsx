@@ -1,21 +1,58 @@
 "use client";
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { useEffect, useState } from "react";
+import { useSocket } from "@/lib/useSocket";
+
+export default function AdminPage() {
+  const { socket, connected } = useSocket("/admin");
+  const [messages, setMessages] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("pong", (data) => {
+      setMessages((m) => [...m, `Pong: ${JSON.stringify(data)}`]);
+    });
+
+    socket.emit("ping", { from: "admin", ts: Date.now() });
+  }, [socket]);
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">🟣 Admin Manager</h1>
+      <div>Status: {connected ? "✅ Connected" : "❌ Disconnected"}</div>
+      <div className="mt-4 space-y-2">
+        {messages.map((m, i) => (
+          <div key={i} className="p-2 bg-gray-100 rounded">
+            {m}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+("use client");
+
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function AdminPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-900">📊 Dashboard Admin</h1>
+          <h1 className="text-4xl font-bold text-slate-900">
+            📊 Dashboard Admin
+          </h1>
           <p className="text-slate-600 mt-2">Vue d'ensemble en temps réel</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">CA Journalier</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                CA Journalier
+              </CardTitle>
               <span className="text-2xl">💰</span>
             </CardHeader>
             <CardContent>
@@ -37,12 +74,16 @@ export default function AdminPage() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Tables Occupées</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Tables Occupées
+              </CardTitle>
               <span className="text-2xl">🪑</span>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-orange-600">12/20</div>
-              <p className="text-xs text-slate-500 mt-1">60% taux d'occupation</p>
+              <p className="text-xs text-slate-500 mt-1">
+                60% taux d'occupation
+              </p>
             </CardContent>
           </Card>
 
@@ -88,14 +129,19 @@ export default function AdminPage() {
             <CardContent>
               <div className="space-y-2">
                 {[
-                  { name: 'Burger Maison', qty: 23, total: '345€' },
-                  { name: 'Pizza Margherita', qty: 18, total: '234€' },
-                  { name: 'Salade César', qty: 15, total: '180€' },
+                  { name: "Burger Maison", qty: 23, total: "345€" },
+                  { name: "Pizza Margherita", qty: 18, total: "234€" },
+                  { name: "Salade César", qty: 15, total: "180€" },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-2 border-b">
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between p-2 border-b"
+                  >
                     <div>
                       <div className="font-medium">{item.name}</div>
-                      <div className="text-sm text-slate-500">{item.qty} vendus</div>
+                      <div className="text-sm text-slate-500">
+                        {item.qty} vendus
+                      </div>
                     </div>
                     <div className="font-bold text-green-600">{item.total}</div>
                   </div>

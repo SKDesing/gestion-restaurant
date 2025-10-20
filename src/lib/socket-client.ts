@@ -1,5 +1,16 @@
-import { io as clientIo, Socket } from "socket.io-client";
+import { io, type Socket } from "socket.io-client";
 
 export function connectNamespace(ns: string, opts = {}): Socket {
-  return clientIo(`${location.protocol}//${location.hostname}:4001${ns}`, opts);
+  const port =
+    (typeof window !== "undefined" && window.location.port) ||
+    process.env.SOCKET_PORT ||
+    "4001";
+  const protocol =
+    typeof window !== "undefined" ? window.location.protocol : "http:";
+  const host =
+    typeof window !== "undefined" ? window.location.hostname : "localhost";
+  return io(`${protocol}//${host}:${port}${ns}`, {
+    path: "/socket.io",
+    ...opts,
+  });
 }

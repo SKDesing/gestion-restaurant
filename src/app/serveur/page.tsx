@@ -1,18 +1,55 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  ShoppingCart, 
-  CreditCard, 
-  DollarSign, 
-  Plus, 
-  Minus, 
+import { useEffect, useState } from "react";
+import { useSocket } from "@/lib/useSocket";
+
+export default function ServeurPage() {
+  const { socket, connected } = useSocket("/serveur");
+  const [messages, setMessages] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!socket) return;
+    socket.on("pong", (data) =>
+      setMessages((m) => [...m, `Pong: ${JSON.stringify(data)}`]),
+    );
+    socket.emit("ping", { from: "serveur", ts: Date.now() });
+  }, [socket]);
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">🔵 Serveur</h1>
+      <div>Status: {connected ? "✅ Connected" : "❌ Disconnected"}</div>
+      <div className="mt-4 space-y-2">
+        {messages.map((m, i) => (
+          <div key={i} className="p-2 bg-gray-100 rounded">
+            {m}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+("use client");
+
+import { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  ShoppingCart,
+  CreditCard,
+  DollarSign,
+  Plus,
+  Minus,
   Trash2,
   Bell,
   Users,
@@ -27,166 +64,226 @@ import {
   Tablet,
   QrCode,
   Camera,
-  Eye
-} from 'lucide-react'
+  Eye,
+} from "lucide-react";
 
 interface CartItem {
-  id: string
-  name: string
-  price: number
-  quantity: number
-  category: string
-  tableId: string
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  category: string;
+  tableId: string;
 }
 
 interface Table {
-  id: string
-  number: string
-  capacity: number
-  status: 'AVAILABLE' | 'OCCUPIED' | 'RESERVED' | 'NEEDS_CLEANING'
-  location: string
+  id: string;
+  number: string;
+  capacity: number;
+  status: "AVAILABLE" | "OCCUPIED" | "RESERVED" | "NEEDS_CLEANING";
+  location: string;
   currentOrder?: {
-    id: string
-    items: CartItem[]
-    total: number
-    status: string
-    createdAt: string
-  }
+    id: string;
+    items: CartItem[];
+    total: number;
+    status: string;
+    createdAt: string;
+  };
 }
 
 interface Notification {
-  id: string
-  type: 'ORDER_READY' | 'PAYMENT_REQUEST' | 'TABLE_CALL' | 'KITCHEN_ALERT'
-  message: string
-  tableNumber?: string
-  timestamp: string
-  read: boolean
-  priority: 'low' | 'medium' | 'high'
+  id: string;
+  type: "ORDER_READY" | "PAYMENT_REQUEST" | "TABLE_CALL" | "KITCHEN_ALERT";
+  message: string;
+  tableNumber?: string;
+  timestamp: string;
+  read: boolean;
+  priority: "low" | "medium" | "high";
 }
 
 export default function ServeurInterface() {
-  const [activeTab, setActiveTab] = useState('tables')
-  const [selectedTable, setSelectedTable] = useState<Table | null>(null)
-  const [cart, setCart] = useState<CartItem[]>([])
-  const [notifications, setNotifications] = useState<Notification[]>([])
-  const [showScanner, setShowScanner] = useState(false)
+  const [activeTab, setActiveTab] = useState("tables");
+  const [selectedTable, setSelectedTable] = useState<Table | null>(null);
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [showScanner, setShowScanner] = useState(false);
 
   const [tables] = useState<Table[]>([
     {
-      id: '1',
-      number: 'T1',
+      id: "1",
+      number: "T1",
       capacity: 4,
-      status: 'OCCUPIED',
-      location: 'Terrasse',
+      status: "OCCUPIED",
+      location: "Terrasse",
       currentOrder: {
-        id: 'order1',
+        id: "order1",
         items: [
-          { id: '1', name: 'Café', price: 2.50, quantity: 2, category: 'Boisson', tableId: '1' },
-          { id: '2', name: 'Croissant', price: 2.00, quantity: 2, category: 'Pâtisserie', tableId: '1' }
+          {
+            id: "1",
+            name: "Café",
+            price: 2.5,
+            quantity: 2,
+            category: "Boisson",
+            tableId: "1",
+          },
+          {
+            id: "2",
+            name: "Croissant",
+            price: 2.0,
+            quantity: 2,
+            category: "Pâtisserie",
+            tableId: "1",
+          },
         ],
-        total: 9.00,
-        status: 'SERVED',
-        createdAt: '2024-01-15T10:30:00Z'
-      }
+        total: 9.0,
+        status: "SERVED",
+        createdAt: "2024-01-15T10:30:00Z",
+      },
     },
     {
-      id: '2',
-      number: 'T2',
+      id: "2",
+      number: "T2",
       capacity: 2,
-      status: 'OCCUPIED',
-      location: 'Terrasse',
+      status: "OCCUPIED",
+      location: "Terrasse",
       currentOrder: {
-        id: 'order2',
+        id: "order2",
         items: [
-          { id: '3', name: 'Salade César', price: 12.00, quantity: 1, category: 'Entrée', tableId: '2' },
-          { id: '4', name: 'Steak Frites', price: 18.50, quantity: 1, category: 'Plat', tableId: '2' }
+          {
+            id: "3",
+            name: "Salade César",
+            price: 12.0,
+            quantity: 1,
+            category: "Entrée",
+            tableId: "2",
+          },
+          {
+            id: "4",
+            name: "Steak Frites",
+            price: 18.5,
+            quantity: 1,
+            category: "Plat",
+            tableId: "2",
+          },
         ],
-        total: 30.50,
-        status: 'PREPARING',
-        createdAt: '2024-01-15T12:15:00Z'
-      }
+        total: 30.5,
+        status: "PREPARING",
+        createdAt: "2024-01-15T12:15:00Z",
+      },
     },
     {
-      id: '3',
-      number: 'T3',
+      id: "3",
+      number: "T3",
       capacity: 4,
-      status: 'AVAILABLE',
-      location: 'Salle Principale'
+      status: "AVAILABLE",
+      location: "Salle Principale",
     },
     {
-      id: '4',
-      number: 'T4',
+      id: "4",
+      number: "T4",
       capacity: 6,
-      status: 'OCCUPIED',
-      location: 'Salle Principale',
+      status: "OCCUPIED",
+      location: "Salle Principale",
       currentOrder: {
-        id: 'order4',
+        id: "order4",
         items: [
-          { id: '5', name: 'Vin Rouge', price: 6.00, quantity: 2, category: 'Boisson', tableId: '4' }
+          {
+            id: "5",
+            name: "Vin Rouge",
+            price: 6.0,
+            quantity: 2,
+            category: "Boisson",
+            tableId: "4",
+          },
         ],
-        total: 12.00,
-        status: 'READY',
-        createdAt: '2024-01-15T12:45:00Z'
-      }
+        total: 12.0,
+        status: "READY",
+        createdAt: "2024-01-15T12:45:00Z",
+      },
     },
     {
-      id: '5',
-      number: 'T5',
+      id: "5",
+      number: "T5",
       capacity: 8,
-      status: 'RESERVED',
-      location: 'Privé'
+      status: "RESERVED",
+      location: "Privé",
     },
     {
-      id: '6',
-      number: 'T6',
+      id: "6",
+      number: "T6",
       capacity: 2,
-      status: 'NEEDS_CLEANING',
-      location: 'Bar'
-    }
-  ])
+      status: "NEEDS_CLEANING",
+      location: "Bar",
+    },
+  ]);
 
   const [menuCategories] = useState([
     {
-      name: 'Boissons',
+      name: "Boissons",
       icon: <Wine className="h-5 w-5" />,
       items: [
-        { id: 'coca', name: 'Coca-Cola', price: 3.00, category: 'Boisson' },
-        { id: 'eau', name: 'Eau Minérale', price: 2.00, category: 'Boisson' },
-        { id: 'vin_rouge', name: 'Vin Rouge (verre)', price: 6.00, category: 'Boisson' },
-        { id: 'vin_blanc', name: 'Vin Blanc (verre)', price: 6.00, category: 'Boisson' },
-        { id: 'biere', name: 'Bière', price: 4.50, category: 'Boisson' },
-        { id: 'cafe', name: 'Café', price: 2.50, category: 'Boisson' },
-      ]
+        { id: "coca", name: "Coca-Cola", price: 3.0, category: "Boisson" },
+        { id: "eau", name: "Eau Minérale", price: 2.0, category: "Boisson" },
+        {
+          id: "vin_rouge",
+          name: "Vin Rouge (verre)",
+          price: 6.0,
+          category: "Boisson",
+        },
+        {
+          id: "vin_blanc",
+          name: "Vin Blanc (verre)",
+          price: 6.0,
+          category: "Boisson",
+        },
+        { id: "biere", name: "Bière", price: 4.5, category: "Boisson" },
+        { id: "cafe", name: "Café", price: 2.5, category: "Boisson" },
+      ],
     },
     {
-      name: 'Entrées',
+      name: "Entrées",
       icon: <Utensils className="h-5 w-5" />,
       items: [
-        { id: 'salade', name: 'Salade César', price: 12.00, category: 'Entrée' },
-        { id: 'soupe', name: 'Soupe à l\'oignon', price: 8.50, category: 'Entrée' },
-        { id: 'bruschetta', name: 'Bruschetta', price: 7.50, category: 'Entrée' },
-      ]
+        { id: "salade", name: "Salade César", price: 12.0, category: "Entrée" },
+        {
+          id: "soupe",
+          name: "Soupe à l'oignon",
+          price: 8.5,
+          category: "Entrée",
+        },
+        {
+          id: "bruschetta",
+          name: "Bruschetta",
+          price: 7.5,
+          category: "Entrée",
+        },
+      ],
     },
     {
-      name: 'Plats Principaux',
+      name: "Plats Principaux",
       icon: <ChefHat className="h-5 w-5" />,
       items: [
-        { id: 'steak', name: 'Steak Frites', price: 18.50, category: 'Plat' },
-        { id: 'saumon', name: 'Saumon Grillé', price: 22.00, category: 'Plat' },
-        { id: 'risotto', name: 'Risotto', price: 16.50, category: 'Plat' },
-        { id: 'burger', name: 'Burger Maison', price: 15.00, category: 'Plat' },
-      ]
+        { id: "steak", name: "Steak Frites", price: 18.5, category: "Plat" },
+        { id: "saumon", name: "Saumon Grillé", price: 22.0, category: "Plat" },
+        { id: "risotto", name: "Risotto", price: 16.5, category: "Plat" },
+        { id: "burger", name: "Burger Maison", price: 15.0, category: "Plat" },
+      ],
     },
     {
-      name: 'Desserts',
+      name: "Desserts",
       icon: <Coffee className="h-5 w-5" />,
       items: [
-        { id: 'tiramisu', name: 'Tiramisu', price: 7.50, category: 'Dessert' },
-        { id: 'creme', name: 'Crème Brûlée', price: 8.00, category: 'Dessert' },
-        { id: 'chocolat', name: 'Fondant Chocolat', price: 7.00, category: 'Dessert' },
-      ]
-    }
-  ])
+        { id: "tiramisu", name: "Tiramisu", price: 7.5, category: "Dessert" },
+        { id: "creme", name: "Crème Brûlée", price: 8.0, category: "Dessert" },
+        {
+          id: "chocolat",
+          name: "Fondant Chocolat",
+          price: 7.0,
+          category: "Dessert",
+        },
+      ],
+    },
+  ]);
 
   useEffect(() => {
     // Simuler les notifications en temps réel
@@ -194,97 +291,101 @@ export default function ServeurInterface() {
       const notifications: Notification[] = [
         {
           id: Date.now().toString(),
-          type: 'ORDER_READY',
-          message: 'Commande prête pour la table T4',
-          tableNumber: 'T4',
+          type: "ORDER_READY",
+          message: "Commande prête pour la table T4",
+          tableNumber: "T4",
           timestamp: new Date().toISOString(),
           read: false,
-          priority: 'high'
+          priority: "high",
         },
         {
           id: (Date.now() + 1).toString(),
-          type: 'TABLE_CALL',
-          message: 'La table T2 vous appelle',
-          tableNumber: 'T2',
+          type: "TABLE_CALL",
+          message: "La table T2 vous appelle",
+          tableNumber: "T2",
           timestamp: new Date().toISOString(),
           read: false,
-          priority: 'medium'
-        }
-      ]
-      
-      setNotifications(prev => [...notifications, ...prev.slice(0, 8)])
-    }, 20000) // Nouvelle notification toutes les 20 secondes
+          priority: "medium",
+        },
+      ];
 
-    return () => clearInterval(interval)
-  }, [])
+      setNotifications((prev) => [...notifications, ...prev.slice(0, 8)]);
+    }, 20000); // Nouvelle notification toutes les 20 secondes
+
+    return () => clearInterval(interval);
+  }, []);
 
   const selectTable = (table: Table) => {
-    setSelectedTable(table)
+    setSelectedTable(table);
     if (table.currentOrder) {
-      setCart(table.currentOrder.items)
+      setCart(table.currentOrder.items);
     } else {
-      setCart([])
+      setCart([]);
     }
-    setActiveTab('commande')
-  }
+    setActiveTab("commande");
+  };
 
   const addToCart = (item: any) => {
-    if (!selectedTable) return
-    
+    if (!selectedTable) return;
+
     const cartItem: CartItem = {
       ...item,
-      tableId: selectedTable.id
-    }
-    
-    setCart(prevCart => {
-      const existingItem = prevCart.find(cartItem => cartItem.id === item.id)
+      tableId: selectedTable.id,
+    };
+
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
       if (existingItem) {
-        return prevCart.map(cartItem =>
+        return prevCart.map((cartItem) =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        )
+            : cartItem,
+        );
       }
-      return [...prevCart, cartItem]
-    })
-  }
+      return [...prevCart, cartItem];
+    });
+  };
 
   const removeFromCart = (itemId: string) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== itemId))
-  }
+    setCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
+  };
 
   const updateQuantity = (itemId: string, delta: number) => {
-    setCart(prevCart => {
-      return prevCart.map(item => {
-        if (item.id === itemId) {
-          const newQuantity = item.quantity + delta
-          return newQuantity > 0 ? { ...item, quantity: newQuantity } : item
-        }
-        return item
-      }).filter(item => item.quantity > 0)
-    })
-  }
+    setCart((prevCart) => {
+      return prevCart
+        .map((item) => {
+          if (item.id === itemId) {
+            const newQuantity = item.quantity + delta;
+            return newQuantity > 0 ? { ...item, quantity: newQuantity } : item;
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0);
+    });
+  };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0)
-  }
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
 
   const sendToKitchen = () => {
-    if (!selectedTable || cart.length === 0) return
+    if (!selectedTable || cart.length === 0) return;
 
     // Envoyer la commande à la cuisine
     const order = {
       tableNumber: selectedTable.number,
       items: cart,
       total: calculateTotal(),
-      timestamp: new Date().toISOString()
-    }
-    
-    console.log('Envoi à la cuisine:', order)
-    
+      timestamp: new Date().toISOString(),
+    };
+
+    console.log("Envoi à la cuisine:", order);
+
     // Simuler l'envoi
-    alert(`Commande envoyée à la cuisine pour la table ${selectedTable.number}`)
-    
+    alert(
+      `Commande envoyée à la cuisine pour la table ${selectedTable.number}`,
+    );
+
     // Mettre à jour le statut de la table
     setSelectedTable({
       ...selectedTable,
@@ -292,66 +393,78 @@ export default function ServeurInterface() {
         id: Date.now().toString(),
         items: cart,
         total: calculateTotal(),
-        status: 'PREPARING',
-        createdAt: new Date().toISOString()
-      }
-    })
-  }
+        status: "PREPARING",
+        createdAt: new Date().toISOString(),
+      },
+    });
+  };
 
   const processPayment = (method: string) => {
-    if (!selectedTable || cart.length === 0) return
+    if (!selectedTable || cart.length === 0) return;
 
-    const total = calculateTotal()
-    
+    const total = calculateTotal();
+
     // Envoyer la demande de paiement à la caisse
     const paymentRequest = {
       tableNumber: selectedTable.number,
       items: cart,
       total,
       method,
-      timestamp: new Date().toISOString()
-    }
-    
-    console.log('Demande de paiement:', paymentRequest)
-    
+      timestamp: new Date().toISOString(),
+    };
+
+    console.log("Demande de paiement:", paymentRequest);
+
     // Simuler l'envoi à la caisse
-    alert(`Demande de paiement envoyée à la caisse (${method}) - Total: €${total.toFixed(2)}`)
-    
+    alert(
+      `Demande de paiement envoyée à la caisse (${method}) - Total: €${total.toFixed(2)}`,
+    );
+
     // Vider le panier et libérer la table
-    setCart([])
+    setCart([]);
     setSelectedTable({
       ...selectedTable,
-      status: 'AVAILABLE',
-      currentOrder: undefined
-    })
-    setActiveTab('tables')
-  }
+      status: "AVAILABLE",
+      currentOrder: undefined,
+    });
+    setActiveTab("tables");
+  };
 
   const markNotificationAsRead = (notificationId: string) => {
-    setNotifications(prev => 
-      prev.map(n => n.id === notificationId ? { ...n, read: true } : n)
-    )
-  }
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === notificationId ? { ...n, read: true } : n)),
+    );
+  };
 
   const getTableStatusColor = (status: string) => {
     switch (status) {
-      case 'AVAILABLE': return 'bg-green-100 text-green-800'
-      case 'OCCUPIED': return 'bg-blue-100 text-blue-800'
-      case 'RESERVED': return 'bg-yellow-100 text-yellow-800'
-      case 'NEEDS_CLEANING': return 'bg-red-100 text-red-800'
-      default: return 'bg-gray-100 text-gray-800'
+      case "AVAILABLE":
+        return "bg-green-100 text-green-800";
+      case "OCCUPIED":
+        return "bg-blue-100 text-blue-800";
+      case "RESERVED":
+        return "bg-yellow-100 text-yellow-800";
+      case "NEEDS_CLEANING":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   const getNotificationIcon = (type: string) => {
     switch (type) {
-      case 'ORDER_READY': return <CheckCircle className="h-4 w-4 text-green-600" />
-      case 'PAYMENT_REQUEST': return <CreditCard className="h-4 w-4 text-blue-600" />
-      case 'TABLE_CALL': return <Bell className="h-4 w-4 text-yellow-600" />
-      case 'KITCHEN_ALERT': return <AlertCircle className="h-4 w-4 text-red-600" />
-      default: return <Bell className="h-4 w-4" />
+      case "ORDER_READY":
+        return <CheckCircle className="h-4 w-4 text-green-600" />;
+      case "PAYMENT_REQUEST":
+        return <CreditCard className="h-4 w-4 text-blue-600" />;
+      case "TABLE_CALL":
+        return <Bell className="h-4 w-4 text-yellow-600" />;
+      case "KITCHEN_ALERT":
+        return <AlertCircle className="h-4 w-4 text-red-600" />;
+      default:
+        return <Bell className="h-4 w-4" />;
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -365,15 +478,17 @@ export default function ServeurInterface() {
               </div>
               <div>
                 <h1 className="text-lg font-bold">Serveur</h1>
-                <p className="text-xs text-gray-600">Gestion des tables et commandes</p>
+                <p className="text-xs text-gray-600">
+                  Gestion des tables et commandes
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="relative">
                 <Bell className="h-6 w-6 text-gray-600" />
-                {notifications.filter(n => !n.read).length > 0 && (
+                {notifications.filter((n) => !n.read).length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {notifications.filter(n => !n.read).length}
+                    {notifications.filter((n) => !n.read).length}
                   </span>
                 )}
               </div>
@@ -397,12 +512,15 @@ export default function ServeurInterface() {
               <ShoppingCart className="h-4 w-4" />
               Commande
             </TabsTrigger>
-            <TabsTrigger value="notifications" className="flex items-center gap-2">
+            <TabsTrigger
+              value="notifications"
+              className="flex items-center gap-2"
+            >
               <Bell className="h-4 w-4" />
               Alertes
-              {notifications.filter(n => !n.read).length > 0 && (
+              {notifications.filter((n) => !n.read).length > 0 && (
                 <span className="bg-red-500 text-white text-xs rounded-full px-1">
-                  {notifications.filter(n => !n.read).length}
+                  {notifications.filter((n) => !n.read).length}
                 </span>
               )}
             </TabsTrigger>
@@ -415,27 +533,33 @@ export default function ServeurInterface() {
           <TabsContent value="tables" className="space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {tables.map((table) => (
-                <Card 
-                  key={table.id} 
+                <Card
+                  key={table.id}
                   className={`cursor-pointer transition-all hover:shadow-md ${
-                    selectedTable?.id === table.id ? 'ring-2 ring-blue-500' : ''
+                    selectedTable?.id === table.id ? "ring-2 ring-blue-500" : ""
                   }`}
                   onClick={() => selectTable(table)}
                 >
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-bold text-lg">Table {table.number}</h3>
+                      <h3 className="font-bold text-lg">
+                        Table {table.number}
+                      </h3>
                       <Badge className={getTableStatusColor(table.status)}>
                         {table.status}
                       </Badge>
                     </div>
                     <div className="text-sm text-gray-600 mb-2">
-                      <div>{table.capacity} personnes • {table.location}</div>
+                      <div>
+                        {table.capacity} personnes • {table.location}
+                      </div>
                       {table.currentOrder && (
                         <div className="mt-1">
                           <div className="font-medium">Commande en cours</div>
                           <div>{table.currentOrder.items.length} articles</div>
-                          <div className="font-bold">€{table.currentOrder.total.toFixed(2)}</div>
+                          <div className="font-bold">
+                            €{table.currentOrder.total.toFixed(2)}
+                          </div>
                           <Badge variant="outline" className="mt-1">
                             {table.currentOrder.status}
                           </Badge>
@@ -447,7 +571,7 @@ export default function ServeurInterface() {
                         <Eye className="h-3 w-3 mr-1" />
                         Voir
                       </Button>
-                      {table.status === 'AVAILABLE' && (
+                      {table.status === "AVAILABLE" && (
                         <Button size="sm" className="flex-1">
                           <Plus className="h-3 w-3 mr-1" />
                           Commander
@@ -470,7 +594,8 @@ export default function ServeurInterface() {
                       Table {selectedTable.number} - {selectedTable.location}
                     </CardTitle>
                     <CardDescription>
-                      {selectedTable.capacity} personnes • {selectedTable.status}
+                      {selectedTable.capacity} personnes •{" "}
+                      {selectedTable.status}
                     </CardDescription>
                   </CardHeader>
                 </Card>
@@ -495,8 +620,12 @@ export default function ServeurInterface() {
                                 className="h-auto p-3 flex flex-col items-center gap-1"
                                 onClick={() => addToCart(item)}
                               >
-                                <span className="text-sm font-medium">{item.name}</span>
-                                <span className="text-sm font-bold text-blue-600">€{item.price.toFixed(2)}</span>
+                                <span className="text-sm font-medium">
+                                  {item.name}
+                                </span>
+                                <span className="text-sm font-bold text-blue-600">
+                                  €{item.price.toFixed(2)}
+                                </span>
                               </Button>
                             ))}
                           </div>
@@ -510,7 +639,9 @@ export default function ServeurInterface() {
                     <Card>
                       <CardHeader>
                         <CardTitle>Panier</CardTitle>
-                        <CardDescription>{cart.length} articles</CardDescription>
+                        <CardDescription>
+                          {cart.length} articles
+                        </CardDescription>
                       </CardHeader>
                       <CardContent>
                         {cart.length === 0 ? (
@@ -521,10 +652,17 @@ export default function ServeurInterface() {
                         ) : (
                           <div className="space-y-3">
                             {cart.map((item) => (
-                              <div key={item.id} className="flex items-center justify-between">
+                              <div
+                                key={item.id}
+                                className="flex items-center justify-between"
+                              >
                                 <div className="flex-1">
-                                  <div className="font-medium text-sm">{item.name}</div>
-                                  <div className="text-xs text-gray-600">€{item.price.toFixed(2)}</div>
+                                  <div className="font-medium text-sm">
+                                    {item.name}
+                                  </div>
+                                  <div className="text-xs text-gray-600">
+                                    €{item.price.toFixed(2)}
+                                  </div>
                                 </div>
                                 <div className="flex items-center gap-1">
                                   <Button
@@ -535,7 +673,9 @@ export default function ServeurInterface() {
                                   >
                                     <Minus className="h-3 w-3" />
                                   </Button>
-                                  <span className="w-6 text-center text-sm">{item.quantity}</span>
+                                  <span className="w-6 text-center text-sm">
+                                    {item.quantity}
+                                  </span>
                                   <Button
                                     size="sm"
                                     variant="outline"
@@ -558,7 +698,9 @@ export default function ServeurInterface() {
                             <Separator />
                             <div className="flex justify-between items-center pt-2">
                               <span className="font-bold">Total:</span>
-                              <span className="font-bold">€{calculateTotal().toFixed(2)}</span>
+                              <span className="font-bold">
+                                €{calculateTotal().toFixed(2)}
+                              </span>
                             </div>
                           </div>
                         )}
@@ -567,8 +709,8 @@ export default function ServeurInterface() {
 
                     {/* Actions */}
                     <div className="space-y-2">
-                      <Button 
-                        className="w-full" 
+                      <Button
+                        className="w-full"
                         onClick={sendToKitchen}
                         disabled={cart.length === 0}
                       >
@@ -576,17 +718,17 @@ export default function ServeurInterface() {
                         Envoyer à la cuisine
                       </Button>
                       <div className="grid grid-cols-2 gap-2">
-                        <Button 
+                        <Button
                           variant="outline"
-                          onClick={() => processPayment('CASH')}
+                          onClick={() => processPayment("CASH")}
                           disabled={cart.length === 0}
                         >
                           <DollarSign className="h-4 w-4 mr-1" />
                           Espèces
                         </Button>
-                        <Button 
+                        <Button
                           variant="outline"
-                          onClick={() => processPayment('CARD')}
+                          onClick={() => processPayment("CARD")}
                           disabled={cart.length === 0}
                         >
                           <CreditCard className="h-4 w-4 mr-1" />
@@ -601,8 +743,12 @@ export default function ServeurInterface() {
               <Card>
                 <CardContent className="text-center py-12">
                   <Tablet className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                  <h3 className="text-lg font-medium mb-2">Aucune table sélectionnée</h3>
-                  <p className="text-gray-600">Sélectionnez une table pour commencer une commande</p>
+                  <h3 className="text-lg font-medium mb-2">
+                    Aucune table sélectionnée
+                  </h3>
+                  <p className="text-gray-600">
+                    Sélectionnez une table pour commencer une commande
+                  </p>
                 </CardContent>
               </Card>
             )}
@@ -612,18 +758,24 @@ export default function ServeurInterface() {
             <Card>
               <CardHeader>
                 <CardTitle>Notifications et Alertes</CardTitle>
-                <CardDescription>Alertes en temps réel de la cuisine et des clients</CardDescription>
+                <CardDescription>
+                  Alertes en temps réel de la cuisine et des clients
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {notifications.length === 0 ? (
-                    <p className="text-center text-gray-500 py-8">Aucune notification</p>
+                    <p className="text-center text-gray-500 py-8">
+                      Aucune notification
+                    </p>
                   ) : (
                     notifications.map((notification) => (
-                      <div 
-                        key={notification.id} 
+                      <div
+                        key={notification.id}
                         className={`p-3 rounded-lg border cursor-pointer transition-colors ${
-                          notification.read ? 'bg-gray-50' : 'bg-blue-50 border-blue-200'
+                          notification.read
+                            ? "bg-gray-50"
+                            : "bg-blue-50 border-blue-200"
                         }`}
                         onClick={() => markNotificationAsRead(notification.id)}
                       >
@@ -631,14 +783,24 @@ export default function ServeurInterface() {
                           {getNotificationIcon(notification.type)}
                           <div className="flex-1">
                             <div className="flex items-center justify-between">
-                              <p className="font-medium">{notification.message}</p>
-                              <Badge variant={notification.priority === 'high' ? 'destructive' : 'outline'}>
+                              <p className="font-medium">
+                                {notification.message}
+                              </p>
+                              <Badge
+                                variant={
+                                  notification.priority === "high"
+                                    ? "destructive"
+                                    : "outline"
+                                }
+                              >
                                 {notification.priority}
                               </Badge>
                             </div>
                             <div className="flex items-center gap-2 mt-1">
                               <span className="text-xs text-gray-500">
-                                {new Date(notification.timestamp).toLocaleTimeString()}
+                                {new Date(
+                                  notification.timestamp,
+                                ).toLocaleTimeString()}
                               </span>
                               {notification.tableNumber && (
                                 <Badge variant="outline" className="text-xs">
@@ -662,8 +824,13 @@ export default function ServeurInterface() {
                 <CardContent className="p-4 text-center">
                   <QrCode className="h-8 w-8 mx-auto mb-2 text-blue-600" />
                   <h3 className="font-medium mb-1">Scanner QR Code</h3>
-                  <p className="text-sm text-gray-600 mb-3">Scanner une table</p>
-                  <Button onClick={() => setShowScanner(true)} className="w-full">
+                  <p className="text-sm text-gray-600 mb-3">
+                    Scanner une table
+                  </p>
+                  <Button
+                    onClick={() => setShowScanner(true)}
+                    className="w-full"
+                  >
                     <Camera className="h-4 w-4 mr-2" />
                     Scanner
                   </Button>
@@ -674,7 +841,9 @@ export default function ServeurInterface() {
                 <CardContent className="p-4 text-center">
                   <Bell className="h-8 w-8 mx-auto mb-2 text-yellow-600" />
                   <h3 className="font-medium mb-1">Appeler Table</h3>
-                  <p className="text-sm text-gray-600 mb-3">Notifier une table</p>
+                  <p className="text-sm text-gray-600 mb-3">
+                    Notifier une table
+                  </p>
                   <Button variant="outline" className="w-full">
                     <Bell className="h-4 w-4 mr-2" />
                     Appeler
@@ -686,7 +855,9 @@ export default function ServeurInterface() {
                 <CardContent className="p-4 text-center">
                   <Utensils className="h-8 w-8 mx-auto mb-2 text-green-600" />
                   <h3 className="font-medium mb-1">Menu du Jour</h3>
-                  <p className="text-sm text-gray-600 mb-3">Voir les suggestions</p>
+                  <p className="text-sm text-gray-600 mb-3">
+                    Voir les suggestions
+                  </p>
                   <Button variant="outline" className="w-full">
                     <Utensils className="h-4 w-4 mr-2" />
                     Voir
@@ -698,7 +869,9 @@ export default function ServeurInterface() {
                 <CardContent className="p-4 text-center">
                   <Users className="h-8 w-8 mx-auto mb-2 text-purple-600" />
                   <h3 className="font-medium mb-1">Réservations</h3>
-                  <p className="text-sm text-gray-600 mb-3">Gérer les réservations</p>
+                  <p className="text-sm text-gray-600 mb-3">
+                    Gérer les réservations
+                  </p>
                   <Button variant="outline" className="w-full">
                     <Users className="h-4 w-4 mr-2" />
                     Voir
@@ -710,5 +883,5 @@ export default function ServeurInterface() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }
