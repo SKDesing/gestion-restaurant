@@ -53,3 +53,11 @@ export function createSocketServer(server) {
 
   return io;
 }
+
+// Provide CommonJS compatibility for legacy require() users
+// This keeps ESM named exports while allowing `require('./socket').createSocketServer`
+// in environments that still use CommonJS.
+declare const module: any
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { createSocketServer };
+}

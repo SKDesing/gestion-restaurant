@@ -225,3 +225,19 @@ Pour toute question ou support :
 ---
 
 **Développé avec ❤️ pour les restaurateurs modernes**
+
+## Tests Socket.IO
+
+Les tests Socket.IO utilisent un serveur HTTP isolé pour éviter les problèmes d'interopérabilité ESM/CJS.
+
+Lancer les tests :
+```bash
+# Avec pnpm (recommandé)
+pnpm exec vitest
+
+# Ou avec npm (fallback)
+npm test
+```
+
+Fichier principal de test : `test/socket.spec.ts` — ce test démarre son propre serveur HTTP et attache Socket.IO via `createSocketServer`.
+
