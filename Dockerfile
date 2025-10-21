@@ -1,24 +1,21 @@
-FROM node:20-alpine AS base
-
-# Install dependencies
-FROM base AS deps
+FROM node:20-alpine AS deps
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
+COPY package*.json pnpm-lock.yaml ./
+RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN pnpm install --frozen-lockfile --prod --ignore-scripts
 
-# Build application
-FROM base AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
-COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN npm run build
+COPY . .
+RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN pnpm run build
 
-# Production image
-FROM base AS runner
+FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs && \
+	adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
