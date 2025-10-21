@@ -1,0 +1,83 @@
+=== ANALYSE D'INCOHERENCES ===
+
+--- Next.js Config vs Package.json ---
+next-auth/prisma-adapter": "^1.0.4
+next": "^15.3.5
+next-auth": "^4.24.11
+next-intl": "^4.3.4
+next-themes": "^0.4.6
+next": "15.3.5
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  // Removed `output: "export"` to allow dynamic API routes and middleware
+  /* config options here */
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // 禁用 Next.js 热重载，由 nodemon 处理重编译
+  reactStrictMode: false,
+  webpack: (config, { dev }) => {
+    if (dev) {
+      // 禁用 webpack 的热模块替换
+      config.watchOptions = {
+        ignored: ['**/*'], // 忽略所有文件变化
+      };
+    }
+    return config;
+  },
+  eslint: {
+    // 构建时忽略ESLint错误
+    ignoreDuringBuilds: true,
+  },
+};
+
+export default nextConfig;
+
+--- Prisma Schema vs .env ---
+  provider = "prisma-client-js"
+  provider = "postgresql"
+.env.example:DATABASE_URL="postgresql://restaurant:restaurant_password@localhost:5432/restaurant_db"
+.env.example:DEV_DATABASE_URL="file:./dev.db"
+.env:DATABASE_URL="postgresql://restaurant:restaurant_password@localhost:5432/restaurant_db"
+
+--- NextAuth Configuration ---
+./src/lib/auth.ts
+./auth_signin_headers.txt
+./auth_json_body.txt
+./auth_cookies.txt
+./auth_debug_headers.txt
+./tmp/auth_test_4001.js
+./auth_debug_body.txt
+./auth_json_headers.txt
+./auth_json_cookies.txt
+./auth_cookies_4001.txt
+./.git/logs/refs/heads/feature/auth-postgres
+./.git/logs/refs/remotes/origin/feature/auth-postgres
+./.git/refs/heads/feature/auth-postgres
+./.git/refs/remotes/origin/feature/auth-postgres
+./auth_debug_cookies.txt
+.env.example:# NEXTAUTH
+.env.example:NEXTAUTH_URL="http://localhost:3000"
+.env.example:NEXTAUTH_SECRET="change_me_to_a_strong_random_value"
+.env:NEXTAUTH_URL="http://127.0.0.1:4000"
+.env:NEXTAUTH_SECRET="change_me_to_a_strong_random_value"
+
+--- Docker Configuration ---
+-rw-rw-r-- 1 soufiane soufiane  596 oct.  20 01:21 docker-compose.prod.yml
+-rw-rw-r-- 1 soufiane soufiane 1185 oct.  20 03:33 docker-compose.yml
+-rw-rw-r-- 1 soufiane soufiane  614 oct.  20 02:03 Dockerfile
+gestionrestaurant-redis-1 redis:7-alpine
+gestionrestaurant-postgres-1 postgres:15-alpine
+gr_test2 gestion-restaurant:local
+gestion_test_postgres postgres:15-alpine
+gestionderestaurantcapverdienportugaisetbresilien-nginx-1 nginx:alpine
+gestionderestaurantcapverdienportugaisetbresilien-app-1 gestionderestaurantcapverdienportugaisetbresilien-app
+gestionderestaurantcapverdienportugaisetbresilien-python-worker-1 gestionderestaurantcapverdienportugaisetbresilien-python-worker
+gestionderestaurantcapverdienportugaisetbresilien-worker-1 gestionderestaurantcapverdienportugaisetbresilien-worker
+gestionderestaurantcapverdienportugaisetbresilien-grafana-1 grafana/grafana:latest
+gestionderestaurantcapverdienportugaisetbresilien-mongodb-1 mongo:6
+gestionderestaurantcapverdienportugaisetbresilien-timescaledb-1 timescale/timescaledb:latest-pg14
+gestionderestaurantcapverdienportugaisetbresilien-redis-1 redis:7-alpine
+gestionderestaurantcapverdienportugaisetbresilien-postgres-1 postgres:15-alpine
+gestionderestaurantcapverdienportugaisetbresilien-prometheus-1 prom/prometheus:latest

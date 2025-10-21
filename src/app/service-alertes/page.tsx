@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -19,8 +19,19 @@ import {
   Bell
 } from 'lucide-react'
 
+type TableType = {
+  id: string
+  capacity: number
+  status: string
+  currentOrder?: string | null
+  orderTime?: string
+  amount?: number
+  customers: number
+  paymentRequested?: boolean
+}
+
 // Mock data pour les tables
-const mockTables = [
+const mockTables: TableType[] = [
   {
     id: 'T1',
     capacity: 4,
@@ -85,7 +96,7 @@ const mockReadyOrders = [
 ]
 
 export default function ServiceAlertes() {
-  const [tables, setTables] = useState(mockTables)
+  const [tables, setTables] = useState<TableType[]>(mockTables)
   const [readyOrders, setReadyOrders] = useState(mockReadyOrders)
   const { requestPayment, customerCall, connected } = useSocket('server', 'server-001')
 
@@ -257,7 +268,7 @@ export default function ServiceAlertes() {
                           <div className="space-y-2">
                             <div className="text-sm">
                               <p className="font-medium">Commande: {table.currentOrder}</p>
-                              <p className="text-gray-600">Montant: €{table.amount.toFixed(2)}</p>
+                              <p className="text-gray-600">Montant: €{(table.amount ?? 0).toFixed(2)}</p>
                               <p className="text-xs text-gray-500">Depuis: {table.orderTime}</p>
                             </div>
 
@@ -268,7 +279,7 @@ export default function ServiceAlertes() {
                                 <Button
                                   size="sm"
                                   variant="outline"
-                                  onClick={() => handleRequestPayment(table.id, table.currentOrder!, table.amount)}
+                                  onClick={() => handleRequestPayment(table.id, table.currentOrder!, table.amount ?? 0)}
                                   className="flex-1"
                                 >
                                   <CreditCard className="h-4 w-4 mr-1" />

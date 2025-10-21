@@ -112,8 +112,8 @@ const SocketHandler = (req: NextApiRequest, res: NextApiResponse & { socket: any
         stationsToNotify.add(StationType.TAKEAWAY)
       }
 
-      // Créer les alertes pour chaque station concernée
-      const alerts = []
+  // Créer les alertes pour chaque station concernée
+  const alerts: any[] = []
       for (const station of stationsToNotify) {
         const alert = {
           id: `alert_${Date.now()}_${station}`,
@@ -126,7 +126,7 @@ const SocketHandler = (req: NextApiRequest, res: NextApiResponse & { socket: any
           timestamp: new Date().toISOString(),
           items
         }
-        alerts.push(alert)
+  alerts.push(alert)
 
         // Envoyer à la station spécifique
         io.to(station).emit('new_alert', alert)

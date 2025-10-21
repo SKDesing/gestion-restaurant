@@ -114,107 +114,104 @@ async function seedDatabase() {
       })),
     ].map(table => prisma.table.create({ data: table })));
     console.log('✅ Tables créées');
-
     // 4. Créer les employés
+    // Générer un mot de passe haché par défaut pour les employés créés par le seed
+    const defaultPassword = await hash('ChangeMe123!', 10);
+
+    // Helper to bypass generated Prisma TS types until client is regenerated after migration
+    const createEmployee = (data: any) => (prisma as any).employee.create({ data });
+
     const employees = await Promise.all([
       // Personnel de cuisine
-      prisma.employee.create({
-        data: {
-          name: 'Pierre Dubois',
-          email: 'pierre.chef@legourmetmoderne.fr',
-          phone: '+33 6 12 34 56 78',
-          role: 'CHEF',
-          salary: 3500,
-          hireDate: new Date('2023-01-15'),
-          status: 'ACTIVE',
-          restaurantId: restaurant.id,
-        },
+      createEmployee({
+        name: 'Pierre Dubois',
+        email: 'pierre.chef@legourmetmoderne.fr',
+        password: defaultPassword,
+        phone: '+33 6 12 34 56 78',
+        role: 'CHEF',
+        salary: 3500,
+        hireDate: new Date('2023-01-15'),
+        status: 'ACTIVE',
+        restaurantId: restaurant.id,
       }),
-      prisma.employee.create({
-        data: {
-          name: 'Marie Martin',
-          email: 'marie.souschef@legourmetmoderne.fr',
-          phone: '+33 6 23 45 67 89',
-          role: 'COOK',
-          salary: 2800,
-          hireDate: new Date('2023-03-20'),
-          status: 'ACTIVE',
-          restaurantId: restaurant.id,
-        },
+      createEmployee({
+        name: 'Marie Martin',
+        email: 'marie.souschef@legourmetmoderne.fr',
+        password: defaultPassword,
+        phone: '+33 6 23 45 67 89',
+        role: 'COOK',
+        salary: 2800,
+        hireDate: new Date('2023-03-20'),
+        status: 'ACTIVE',
+        restaurantId: restaurant.id,
       }),
-      prisma.employee.create({
-        data: {
-          name: 'Luc Bernard',
-          email: 'luc.pcook@legourmetmoderne.fr',
-          phone: '+33 6 34 56 78 90',
-          role: 'COOK',
-          salary: 2200,
-          hireDate: new Date('2023-06-10'),
-          status: 'ACTIVE',
-          restaurantId: restaurant.id,
-        },
+      createEmployee({
+        name: 'Luc Bernard',
+        email: 'luc.pcook@legourmetmoderne.fr',
+        password: defaultPassword,
+        phone: '+33 6 34 56 78 90',
+        role: 'COOK',
+        salary: 2200,
+        hireDate: new Date('2023-06-10'),
+        status: 'ACTIVE',
+        restaurantId: restaurant.id,
       }),
       // Personnel de service
-      prisma.employee.create({
-        data: {
-          name: 'Sophie Laurent',
-          email: 'sophie.serveur@legourmetmoderne.fr',
-          phone: '+33 6 45 67 89 01',
-          role: 'WAITER',
-          salary: 2100,
-          hireDate: new Date('2023-02-01'),
-          status: 'ACTIVE',
-          restaurantId: restaurant.id,
-        },
+      createEmployee({
+        name: 'Sophie Laurent',
+        email: 'sophie.serveur@legourmetmoderne.fr',
+        password: defaultPassword,
+        phone: '+33 6 45 67 89 01',
+        role: 'WAITER',
+        salary: 2100,
+        hireDate: new Date('2023-02-01'),
+        status: 'ACTIVE',
+        restaurantId: restaurant.id,
       }),
-      prisma.employee.create({
-        data: {
-          name: 'Jean Petit',
-          email: 'jean.serveur@legourmetmoderne.fr',
-          phone: '+33 6 56 78 90 12',
-          role: 'WAITER',
-          salary: 2100,
-          hireDate: new Date('2023-04-15'),
-          status: 'ACTIVE',
-          restaurantId: restaurant.id,
-        },
+      createEmployee({
+        name: 'Jean Petit',
+        email: 'jean.serveur@legourmetmoderne.fr',
+        password: defaultPassword,
+        phone: '+33 6 56 78 90 12',
+        role: 'WAITER',
+        salary: 2100,
+        hireDate: new Date('2023-04-15'),
+        status: 'ACTIVE',
+        restaurantId: restaurant.id,
       }),
-      prisma.employee.create({
-        data: {
-          name: 'Claire Roux',
-          email: 'claire.barmaid@legourmetmoderne.fr',
-          phone: '+33 6 67 89 01 23',
-          role: 'BARTENDER',
-          salary: 2300,
-          hireDate: new Date('2023-05-20'),
-          status: 'ACTIVE',
-          restaurantId: restaurant.id,
-        },
+      createEmployee({
+        name: 'Claire Roux',
+        email: 'claire.barmaid@legourmetmoderne.fr',
+        password: defaultPassword,
+        phone: '+33 6 67 89 01 23',
+        role: 'BARTENDER',
+        salary: 2300,
+        hireDate: new Date('2023-05-20'),
+        status: 'ACTIVE',
+        restaurantId: restaurant.id,
       }),
       // Administration
-      prisma.employee.create({
-        data: {
-          name: 'Michel Gauthier',
-          email: 'michel.manager@legourmetmoderne.fr',
-          phone: '+33 6 78 90 12 34',
-          role: 'MANAGER',
-          salary: 3800,
-          hireDate: new Date('2022-09-01'),
-          status: 'ACTIVE',
-          restaurantId: restaurant.id,
-        },
+      createEmployee({
+        name: 'Michel Gauthier',
+        email: 'michel.manager@legourmetmoderne.fr',
+        password: defaultPassword,
+        phone: '+33 6 78 90 12 34',
+        role: 'MANAGER',
+        salary: 3800,
+        hireDate: new Date('2022-09-01'),
+        status: 'ACTIVE',
+        restaurantId: restaurant.id,
       }),
-      prisma.employee.create({
-        data: {
-          name: 'Isabelle Bonnet',
-          email: 'isabelle.cashier@legourmetmoderne.fr',
-          phone: '+33 6 89 01 23 45',
-          role: 'CASHIER',
-          salary: 2000,
-          hireDate: new Date('2023-07-10'),
-          status: 'ACTIVE',
-          restaurantId: restaurant.id,
-        },
+      createEmployee({
+        name: 'Isabelle Bonnet',
+        email: 'isabelle.cashier@legourmetmoderne.fr',
+        password: defaultPassword,
+        phone: '+33 6 89 01 23 45',
+        role: 'CASHIER',
+        salary: 2000,
+        hireDate: new Date('2023-07-10'),
+        status: 'ACTIVE',
+        restaurantId: restaurant.id,
       }),
     ]);
     console.log('✅ Employés créés');

@@ -1,0 +1,13 @@
+.next/types/validator.ts(183,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/analytics/route.ts' is not a module.
+.next/types/validator.ts(210,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/cleaning/route.ts' is not a module.
+.next/types/validator.ts(219,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/employees/route.ts' is not a module.
+.next/types/validator.ts(228,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/haccp-alerts/route.ts' is not a module.
+.next/types/validator.ts(237,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/health/route.ts' is not a module.
+.next/types/validator.ts(246,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/inventory/route.ts' is not a module.
+.next/types/validator.ts(255,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/menu/route.ts' is not a module.
+.next/types/validator.ts(282,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/orders/takeout/route.ts' is not a module.
+.next/types/validator.ts(291,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/quality/route.ts' is not a module.
+.next/types/validator.ts(300,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/reservations/route.ts' is not a module.
+.next/types/validator.ts(309,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/restaurants/route.ts' is not a module.
+.next/types/validator.ts(327,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/suppliers/route.ts' is not a module.
+.next/types/validator.ts(345,39): error TS2306: File '/home/soufiane/Bureau/gestion restaurant/src/app/api/temperature/route.ts' is not a module.

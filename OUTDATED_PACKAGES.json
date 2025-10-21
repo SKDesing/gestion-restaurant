@@ -1,0 +1,83 @@
+{
+  "@tailwindcss/postcss": {
+    "current": "4.1.14",
+    "wanted": "4.1.15",
+    "latest": "4.1.15",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/@tailwindcss/postcss",
+    "type": "dependencies",
+    "homepage": "https://tailwindcss.com"
+  },
+  "@tanstack/react-query": {
+    "current": "5.90.3",
+    "wanted": "5.90.5",
+    "latest": "5.90.5",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/@tanstack/react-query",
+    "type": "dependencies",
+    "homepage": "https://tanstack.com/query"
+  },
+  "@types/node": {
+    "current": "20.19.21",
+    "wanted": "20.19.22",
+    "latest": "24.9.0",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/@types/node",
+    "type": "devDependencies",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node"
+  },
+  "eslint": {
+    "current": "9.37.0",
+    "wanted": "9.38.0",
+    "latest": "9.38.0",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/eslint",
+    "type": "devDependencies",
+    "homepage": "https://eslint.org"
+  },
+  "eslint-config-next": {
+    "current": "15.3.5",
+    "wanted": "15.3.5",
+    "latest": "15.5.6",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/eslint-config-next",
+    "type": "devDependencies",
+    "homepage": "https://nextjs.org/docs/app/api-reference/config/eslint"
+  },
+  "lucide-react": {
+    "current": "0.525.0",
+    "wanted": "0.525.0",
+    "latest": "0.546.0",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/lucide-react",
+    "type": "dependencies",
+    "homepage": "https://lucide.dev"
+  },
+  "recharts": {
+    "current": "2.15.4",
+    "wanted": "2.15.4",
+    "latest": "3.3.0",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/recharts",
+    "type": "dependencies",
+    "homepage": "https://github.com/recharts/recharts"
+  },
+  "tailwindcss": {
+    "current": "4.1.14",
+    "wanted": "4.1.15",
+    "latest": "4.1.15",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/tailwindcss",
+    "type": "dependencies",
+    "homepage": "https://tailwindcss.com"
+  },
+  "uuid": {
+    "current": "11.1.0",
+    "wanted": "11.1.0",
+    "latest": "13.0.0",
+    "dependent": "gestion restaurant",
+    "location": "/home/soufiane/Bureau/gestion restaurant/node_modules/uuid",
+    "type": "dependencies",
+    "homepage": "https://github.com/uuidjs/uuid#readme"
+  }
+}

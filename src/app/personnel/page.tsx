@@ -214,7 +214,7 @@ export default function PersonnelManagement() {
   }
 
   const getWeekDates = (startDate: string) => {
-    const dates = []
+    const dates: string[] = []
     const start = new Date(startDate)
     for (let i = 0; i < 7; i++) {
       const date = new Date(start)

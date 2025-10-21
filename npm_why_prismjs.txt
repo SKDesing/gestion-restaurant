@@ -1,0 +1,14 @@
+prismjs@1.30.0
+node_modules/prismjs
+  prismjs@"^1.30.0" from @lexical/code@0.35.0
+  node_modules/@lexical/code
+    @lexical/code@"0.35.0" from @lexical/markdown@0.35.0
+    node_modules/@lexical/markdown
+      @lexical/markdown@"0.35.0" from @lexical/react@0.35.0
+      node_modules/@lexical/react
+        @lexical/react@"^0.35.0" from @mdxeditor/editor@3.47.0
+        node_modules/@mdxeditor/editor
+          @mdxeditor/editor@"^3.39.1" from the root project
+      @lexical/markdown@"^0.35.0" from @mdxeditor/editor@3.47.0
+      node_modules/@mdxeditor/editor
+        @mdxeditor/editor@"^3.39.1" from the root project

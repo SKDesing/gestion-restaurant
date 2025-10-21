@@ -1,0 +1,410 @@
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+set-cookie: next-auth.csrf-token=9817a1bc2a799df5962ff3a86a6ed10d8f6c0f7602b9b009731dab026bfb1eb8%7Ca1108d2d9e9668d2a5102f6122b489ba1a1d7c84bea36e067e166a15540c18fa; Path=/; HttpOnly; SameSite=Lax
+set-cookie: next-auth.callback-url=http%3A%2F%2F127.0.0.1%3A4001; Path=/; HttpOnly; SameSite=Lax
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:02 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://127.0.0.1:4001/api/auth/signin?csrf=true
+Date: Mon, 20 Oct 2025 18:29:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+

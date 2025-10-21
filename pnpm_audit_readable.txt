@@ -1,0 +1,3 @@
+```plaintext
+Renamed from npm_audit_readable.txt — see original file for details. Use `pnpm audit --json` to regenerate.
+```

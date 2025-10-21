@@ -134,7 +134,9 @@ export default function ServeurApp() {
       ));
     });
 
-    return () => newSocket.close();
+    return () => {
+      newSocket.close();
+    }
   }, []);
 
   const addToOrder = (menuItem: MenuItem) => {

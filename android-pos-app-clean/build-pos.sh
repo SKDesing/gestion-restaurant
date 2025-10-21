@@ -35,12 +35,15 @@ echo "1) Export Next.js (next build && next export)"
 GRADLE_WRAPPER="./gradlew"
 cd "$NEXT_PROJECT_DIR"
 if [ -f package.json ]; then
-  # Use npm if available, prefer pnpm/yarn if project uses them? Keep simple: npm.
-  if command -v npm >/dev/null 2>&1; then
+  # Prefer pnpm when available, fallback to npm
+  if command -v pnpm >/dev/null 2>&1; then
+    pnpm run build --if-present
+    pnpm run export --if-present
+  elif command -v npm >/dev/null 2>&1; then
     npm run build --if-present
     npm run export --if-present
   else
-    echo "npm introuvable, saute l'étape d'export (attendu: dossier $OUT_DIR existant)"
+    echo "pnpm/npm introuvable, saute l'étape d'export (attendu: dossier $OUT_DIR existant)"
   fi
 else
   echo "package.json introuvable dans $NEXT_PROJECT_DIR, saute l'export" 
@@ -50,21 +53,35 @@ if [ ! -d "$OUT_DIR" ]; then
   echo "Dossier d'export statique introuvable: $OUT_DIR" >&2
 echo "3) Builder l'APK (préférence: ./gradlew, sinon Gradle local $GRADLE_BIN)"
 fi
+GRADLE_CMD=""
 if [ -x "$GRADLE_WRAPPER" ]; then
   echo "Utilisation de ./gradlew"
   chmod +x "$GRADLE_WRAPPER" || true
-  "$GRADLE_WRAPPER" assembleDebug --no-daemon --stacktrace --info
+  GRADLE_CMD="$GRADLE_WRAPPER"
 else
   echo "./gradlew introuvable, utilisation de $GRADLE_BIN"
+  GRADLE_CMD="$GRADLE_BIN"
+fi
 
 echo "2) Copier fichiers statiques vers Android assets"
 
-mkdir -p "$ASSETS_DIR"
-rsync -a --delete "$OUT_DIR/" "$ASSETS_DIR/"
+# Prefer the exported `out/` folder. If absent, fallback to .next/static
+if [ -d "$OUT_DIR" ]; then
+  mkdir -p "$ASSETS_DIR"
+  rsync -a --delete "$OUT_DIR/" "$ASSETS_DIR/"
+else
+  echo "Dossier d'export statique introuvable: $OUT_DIR — tentative de copie depuis .next/static"
+  if [ -d ".next/static" ]; then
+    mkdir -p "$ASSETS_DIR"
+    rsync -a --delete ".next/static/" "$ASSETS_DIR/"
+  else
+    echo "Aucun dossier statique trouvé (.next/static ou out/). Continue sans copier d'actifs." >&2
+  fi
+fi
 
-echo "3) Builder l'APK avec Gradle local ($GRADLE_BIN)"
+echo "3) Builder l'APK avec Gradle ($GRADLE_CMD)"
 cd "$ANDROID_PROJECT_DIR"
-"$GRADLE_BIN" assembleDebug --no-daemon --stacktrace --info
+"$GRADLE_CMD" assembleDebug --no-daemon --stacktrace --info
 
 APK_PATH="$ANDROID_PROJECT_DIR/app/build/outputs/apk/debug/app-debug.apk"
 if [ ! -f "$APK_PATH" ]; then

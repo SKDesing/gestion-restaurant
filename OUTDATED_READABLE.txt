@@ -1,0 +1,10 @@
+Package                 Current    Wanted   Latest  Location                            Depended by
+@tailwindcss/postcss     4.1.14    4.1.15   4.1.15  node_modules/@tailwindcss/postcss   gestion restaurant
+@tanstack/react-query    5.90.3    5.90.5   5.90.5  node_modules/@tanstack/react-query  gestion restaurant
+@types/node            20.19.21  20.19.22   24.9.0  node_modules/@types/node            gestion restaurant
+eslint                   9.37.0    9.38.0   9.38.0  node_modules/eslint                 gestion restaurant
+eslint-config-next       15.3.5    15.3.5   15.5.6  node_modules/eslint-config-next     gestion restaurant
+lucide-react            0.525.0   0.525.0  0.546.0  node_modules/lucide-react           gestion restaurant
+recharts                 2.15.4    2.15.4    3.3.0  node_modules/recharts               gestion restaurant
+tailwindcss              4.1.14    4.1.15   4.1.15  node_modules/tailwindcss            gestion restaurant
+uuid                     11.1.0    11.1.0   13.0.0  node_modules/uuid                   gestion restaurant

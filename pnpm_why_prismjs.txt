@@ -1,0 +1,3 @@
+```plaintext
+Renamed placeholder from npm_why_prismjs.txt
+```

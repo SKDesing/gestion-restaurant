@@ -9,6 +9,8 @@ interface NotificationData {
   data?: any;
   timestamp: string;
   priority: 'low' | 'medium' | 'high';
+  id?: string;
+  read?: boolean;
 }
 
 interface KitchenOrder {

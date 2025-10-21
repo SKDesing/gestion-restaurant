@@ -1,0 +1,294 @@
+.
+├── android-pos-app
+│   ├── app
+│   │   ├── build.gradle
+│   │   └── src
+│   │       └── main
+│   ├── build.gradle
+│   ├── build-pos.sh
+│   ├── gradle
+│   │   └── wrapper
+│   │       ├── gradle-wrapper.jar
+│   │       └── gradle-wrapper.properties
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   ├── local.properties
+│   ├── README.md
+│   └── settings.gradle
+├── android-pos-app-clean
+│   ├── app
+│   │   ├── build.gradle
+│   │   └── src
+│   │       └── main
+│   ├── build.gradle
+│   ├── build-pos.sh
+│   ├── gradle
+│   │   └── wrapper
+│   │       ├── gradle-wrapper.jar
+│   │       └── gradle-wrapper.properties
+│   ├── gradle.properties
+│   ├── gradlew
+│   ├── gradlew.bat
+│   ├── keystore
+│   │   ├── README.md
+│   │   └── release-keystore.jks
+│   ├── local.properties
+│   ├── README.md
+│   ├── release
+│   │   └── app-debug.apk
+│   └── settings.gradle
+├── audit_audit_err.log
+├── audit_audit_summary_err.log
+├── audit_fix_apply.txt
+├── audit_fix_plan.txt
+├── audit_report_full.json
+├── audit_report.md
+├── AUDIT_REPORT.md
+├── audit_summary.txt
+├── audit_timestamp.txt
+├── auth_cookies_4001.txt
+├── auth_cookies.txt
+├── auth_debug_body.txt
+├── auth_debug_cookies.txt
+├── auth_debug_headers.txt
+├── auth_json_body.txt
+├── auth_json_cookies.txt
+├── auth_json_headers.txt
+├── auth_signin_headers.txt
+├── AUTH_TEST_REPORT.md
+├── build_after_audit_fix.log
+├── components.json
+├── CONFIG_FILES.txt
+├── DATABASE_SUMMARY.md
+├── db
+│   └── custom.db
+├── debug_server_4001.log
+├── DEPENDENCIES_SNAPSHOT.json
+├── deploy.sh
+├── dev.log
+├── dev.out
+├── docker-compose.prod.yml
+├── docker-compose.yml
+├── Dockerfile
+├── eslint.config.mjs
+├── eslint_full.json
+├── ESLINT_REPORT.txt
+├── ESLINT_RUN2.txt
+├── ESLINT_RUN.txt
+├── ESLINT_SRC.txt
+├── examples
+│   └── websocket
+│       └── page.tsx
+├── GIT_BRANCHES.txt
+├── GIT_HISTORY.txt
+├── GIT_REMOTES.txt
+├── GIT_STATUS.txt
+├── INCOHERENCES.txt
+├── INITIAL_AUDIT.md
+├── next_build_run.log
+├── next.config.ts
+├── next-env.d.ts
+├── nextjs_build.log
+├── audit_reports/
+│   ├── pnpm_audit_full.err
+│   ├── pnpm_audit_full.json
+│   ├── pnpm_audit_prod.err
+│   ├── pnpm_audit_prod.json
+│   ├── pnpm_audit_readable.err
+│   └── pnpm_audit_readable.txt
+├── outdated_err.log
+├── OUTDATED_PACKAGES.err
+├── OUTDATED_PACKAGES.json
+├── outdated_packages.txt
+├── OUTDATED_READABLE.err
+├── OUTDATED_READABLE.txt
+├── package.json
+├── pnpm-lock.yaml
+├── package-lock.json.backup
+├── postcss.config.mjs
+├── prisma
+│   ├── migrations
+│   │   ├── 20251019225603_init_postgres
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   ├── schema.prisma
+│   ├── schema.prisma.backup
+│   └── seed.ts
+├── prisma_generate.log
+├── PROJECT_STRUCTURE.txt
+├── public
+│   ├── logo.svg
+│   └── robots.txt
+├── README.dev.md
+├── README.md
+├── README_RESTAURANT.md
+├── RUNTIME_TEST_REPORT.md
+├── scripts
+│   ├── launch-tablets.sh
+│   ├── restart-tablet.sh
+│   ├── run_initial_audit.sh
+│   └── stop-tablets.sh
+├── SECRETS_REPORT.md
+├── SECRETS_SCAN.txt
+├── SECURITY_MATRIX.md
+├── server-4001.log
+├── server-4001.pid
+├── server-admin.log
+├── server-admin.ts
+├── server-caisse.log
+├── server-caisse.ts
+├── server-cuisine.log
+├── server-cuisine.ts
+├── server.log
+├── server-serveur.log
+├── server-serveur.ts
+├── server_test.log
+├── server_test.pid
+├── server.ts
+├── src
+│   ├── app
+│   │   ├── accueil
+│   │   │   └── page.tsx
+│   │   ├── admin
+│   │   │   └── page.tsx
+│   │   ├── api
+│   │   │   ├── alertes
+│   │   │   ├── analytics
+│   │   │   ├── auth
+│   │   │   ├── categories
+│   │   │   ├── cleaning
+│   │   │   ├── debug-auth
+│   │   │   ├── employees
+│   │   │   ├── haccp-alerts
+│   │   │   ├── health
+│   │   │   ├── inventory
+│   │   │   ├── menu
+│   │   │   ├── newsletter
+│   │   │   ├── orders
+│   │   │   ├── personnel
+│   │   │   ├── quality
+│   │   │   ├── reservations
+│   │   │   ├── restaurants
+│   │   │   ├── socketio
+│   │   │   ├── suppliers
+│   │   │   ├── tables
+│   │   │   └── temperature
+│   │   ├── auth
+│   │   │   ├── login
+│   │   │   └── register
+│   │   ├── bar
+│   │   │   └── page.tsx
+│   │   ├── caisse
+│   │   │   └── page.tsx
+│   │   ├── caisse-avancee
+│   │   │   └── page.tsx
+│   │   ├── cuisine
+│   │   │   └── page.tsx
+│   │   ├── cuisine-alertes
+│   │   │   └── page.tsx
+│   │   ├── cuisine-avancee
+│   │   │   └── page.tsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── newsletter-demo
+│   │   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   ├── personnel
+│   │   │   └── page.tsx
+│   │   ├── serveur
+│   │   │   └── page.tsx
+│   │   └── service-alertes
+│   │       └── page.tsx
+│   ├── apps
+│   │   ├── admin-manager.tsx
+│   │   ├── caisse-bar.tsx
+│   │   ├── cuisine.tsx
+│   │   └── serveur.tsx
+│   ├── components
+│   │   ├── AlertSystem.tsx
+│   │   ├── PlanningManager.tsx
+│   │   └── ui
+│   │       ├── accordion.tsx
+│   │       ├── alert-dialog.tsx
+│   │       ├── alert.tsx
+│   │       ├── aspect-ratio.tsx
+│   │       ├── avatar.tsx
+│   │       ├── badge.tsx
+│   │       ├── breadcrumb.tsx
+│   │       ├── button.tsx
+│   │       ├── calendar.tsx
+│   │       ├── card.tsx
+│   │       ├── carousel.tsx
+│   │       ├── chart.tsx
+│   │       ├── checkbox.tsx
+│   │       ├── collapsible.tsx
+│   │       ├── command.tsx
+│   │       ├── context-menu.tsx
+│   │       ├── dialog.tsx
+│   │       ├── drawer.tsx
+│   │       ├── dropdown-menu.tsx
+│   │       ├── form.tsx
+│   │       ├── hover-card.tsx
+│   │       ├── input-otp.tsx
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       ├── menubar.tsx
+│   │       ├── navigation-menu.tsx
+│   │       ├── pagination.tsx
+│   │       ├── popover.tsx
+│   │       ├── progress.tsx
+│   │       ├── radio-group.tsx
+│   │       ├── resizable.tsx
+│   │       ├── scroll-area.tsx
+│   │       ├── select.tsx
+│   │       ├── separator.tsx
+│   │       ├── sheet.tsx
+│   │       ├── sidebar.tsx
+│   │       ├── skeleton.tsx
+│   │       ├── slider.tsx
+│   │       ├── sonner.tsx
+│   │       ├── switch.tsx
+│   │       ├── table.tsx
+│   │       ├── tabs.tsx
+│   │       ├── textarea.tsx
+│   │       ├── toaster.tsx
+│   │       ├── toast.tsx
+│   │       ├── toggle-group.tsx
+│   │       ├── toggle.tsx
+│   │       └── tooltip.tsx
+│   ├── hooks
+│   │   ├── use-mobile.ts
+│   │   ├── use-socket.ts
+│   │   ├── useSocket.ts
+│   │   └── use-toast.ts
+│   ├── lib
+│   │   ├── auth.ts
+│   │   ├── db.ts
+│   │   ├── seed.ts
+│   │   ├── socket.ts
+│   │   ├── tablet-config.ts
+│   │   └── utils.ts
+│   ├── middleware.ts
+│   ├── pages
+│   │   └── api
+│   │       └── socket
+│   └── types
+│       └── global.d.ts
+├── TABLETTE_GUIDE.md
+├── tailwind.config.ts
+├── tmp
+│   ├── auth_test_4001.js
+│   ├── package.json
+│   └── package-lock.json
+├── ts_build.log
+├── TS_CHECK.txt
+├── tsconfig.check.json
+├── tsconfig.json
+├── tsconfig.tsbuildinfo
+├── TS_ERRORS_RUN.txt
+├── TS_ERRORS.txt
+└── VULNERABILITY_PATHS.txt
+
+72 directories, 225 files

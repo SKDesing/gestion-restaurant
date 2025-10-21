@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Removed `output: "export"` to allow dynamic API routes and middleware
   /* config options here */
   typescript: {
     ignoreBuildErrors: true,

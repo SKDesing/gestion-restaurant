@@ -1,0 +1,12 @@
+.next/
+out/
+build/
+dist/
+node_modules/
+public/
+*.log
+*.json
+tmp/
+android-pos-app*/
+.vscode/
+*.tsbuildinfo

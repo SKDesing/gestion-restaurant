@@ -1,0 +1,5 @@
+ M CONFIG_FILES.txt
+ M GIT_STATUS.txt
+ M PROJECT_STRUCTURE.txt
+?? deploy.sh
+?? scripts/run_initial_audit.sh

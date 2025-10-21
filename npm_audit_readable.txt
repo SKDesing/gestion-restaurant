@@ -1,0 +1,19 @@
+# npm audit report
+
+prismjs  <1.30.0
+Severity: moderate
+PrismJS DOM Clobbering vulnerability - https://github.com/advisories/GHSA-x7hr-w5r2-h6wg
+fix available via `npm audit fix --force`
+Will install react-syntax-highlighter@5.8.0, which is a breaking change
+node_modules/refractor/node_modules/prismjs
+  refractor  <=4.6.0
+  Depends on vulnerable versions of prismjs
+  node_modules/refractor
+    react-syntax-highlighter  >=6.0.0
+    Depends on vulnerable versions of refractor
+    node_modules/react-syntax-highlighter
+
+3 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force

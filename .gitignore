@@ -38,6 +38,9 @@ node_modules/
 *.pem
 
 # debug
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -45,6 +48,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -56,7 +60,40 @@ local-*
 .claude
 .z-ai-config
 dev.log
-test
 prompt
 
 server.log
+dev.out
+.dev_pid
+
+# Android builds
+android-pos-app-clean/release/
+*.apk
+
+# Local databases and temp
+*.db
+*.sqlite
+tmp/
+tmp-*
+
+# IDE run logs
+*.log
+
+# Audit & ephemeral artifacts
+cookiejar.txt
+csrf_*.json
+session_*.json
+signin_*.txt
+signin_raw.txt
+csrf_raw.txt
+signin_out.txt
+session_raw.txt
+build_output.txt
+tsc_output.txt
+lint_output*.txt
+audit_*.sh
+audit_*.json
+audit_*.txt
+logs/
+server_test_prod.pid
+deploy.sh

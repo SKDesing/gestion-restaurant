@@ -75,7 +75,7 @@ export function PlanningManager({
   })
 
   const getWeekDates = (startDate: string) => {
-    const dates = []
+    const dates: string[] = []
     const start = new Date(startDate)
     const dayOfWeek = start.getDay()
     const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek

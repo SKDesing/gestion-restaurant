@@ -2,10 +2,13 @@ import { Server } from 'socket.io';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (!res.socket.server.io) {
+  // res.socket.server has a non-standard `io` property attached at runtime.
+  // Cast to any to access server for Socket.IO setup.
+  const sock: any = res.socket as any
+  if (!sock.server.io) {
     console.log('Setting up Socket.io server...');
     
-    const io = new Server(res.socket.server, {
+    const io = new Server(sock.server, {
       path: '/api/socket/io',
       addTrailingSlash: false,
       cors: {
@@ -147,7 +150,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       });
     });
 
-    res.socket.server.io = io;
+    sock.server.io = io;
   }
 
   res.end();
