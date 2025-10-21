@@ -1,99 +1,63 @@
-# Ignored files for this project
-# Android keystores
-/android-pos-app-clean/keystore/
-
-# Gradle caches and wrapper distribution directories (optional)
-/.gradle/
-**/build/
-
-# IDE and OS files
-.idea/
-*.iml
-.DS_Store
+# Dependencies
 node_modules/
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+.pnp
+.pnp.js
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Testing
+coverage/
+.nyc_output/
 
-# testing
-/coverage
+# Next.js
+.next/
+out/
+build/
+dist/
 
-# next.js
-/.next/
-/out/
+# Production
+.vercel/
+.env*.local
 
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# Debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-!.env.example
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# vercel
-.vercel
+# OS
+.DS_Store
+Thumbs.db
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
-local-*
-.claude
-.z-ai-config
-dev.log
-prompt
 
-server.log
-dev.out
-.dev_pid
-
-# Android builds
-android-pos-app-clean/release/
+# Android (if present)
+android-pos-app/build/
+android-pos-app/.gradle/
+android-pos-app-clean/build/
+android-pos-app-clean/.gradle/
 *.apk
+*.aab
+*.ap_
+*.dex
+local.properties
 
-# Local databases and temp
-*.db
-*.sqlite
-tmp/
-tmp-*
+# Backups
+*.backup
+*.bak
 
-# IDE run logs
+# Logs
+logs/
 *.log
 
-# Audit & ephemeral artifacts
-cookiejar.txt
-csrf_*.json
-session_*.json
-signin_*.txt
-signin_raw.txt
-csrf_raw.txt
-signin_out.txt
-session_raw.txt
-build_output.txt
-tsc_output.txt
-lint_output*.txt
-audit_*.sh
-audit_*.json
-audit_*.txt
-logs/
-server_test_prod.pid
-deploy.sh
+# Temporary
+tmp/
+temp/
+.cache/
