@@ -1,155 +1,86 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useSocket } from "@/lib/useSocket";
+import { useSocket } from '@/lib/useSocket';
+import { useEffect, useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export default function AdminPage() {
-  const { socket, connected } = useSocket("/admin");
-  const [messages, setMessages] = useState<string[]>([]);
+  const { socket, connected } = useSocket('/admin');
+  const [stats, setStats] = useState({ orders: 0, revenue: 0, tables: 0, staff: 0 });
 
   useEffect(() => {
-    if (!socket) return;
 
-    socket.on("pong", (data) => {
-      setMessages((m) => [...m, `Pong: ${JSON.stringify(data)}`]);
+    socket.on('stats:update', (data) => {
+      setStats(data);
     });
 
-    socket.emit("ping", { from: "admin", ts: Date.now() });
+    socket.emit('stats:request');
+
+    return () => {
+      socket.off('stats:update');
+    };
   }, [socket]);
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">🟣 Admin Manager</h1>
-      <div>Status: {connected ? "✅ Connected" : "❌ Disconnected"}</div>
-      <div className="mt-4 space-y-2">
-        {messages.map((m, i) => (
-          <div key={i} className="p-2 bg-gray-100 rounded">
-            {m}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-("use client");
-
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-
-export default function AdminPage() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+    <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-900">
-            📊 Dashboard Admin
-          </h1>
-          <p className="text-slate-600 mt-2">Vue d'ensemble en temps réel</p>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold">Tableau de bord Admin</h1>
+          <Badge variant={connected ? 'default' : 'destructive'}>
+            {connected ? '🟢 Connecté' : '🔴 Déconnecté'}
+          </Badge>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-6">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">
-                CA Journalier
-              </CardTitle>
-              <span className="text-2xl">💰</span>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-green-600">2 450 €</div>
-              <p className="text-xs text-slate-500 mt-1">+12% vs hier</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Commandes</CardTitle>
-              <span className="text-2xl">📋</span>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-blue-600">47</div>
-              <p className="text-xs text-slate-500 mt-1">8 en cours</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">
-                Tables Occupées
-              </CardTitle>
-              <span className="text-2xl">🪑</span>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-orange-600">12/20</div>
-              <p className="text-xs text-slate-500 mt-1">
-                60% taux d'occupation
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Cuisine</CardTitle>
-              <span className="text-2xl">👨‍🍳</span>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-red-600">5 min</div>
-              <p className="text-xs text-slate-500 mt-1">Temps moyen</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>🔴 Alertes en Temps Réel</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-500">Commandes du jour</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-red-50 rounded">
-                  <span>Stock fromage bas</span>
-                  <Badge variant="destructive">Urgent</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-yellow-50 rounded">
-                  <span>Table 7 attend depuis 15min</span>
-                  <Badge variant="outline">Attention</Badge>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-green-50 rounded">
-                  <span>Service fluide</span>
-                  <Badge variant="default">OK</Badge>
-                </div>
-              </div>
+              <p className="text-3xl font-bold">{stats.orders}</p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>📈 Top Ventes Aujourd'hui</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-500">Chiffre d'affaires</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
-                {[
-                  { name: "Burger Maison", qty: 23, total: "345€" },
-                  { name: "Pizza Margherita", qty: 18, total: "234€" },
-                  { name: "Salade César", qty: 15, total: "180€" },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-between p-2 border-b"
-                  >
-                    <div>
-                      <div className="font-medium">{item.name}</div>
-                      <div className="text-sm text-slate-500">
-                        {item.qty} vendus
-                      </div>
-                    </div>
-                    <div className="font-bold text-green-600">{item.total}</div>
-                  </div>
-                ))}
-              </div>
+              <p className="text-3xl font-bold">{stats.revenue}€</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm font-medium text-gray-500">Tables actives</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-3xl font-bold">{stats.tables}</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm font-medium text-gray-500">Personnel en ligne</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-3xl font-bold">{stats.staff}</p>
             </CardContent>
           </Card>
         </div>
+
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle>Activité en temps réel</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-500">Socket ID: {socket?.id || 'Non connecté'}</p>
+              <p className="text-sm text-gray-500">Namespace: /admin</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

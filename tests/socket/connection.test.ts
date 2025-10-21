@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { io, Socket } from "socket.io-client";
 import { createServer } from "http";
-import { createSocketServer } from "../src/server/socket";
+import { createSocketServer } from "../../src/server/socket";
 
 describe("Socket.IO Namespaces", () => {
   let httpServer: any;

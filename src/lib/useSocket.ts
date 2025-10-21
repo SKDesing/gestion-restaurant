@@ -1,25 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Socket } from "socket.io-client";
 import { connectNamespace } from "./socket-client";
 
-export function useSocket(namespace: string) {
-  const [socket, setSocket] = useState<Socket | null>(null);
+export function useSocket(namespace: string): { socket: Socket; connected: boolean } {
+  const socketRef = useRef<Socket | null>(null);
+  if (typeof window !== "undefined" && !socketRef.current) {
+    socketRef.current = connectNamespace(namespace);
+  }
+
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    const s = connectNamespace(namespace);
+    const s = socketRef.current!
+    if (!s) return
 
-    s.on("connect", () => setConnected(true));
-    s.on("disconnect", () => setConnected(false));
+    const onConnect = () => setConnected(true)
+    const onDisconnect = () => setConnected(false)
 
-    setSocket(s);
+    s.on("connect", onConnect)
+    s.on("disconnect", onDisconnect)
 
     return () => {
-      s.disconnect();
-    };
-  }, [namespace]);
+      s.off("connect", onConnect)
+      s.off("disconnect", onDisconnect)
+      s.disconnect()
+      socketRef.current = null
+    }
+  }, [namespace])
 
-  return { socket, connected };
+  return { socket: socketRef.current as Socket, connected }
 }
