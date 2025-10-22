@@ -1,17 +1,17 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+import NextAuth, { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
 const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'credentials',
+      name: "credentials",
       credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         // Structured stderr-only debug logging (avoid writing to disk in production)
@@ -23,13 +23,13 @@ const authOptions: NextAuthOptions = {
           } catch (err) {
             // swallow to avoid crashing auth flow
             // log to stderr; avoid throwing from logger
-            console.error('Failed logging debug message', err);
+            console.error("Failed logging debug message", err);
           }
         };
 
-        append('⚙️ authorize() called');
+        append("⚙️ authorize() called");
         if (!credentials?.email || !credentials?.password) {
-          append('⚠️ authorize: missing credentials');
+          append("⚠️ authorize: missing credentials");
           return null;
         }
 
@@ -45,7 +45,10 @@ const authOptions: NextAuthOptions = {
           if (!employee) return null;
 
           // If passwords were hashed with bcrypt in seed, compare
-          const valid = await bcrypt.compare(credentials.password, employee.password);
+          const valid = await bcrypt.compare(
+            credentials.password,
+            employee.password,
+          );
           append(`🔐 authorize: bcrypt.compare result=${valid}`);
           if (!valid) return null;
 
@@ -57,21 +60,62 @@ const authOptions: NextAuthOptions = {
             restaurantId: employee.restaurantId,
           } as any;
 
-          append(`✅ authorize: success for email=${employee.email} id=${employee.id}`);
+          append(
+            `✅ authorize: success for email=${employee.email} id=${employee.id}`,
+          );
           return user;
         } catch (e) {
           append(`Auth error: ${(e as Error).message}`);
           // also log stack to stderr for debugging
-          console.error('Auth error', e);
+          console.error("Auth error", e);
           return null;
         }
       },
     }),
   ],
 
-  session: { strategy: 'jwt' },
-  pages: { signIn: '/login' },
-  secret: process.env.NEXTAUTH_SECRET || 'change-me',
+  session: { strategy: "jwt" },
+  pages: { signIn: "/login" },
+  secret: process.env.NEXTAUTH_SECRET || "change-me",
+  // Secure cookie configuration (Ticket #10)
+  cookies: {
+    sessionToken: {
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.session-token"
+          : "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+    callbackUrl: {
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.callback-url"
+          : "next-auth.callback-url",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+    csrfToken: {
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Host-next-auth.csrf-token"
+          : "next-auth.csrf-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {

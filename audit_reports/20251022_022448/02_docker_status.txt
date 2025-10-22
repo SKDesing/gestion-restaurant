@@ -1,0 +1,113 @@
+=== ÉTAT DOCKER ===
+Version Docker: Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
+Docker Compose: Docker Compose version v2.40.0
+
+=== CONTAINERS ===
+NAMES                                                               STATUS                          PORTS                                                                                                                                  IMAGE
+gestion-test                                                        Created                                                                                                                                                                gestion-restaurant:v1.0.0-final
+nostalgic_sanderson                                                 Exited (1) 49 minutes ago                                                                                                                                              96380074d106
+elated_yalow                                                        Exited (1) About an hour ago                                                                                                                                           21f10e0322b7
+agitated_rubin                                                      Exited (1) About an hour ago                                                                                                                                           e9382343c726
+minikube                                                            Up 5 hours                      127.0.0.1:32768->22/tcp, 127.0.0.1:32769->2376/tcp, 127.0.0.1:32770->5000/tcp, 127.0.0.1:32771->8443/tcp, 127.0.0.1:32772->32443/tcp   gcr.io/k8s-minikube/kicbase:v0.0.48
+gestionrestaurant-redis-1                                           Up 35 hours                     0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp                                                                                            redis:7-alpine
+gestionrestaurant-postgres-1                                        Up 35 hours (healthy)           0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp                                                                                            postgres:15-alpine
+gr_test2                                                            Up 2 days                       0.0.0.0:5000->4000/tcp, [::]:5000->4000/tcp                                                                                            gestion-restaurant:local
+competent_perlman                                                   Exited (1) 2 days ago                                                                                                                                                  2da9a74f33e3
+youthful_swartz                                                     Exited (1) 2 days ago                                                                                                                                                  f9710b58c3c6
+gestion_test_postgres                                               Up 2 days                       0.0.0.0:55432->5432/tcp, [::]:55432->5432/tcp                                                                                          postgres:15-alpine
+gestionderestaurantcapverdienportugaisetbresilien-nginx-1           Restarting (1) 23 seconds ago                                                                                                                                          nginx:alpine
+gestionderestaurantcapverdienportugaisetbresilien-app-1             Exited (1) 2 days ago                                                                                                                                                  gestionderestaurantcapverdienportugaisetbresilien-app
+gestionderestaurantcapverdienportugaisetbresilien-python-worker-1   Restarting (1) 5 seconds ago                                                                                                                                           gestionderestaurantcapverdienportugaisetbresilien-python-worker
+gestionderestaurantcapverdienportugaisetbresilien-worker-1          Restarting (1) 18 seconds ago                                                                                                                                          gestionderestaurantcapverdienportugaisetbresilien-worker
+gestionderestaurantcapverdienportugaisetbresilien-grafana-1         Up 2 days                       0.0.0.0:3001->3000/tcp, [::]:3001->3000/tcp                                                                                            grafana/grafana:latest
+gestionderestaurantcapverdienportugaisetbresilien-mongodb-1         Up 2 days                       0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp                                                                                        mongo:6
+gestionderestaurantcapverdienportugaisetbresilien-timescaledb-1     Up 2 days                       0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp                                                                                            timescale/timescaledb:latest-pg14
+gestionderestaurantcapverdienportugaisetbresilien-redis-1           Up 2 days                       0.0.0.0:6380->6379/tcp, [::]:6380->6379/tcp                                                                                            redis:7-alpine
+gestionderestaurantcapverdienportugaisetbresilien-postgres-1        Up 2 days                       0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp                                                                                            postgres:15-alpine
+gestionderestaurantcapverdienportugaisetbresilien-prometheus-1      Up 2 days                       0.0.0.0:9090->9090/tcp, [::]:9090->9090/tcp                                                                                            prom/prometheus:latest
+
+=== IMAGES ===
+REPOSITORY                                                        TAG            SIZE      CREATED AT
+gestion-restaurant                                                v1.0.0-final   235MB     2025-10-22 02:08:29 +0200 CEST
+<none>                                                            <none>         1.71GB    2025-10-22 02:08:24 +0200 CEST
+<none>                                                            <none>         1.31GB    2025-10-22 02:06:09 +0200 CEST
+<none>                                                            <none>         235MB     2025-10-22 01:51:53 +0200 CEST
+<none>                                                            <none>         1.71GB    2025-10-22 01:51:48 +0200 CEST
+<none>                                                            <none>         1.31GB    2025-10-22 01:49:18 +0200 CEST
+<none>                                                            <none>         135MB     2025-10-22 01:44:53 +0200 CEST
+<none>                                                            <none>         1.61GB    2025-10-22 01:44:52 +0200 CEST
+<none>                                                            <none>         1.31GB    2025-10-22 01:42:47 +0200 CEST
+<none>                                                            <none>         1.2GB     2025-10-22 01:35:14 +0200 CEST
+<none>                                                            <none>         1.23GB    2025-10-22 01:34:10 +0200 CEST
+<none>                                                            <none>         1.2GB     2025-10-22 01:23:50 +0200 CEST
+<none>                                                            <none>         1.22GB    2025-10-22 01:22:53 +0200 CEST
+gestionrestaurant-web                                             latest         1.35GB    2025-10-20 15:16:40 +0200 CEST
+<none>                                                            <none>         1.35GB    2025-10-20 03:38:05 +0200 CEST
+gestion-restaurant                                                local          1.35GB    2025-10-20 02:09:29 +0200 CEST
+<none>                                                            <none>         2.48GB    2025-10-20 02:08:20 +0200 CEST
+<none>                                                            <none>         1.24GB    2025-10-20 01:39:30 +0200 CEST
+<none>                                                            <none>         2.29GB    2025-10-20 01:38:22 +0200 CEST
+gestionderestaurantcapverdienportugaisetbresilien-app             latest         1.28GB    2025-10-17 14:25:43 +0200 CEST
+gestionderestaurantcapverdienportugaisetbresilien-python-worker   latest         539MB     2025-10-17 14:25:43 +0200 CEST
+gestionderestaurantcapverdienportugaisetbresilien-worker          latest         1.28GB    2025-10-17 14:25:43 +0200 CEST
+<none>                                                            <none>         539MB     2025-10-17 14:25:08 +0200 CEST
+<none>                                                            <none>         1.28GB    2025-10-17 14:25:08 +0200 CEST
+<none>                                                            <none>         1.28GB    2025-10-17 14:25:08 +0200 CEST
+<none>                                                            <none>         1.28GB    2025-10-17 14:23:30 +0200 CEST
+<none>                                                            <none>         1.28GB    2025-10-17 14:23:30 +0200 CEST
+<none>                                                            <none>         539MB     2025-10-17 14:22:49 +0200 CEST
+gestionderestaurantcapverdienportugaisetbresilien_app             latest         1.28GB    2025-10-17 14:05:39 +0200 CEST
+gestionderestaurantcapverdienportugaisetbresilien_worker          latest         1.28GB    2025-10-17 14:05:39 +0200 CEST
+gestionderestaurantcapverdienportugaisetbresilien_python-worker   latest         539MB     2025-10-17 14:05:39 +0200 CEST
+<none>                                                            <none>         539MB     2025-10-17 13:59:28 +0200 CEST
+<none>                                                            <none>         1.28GB    2025-10-17 13:57:58 +0200 CEST
+prom/prometheus                                                   latest         370MB     2025-10-17 10:24:46 +0200 CEST
+python                                                            3.11-slim      133MB     2025-10-09 23:44:07 +0200 CEST
+nginx                                                             alpine         52.8MB    2025-10-07 23:06:46 +0200 CEST
+redis                                                             7-alpine       41.4MB    2025-10-03 13:58:08 +0200 CEST
+mongo                                                             6              765MB     2025-10-01 02:16:47 +0200 CEST
+postgres                                                          15-alpine      273MB     2025-09-30 20:58:13 +0200 CEST
+grafana/grafana                                                   latest         733MB     2025-09-23 16:54:51 +0200 CEST
+gcr.io/k8s-minikube/kicbase                                       v0.0.48        1.31GB    2025-09-09 08:54:42 +0200 CEST
+node                                                              20-alpine      134MB     2025-09-03 21:47:58 +0200 CEST
+timescale/timescaledb                                             latest-pg14    1.24GB    2025-04-30 20:33:32 +0200 CEST
+
+=== VOLUMES ===
+DRIVER    VOLUME NAME
+local     718f837c90f163c49db81ba08986233b1d381f23c504e57b95a80b7a80fadf93
+local     aura-osint-advanced-ecosystem_backend-data
+local     aura-osint-advanced-ecosystem_elasticsearch_data
+local     aura-osint-advanced-ecosystem_es_data
+local     aura-osint-advanced-ecosystem_grafana_data
+local     aura-osint-advanced-ecosystem_postgres_data
+local     aura-osint-advanced-ecosystem_prometheus_data
+local     aura-osint-advanced-ecosystem_qdrant_data
+local     aura-osint-advanced-ecosystem_redis_data
+local     d8c623c57426e1b2ba50963d8e7192a689b1849f4396c6b8ef32c6b155df5d13
+local     gestionderestaurantcapverdienportugaisetbresilien_grafana_data
+local     gestionderestaurantcapverdienportugaisetbresilien_mongodb_data
+local     gestionderestaurantcapverdienportugaisetbresilien_postgres_data
+local     gestionderestaurantcapverdienportugaisetbresilien_prometheus_data
+local     gestionderestaurantcapverdienportugaisetbresilien_redis_data
+local     gestionderestaurantcapverdienportugaisetbresilien_timescale_data
+local     gestionrestaurant_postgres_data
+local     gestionrestaurant_redis_data
+local     minikube
+local     osint-tools-advanced_es_data
+local     osint-tools-advanced_pg_data
+
+=== RÉSEAUX ===
+NETWORK ID     NAME                                                                   DRIVER    SCOPE
+4965be2efc3f   bridge                                                                 bridge    local
+b71160fe7fba   gestionderestaurantcapverdienportugaisetbresilien_restaurant-network   bridge    local
+d9d975d2c1fe   gestionrestaurant_default                                              bridge    local
+73826441b421   host                                                                   host      local
+712b8bc0d6de   minikube                                                               bridge    local
+420dc22f74e2   none                                                                   null      local
+
+=== UTILISATION DISQUE DOCKER ===
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          42        15        30.13GB   25.32GB (84%)
+Containers      21        14        1.886GB   1.883GB (99%)
+Local Volumes   21        11        1.627GB   51.2MB (3%)
+Build Cache     67        0         10.94GB   10.94GB

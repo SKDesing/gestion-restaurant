@@ -10,6 +10,18 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // Files/dirs to ignore (prevents scanning build artifacts and static bundles)
+  {
+    ignores: [
+      'node_modules/',
+      '.next/',
+      'dist/',
+      'build/',
+      'android-pos-app/app/src/main/assets/',
+      '_next/',
+      'out/',
+    ],
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {

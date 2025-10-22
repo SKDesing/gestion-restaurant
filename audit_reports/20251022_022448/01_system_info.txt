@@ -1,0 +1,9 @@
+=== INFORMATIONS SYSTÈME ===
+Date: mer. 22 oct. 2025 02:24:48 CEST
+Hostname: soufiane-HP-Laptop-15s-eq1xxx
+OS: Linux soufiane-HP-Laptop-15s-eq1xxx 6.14.0-33-generic #33~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Sep 19 17:02:30 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+CPU: 
+RAM Total: 14Gi
+RAM Utilisée: 8,2Gi
+Espace disque: 93G disponible sur 468G
+Load Average:  0,94, 1,51, 1,67

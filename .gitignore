@@ -12,6 +12,8 @@ coverage/
 out/
 build/
 dist/
+*.bak
+audit_reports/
 
 # Production
 .vercel/

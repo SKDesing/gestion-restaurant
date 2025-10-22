@@ -1,0 +1,114 @@
+=== SERVICES SYSTÈME ACTIFS ===
+  UNIT                                  LOAD   ACTIVE SUB     DESCRIPTION
+  accounts-daemon.service               loaded active running Accounts Service
+  apache2.service                       loaded active running The Apache HTTP Server
+  avahi-daemon.service                  loaded active running Avahi mDNS/DNS-SD Stack
+  bluetooth.service                     loaded active running Bluetooth service
+  colord.service                        loaded active running Manage, Install and Generate Color Profiles
+  containerd.service                    loaded active running containerd container runtime
+  cron.service                          loaded active running Regular background program processing daemon
+  cups-browsed.service                  loaded active running Make remote CUPS printers available locally
+  cups.service                          loaded active running CUPS Scheduler
+  dbus.service                          loaded active running D-Bus System Message Bus
+  docker.service                        loaded active running Docker Application Container Engine
+  fwupd.service                         loaded active running Firmware update daemon
+  gdm.service                           loaded active running GNOME Display Manager
+  glances.service                       loaded active running Glances
+  gnome-remote-desktop.service          loaded active running GNOME Remote Desktop
+  kerneloops.service                    loaded active running Tool to automatically collect and submit kernel crash signatures
+  lxc-monitord.service                  loaded active running LXC Container Monitoring Daemon
+  lxcfs.service                         loaded active running FUSE filesystem for LXC
+  me.proton.vpn.split_tunneling.service loaded active running Proton VPN Daemon
+  ModemManager.service                  loaded active running Modem Manager
+  NetworkManager.service                loaded active running Network Manager
+  polkit.service                        loaded active running Authorization Manager
+  power-profiles-daemon.service         loaded active running Power Profiles daemon
+  rsyslog.service                       loaded active running System Logging Service
+  rtkit-daemon.service                  loaded active running RealtimeKit Scheduling Policy Service
+  snap.cups.cups-browsed.service        loaded active running Service for snap application cups.cups-browsed
+  snap.cups.cupsd.service               loaded active running Service for snap application cups.cupsd
+  snap.gitea.web.service                loaded active running Service for snap application gitea.web
+  snapd.service                         loaded active running Snap Daemon
+  switcheroo-control.service            loaded active running Switcheroo Control Proxy service
+  systemd-journald.service              loaded active running Journal Service
+  systemd-logind.service                loaded active running User Login Management
+  systemd-oomd.service                  loaded active running Userspace Out-Of-Memory (OOM) Killer
+  systemd-resolved.service              loaded active running Network Name Resolution
+  systemd-timesyncd.service             loaded active running Network Time Synchronization
+  systemd-udevd.service                 loaded active running Rule-based Manager for Device Events and Files
+  tor@default.service                   loaded active running Anonymizing overlay network for TCP
+  udisks2.service                       loaded active running Disk Manager
+  unattended-upgrades.service           loaded active running Unattended Upgrades Shutdown
+  upower.service                        loaded active running Daemon for power management
+  user@1000.service                     loaded active running User Manager for UID 1000
+  waydroid-container.service            loaded active running Waydroid Container
+  wpa_supplicant.service                loaded active running WPA supplicant
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+43 loaded units listed.
+
+=== PROCESSUS NODE ===
+root        6992  0.0  0.0   2704   276 ?        Ss   oct.19   0:00 fusermount3 -o rw,nosuid,nodev,fsname=portal,auto_unmount,subtype=portal -- /run/user/1000/doc
+soufiane  499286  1.5  0.7 34362992 116844 ?     Sl   oct.19  47:35 /snap/brave/559/opt/brave.com/brave/brave --type=gpu-process --ozone-platform=wayland --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=499195 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --gpu-preferences=UAAAAAAAAAAgAAAEAAAAAAAAAAAAAGAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAABgAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --metrics-shmem-handle=4,i,16266773979374132321,1184110669481378556,262144 --field-trial-handle=3,i,9629343875631708219,6182353200845870512,262144 --disable-features=EyeDropper --variations-seed-version=main@abd0825eeaeaa65d3335fc14eac1f085dd7c59ea
+soufiane  499302  0.2  0.5 34029908 83860 ?      Sl   oct.19   6:10 /snap/brave/559/opt/brave.com/brave/brave --type=utility --utility-sub-type=network.mojom.NetworkService --lang=fr --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=499195 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,7909507597370479502,12944356655129463508,524288 --field-trial-handle=3,i,9629343875631708219,6182353200845870512,262144 --disable-features=EyeDropper --variations-seed-version=main@abd0825eeaeaa65d3335fc14eac1f085dd7c59ea
+soufiane  499327  0.0  0.2 33985724 36916 ?      Sl   oct.19   0:26 /snap/brave/559/opt/brave.com/brave/brave --type=utility --utility-sub-type=storage.mojom.StorageService --lang=fr --service-sandbox-type=utility --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=499195 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,1413156926974561393,4533905312076618384,524288 --field-trial-handle=3,i,9629343875631708219,6182353200845870512,262144 --disable-features=EyeDropper --variations-seed-version=main@abd0825eeaeaa65d3335fc14eac1f085dd7c59ea
+soufiane  499598  0.0  0.1 34061260 25144 ?      Sl   oct.19   0:22 /snap/brave/559/opt/brave.com/brave/brave --type=utility --utility-sub-type=audio.mojom.AudioService --lang=fr --service-sandbox-type=none --render-node-override=/dev/dri/renderD128 --crashpad-handler-pid=499195 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --shared-files=v8_context_snapshot_data:100 --metrics-shmem-handle=4,i,9277146730954981713,2606216682874082838,524288 --field-trial-handle=3,i,9629343875631708219,6182353200845870512,262144 --disable-features=EyeDropper --variations-seed-version=main@abd0825eeaeaa65d3335fc14eac1f085dd7c59ea
+root      620127  0.0  0.0 697704   984 ?        Sl   oct.20   0:00 node /app/node_modules/.bin/tsx server.ts
+root      620138  0.0  0.0 44619000 9380 ?       Sl   oct.20   0:59 /usr/local/bin/node --require /app/node_modules/tsx/dist/preflight.cjs --import file:///app/node_modules/tsx/dist/loader.mjs server.ts
+root      620151  0.0  0.0 1237540 4976 ?        Sl   oct.20   1:31 /app/node_modules/@esbuild/linux-x64/bin/esbuild --service=0.25.11 --ping
+root      620160  0.0  0.0 1237796 4796 ?        Sl   oct.20   1:31 /app/node_modules/@esbuild/linux-x64/bin/esbuild --service=0.25.11 --ping
+root     1785062  1.9  0.3 1299148 50836 ?       Ssl  oct.21   5:45 kube-controller-manager --allocate-node-cidrs=true --authentication-kubeconfig=/etc/kubernetes/controller-manager.conf --authorization-kubeconfig=/etc/kubernetes/controller-manager.conf --bind-address=127.0.0.1 --client-ca-file=/var/lib/minikube/certs/ca.crt --cluster-cidr=10.244.0.0/16 --cluster-name=mk --cluster-signing-cert-file=/var/lib/minikube/certs/ca.crt --cluster-signing-key-file=/var/lib/minikube/certs/ca.key --controllers=*,bootstrapsigner,tokencleaner --kubeconfig=/etc/kubernetes/controller-manager.conf --leader-elect=false --requestheader-client-ca-file=/var/lib/minikube/certs/front-proxy-ca.crt --root-ca-file=/var/lib/minikube/certs/ca.crt --service-account-private-key-file=/var/lib/minikube/certs/sa.key --service-cluster-ip-range=10.96.0.0/12 --use-service-account-credentials=true
+root     1785208  2.7  0.3 2470792 55100 ?       Ssl  oct.21   8:05 /var/lib/minikube/binaries/v1.34.0/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --config=/var/lib/kubelet/config.yaml --hostname-override=minikube --kubeconfig=/etc/kubernetes/kubelet.conf --node-ip=192.168.49.2
+soufiane 1882933  0.3  0.6 1461351932 102912 ?   Sl   oct.21   0:47 /proc/self/exe --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=1882806 --enable-crash-reporter=1814665f-5ef8-4ad3-a2f1-23f6339f020e,no_channel --user-data-dir=/home/soufiane/.config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,18168742537017501632,7373683539542730266,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EarlyEstablishGpuChannel,EstablishGpuChannelAsync --disable-features=CalculateNativeWinOcclusion,FontationsLinuxSystemFonts,ScreenAIOCREnabled,SpareRendererForSitePerProcess --variations-seed-version
+soufiane 1882968  0.1  0.7 1461326608 114324 ?   Sl   oct.21   0:18 /proc/self/exe --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=1882806 --enable-crash-reporter=1814665f-5ef8-4ad3-a2f1-23f6339f020e,no_channel --user-data-dir=/home/soufiane/.config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,18168742537017501632,7373683539542730266,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EarlyEstablishGpuChannel,EstablishGpuChannelAsync --disable-features=CalculateNativeWinOcclusion,FontationsLinuxSystemFonts,ScreenAIOCREnabled,SpareRendererForSitePerProcess --variations-seed-version
+soufiane 1882973  0.7  1.2 1461343552 197300 ?   Sl   oct.21   1:31 /proc/self/exe --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=1882806 --enable-crash-reporter=1814665f-5ef8-4ad3-a2f1-23f6339f020e,no_channel --user-data-dir=/home/soufiane/.config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,18168742537017501632,7373683539542730266,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EarlyEstablishGpuChannel,EstablishGpuChannelAsync --disable-features=CalculateNativeWinOcclusion,FontationsLinuxSystemFonts,ScreenAIOCREnabled,SpareRendererForSitePerProcess --variations-seed-version
+soufiane 2103408  1.7  0.9 1459515256 141536 ?   Sl   02:18   0:06 /usr/share/code/code --max-old-space-size=3072 /home/soufiane/.vscode/extensions/ms-vscode.vscode-typescript-next-6.0.20251020/node_modules/typescript/lib/tsserver.js --serverMode partialSemantic --useInferredProjectPerProjectRoot --disableAutomaticTypingAcquisition --cancellationPipeName /tmp/vscode-typescript1000/081457d7a105257148f8/tscancellation-d9c574555164fcaa78df.tmp* --globalPlugins @vscode/copilot-typescript-server-plugin --pluginProbeLocations /home/soufiane/.vscode/extensions/github.copilot-chat-0.32.3 --locale en --noGetErrOnBackgroundUpdate --canUseWatchEvents --validateDefaultNpmLocation --useNodeIpc
+soufiane 2103409 12.4  4.5 1459515272 721824 ?   Sl   02:18   0:44 /usr/share/code/code --max-old-space-size=3072 /home/soufiane/.vscode/extensions/ms-vscode.vscode-typescript-next-6.0.20251020/node_modules/typescript/lib/tsserver.js --useInferredProjectPerProjectRoot --enableTelemetry --cancellationPipeName /tmp/vscode-typescript1000/081457d7a105257148f8/tscancellation-befb70610a04fc8790a7.tmp* --globalPlugins @vscode/copilot-typescript-server-plugin --pluginProbeLocations /home/soufiane/.vscode/extensions/github.copilot-chat-0.32.3 --locale en --noGetErrOnBackgroundUpdate --canUseWatchEvents --validateDefaultNpmLocation --useNodeIpc
+soufiane 2103440  0.1  0.7 1459515256 111900 ?   Sl   02:18   0:00 /usr/share/code/code /home/soufiane/.vscode/extensions/ms-vscode.vscode-typescript-next-6.0.20251020/node_modules/typescript/lib/typingsInstaller.js --globalTypingsCacheLocation /home/soufiane/.cache/typescript/6.0 --enableTelemetry --typesMapLocation /home/soufiane/.vscode/extensions/ms-vscode.vscode-typescript-next-6.0.20251020/node_modules/typescript/lib/typesMap.json --validateDefaultNpmLocation
+soufiane 2103441  0.0  0.5 1459515256 89176 ?    Sl   02:18   0:00 /usr/share/code/code /usr/share/code/resources/app/extensions/markdown-language-features/dist/serverWorkerMain --node-ipc --clientProcessId=2103368
+soufiane 2103448  1.7  0.8 1459515256 137820 ?   Sl   02:18   0:06 /usr/share/code/code /usr/share/code/resources/app/extensions/html-language-features/server/dist/node/htmlServerMain --node-ipc --clientProcessId=2103368
+soufiane 2103464  0.0  0.5 1459515256 85088 ?    Sl   02:18   0:00 /usr/share/code/code /home/soufiane/.vscode/extensions/ms-azuretools.vscode-containers-2.2.0/dist/dockerfile-language-server-nodejs/lib/server.js --node-ipc --node-ipc --clientProcessId=2103368
+soufiane 2103465  0.0  0.5 1459515256 79784 ?    Sl   02:18   0:00 /usr/share/code/code /home/soufiane/.vscode/extensions/ms-azuretools.vscode-containers-2.2.0/dist/compose-language-service/lib/server.js --node-ipc --node-ipc --clientProcessId=2103368
+soufiane 2103562  0.1  0.6 1459515300 97548 ?    Sl   02:18   0:00 /usr/share/code/code /home/soufiane/.vscode/extensions/mongodb.mongodb-vscode-1.14.2/dist/languageServer.js --node-ipc --clientProcessId=2103368
+soufiane 2103581  0.1  0.6 1459515256 95136 ?    Sl   02:18   0:00 /usr/share/code/code /home/soufiane/.vscode/extensions/formulahendry.auto-rename-tag-0.1.10/packages/server/dist/serverMain.js --node-ipc --clientProcessId=2103368
+soufiane 2103603  0.4  0.5 1459548040 93688 ?    Sl   02:18   0:01 /usr/share/code/code /usr/share/code/resources/app/extensions/json-language-features/server/dist/node/jsonServerMain --node-ipc --clientProcessId=2103368
+soufiane 2103674  0.2  0.6 1459548068 97344 ?    Sl   02:19   0:01 /usr/share/code/code /home/soufiane/.vscode/extensions/redhat.vscode-yaml-1.19.1/dist/languageserver.js --node-ipc --clientProcessId=2103368
+soufiane 2103706  2.2  1.0 1459548040 169240 ?   Sl   02:19   0:07 /usr/share/code/code /home/soufiane/.vscode/extensions/streetsidesoftware.code-spell-checker-4.2.6/packages/_server/dist/main.cjs --node-ipc --clientProcessId=2103368
+soufiane 2104014  2.1  1.3 1459567436 205796 ?   Sl   02:19   0:07 /usr/share/code/code /home/soufiane/.vscode/extensions/bradlc.vscode-tailwindcss-0.14.28/dist/tailwindServer.js --node-ipc --clientProcessId=2103368
+soufiane 2110712  0.0  0.0   2800  1592 ?        S    02:24   0:00 /bin/sh -c "/usr/share/code/resources/app/out/vs/base/node/cpuUsage.sh" 1990118 2110582 2110609 2110681 2110682
+soufiane 2110713  0.0  0.0   9880  3568 ?        S    02:24   0:00 /bin/bash /usr/share/code/resources/app/out/vs/base/node/cpuUsage.sh 1990118 2110582 2110609 2110681 2110682
+
+=== PROCESSUS DOCKER ===
+root        3395  0.9  1.5 5094684 240548 ?      Ssl  oct.19  41:31 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+472         4050  0.2  0.4 1797696 78144 ?       Ssl  oct.19  12:05 grafana server --homepath=/usr/share/grafana --config=/etc/grafana/grafana.ini --packaging=docker cfg:default.log.mode=console cfg:default.paths.data=/var/lib/grafana cfg:default.paths.logs=/var/log/grafana cfg:default.paths.plugins=/var/lib/grafana/plugins cfg:default.paths.provisioning=/etc/grafana/provisioning
+root        4216  0.0  0.0 1671368  740 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 3001 -container-ip 172.19.0.2 -container-port 3000 -use-listen-fd
+root        4233  0.0  0.0 1745100 2020 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 3001 -container-ip 172.19.0.2 -container-port 3000 -use-listen-fd
+root        4345  0.0  0.0 1745100  928 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 6380 -container-ip 172.19.0.4 -container-port 6379 -use-listen-fd
+root        4353  0.0  0.0 1745100  976 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 6380 -container-ip 172.19.0.4 -container-port 6379 -use-listen-fd
+root        4455  0.0  0.0 1671368  708 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5433 -container-ip 172.19.0.6 -container-port 5432 -use-listen-fd
+root        4465  0.0  0.0 1671368  776 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5433 -container-ip 172.19.0.6 -container-port 5432 -use-listen-fd
+root        4506  0.0  0.0 1745100 1056 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5434 -container-ip 172.19.0.7 -container-port 5432 -use-listen-fd
+root        4514  0.0  0.0 1745100  676 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5434 -container-ip 172.19.0.7 -container-port 5432 -use-listen-fd
+root        4552  0.0  0.0 1745100  756 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 27017 -container-ip 172.19.0.8 -container-port 27017 -use-listen-fd
+root        4560  0.0  0.0 1745100  776 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 27017 -container-ip 172.19.0.8 -container-port 27017 -use-listen-fd
+root        4610  0.0  0.0 1671368  608 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 9090 -container-ip 172.19.0.10 -container-port 9090 -use-listen-fd
+root        4617  0.0  0.0 1745100  864 ?        Sl   oct.19   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 9090 -container-ip 172.19.0.10 -container-port 9090 -use-listen-fd
+root      552404  0.0  0.0 2114528  904 ?        Sl   oct.20   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 55432 -container-ip 172.17.0.2 -container-port 5432 -use-listen-fd
+root      552412  0.0  0.0 1671368  768 ?        Sl   oct.20   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 55432 -container-ip 172.17.0.2 -container-port 5432 -use-listen-fd
+root      620093  0.0  0.0 1745100  668 ?        Sl   oct.20   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5000 -container-ip 172.17.0.3 -container-port 4000 -use-listen-fd
+root      620101  0.0  0.0 1745100  572 ?        Sl   oct.20   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5000 -container-ip 172.17.0.3 -container-port 4000 -use-listen-fd
+root      741127  0.0  0.0 1819088 2240 ?        Sl   oct.20   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 6379 -container-ip 172.18.0.2 -container-port 6379 -use-listen-fd
+root      741136  0.0  0.0 1745100 1268 ?        Sl   oct.20   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 6379 -container-ip 172.18.0.2 -container-port 6379 -use-listen-fd
+root      741159  0.0  0.0 1745356 2464 ?        Sl   oct.20   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5432 -container-ip 172.18.0.3 -container-port 5432 -use-listen-fd
+root      741167  0.0  0.0 1671368 1056 ?        Sl   oct.20   0:00 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5432 -container-ip 172.18.0.3 -container-port 5432 -use-listen-fd
+root     1782460  0.0  0.0 1967064 3396 ?        Sl   oct.21   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 32768 -container-ip 192.168.49.2 -container-port 22 -use-listen-fd
+root     1782468  0.0  0.0 1745100 3524 ?        Sl   oct.21   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 32769 -container-ip 192.168.49.2 -container-port 2376 -use-listen-fd
+root     1782476  0.0  0.0 1671368 3652 ?        Sl   oct.21   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 32770 -container-ip 192.168.49.2 -container-port 5000 -use-listen-fd
+root     1782483  0.0  0.0 1745100 3396 ?        Sl   oct.21   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 32771 -container-ip 192.168.49.2 -container-port 8443 -use-listen-fd
+root     1782490  0.0  0.0 1745100 3396 ?        Sl   oct.21   0:00 /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 32772 -container-ip 192.168.49.2 -container-port 32443 -use-listen-fd
+root     1783915  1.0  0.2 2417176 38812 ?       Ssl  oct.21   3:00 /usr/bin/dockerd -H tcp://0.0.0.0:2376 -H fd:// --containerd=/run/containerd/containerd.sock -H unix:///var/run/docker.sock --default-ulimit=nofile=1048576:1048576 --tlsverify --tlscacert /etc/docker/ca.pem --tlscert /etc/docker/server.pem --tlskey /etc/docker/server-key.pem --label provider=docker --insecure-registry 10.96.0.0/12
+root     1784230  1.0  0.1 1279424 24472 ?       Ssl  oct.21   3:07 /usr/bin/cri-dockerd --container-runtime-endpoint fd:// --pod-infra-container-image=registry.k8s.io/pause:3.10.1 --network-plugin=cni --hairpin-mode=hairpin-veth
+soufiane 2103464  0.0  0.5 1459515256 85088 ?    Sl   02:18   0:00 /usr/share/code/code /home/soufiane/.vscode/extensions/ms-azuretools.vscode-containers-2.2.0/dist/dockerfile-language-server-nodejs/lib/server.js --node-ipc --node-ipc --clientProcessId=2103368

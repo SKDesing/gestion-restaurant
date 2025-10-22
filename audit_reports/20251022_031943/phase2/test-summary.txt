@@ -1,0 +1,27 @@
+
+ RUN  v3.2.4 /home/soufiane/Bureau/gestion restaurant
+
+ ✓ tests/unit/Button.test.tsx (1 test) 32ms
+stdout | tests/socket/connection.test.ts > Socket.IO Namespaces
+ℹ️ Using in-memory adapter (no REDIS_URL)
+
+ ✓ tests/socket/connection.test.ts (2 tests) 21ms
+stdout | test/socket.spec.ts > socket server > responds to ping with pong on /admin
+ℹ️ Using in-memory adapter (no REDIS_URL)
+
+stdout | test/socket.spec.ts > socket server > responds to ping with pong on /admin
+test http server listening on 5001
+
+stdout | test/socket.spec.ts > socket server > responds to ping with pong on /admin
+socket connected to /admin: KouKlXENJAJOtSWhAAAB
+
+stdout | test/socket.spec.ts
+socket KouKlXENJAJOtSWhAAAB disconnected from /admin: client namespace disconnect
+
+ ✓ test/socket.spec.ts (1 test) 36ms
+
+ Test Files  3 passed (3)
+      Tests  4 passed (4)
+   Start at  14:52:26
+   Duration  1.08s (transform 103ms, setup 0ms, collect 672ms, tests 89ms, environment 1.44s, prepare 261ms)
+
