@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+content-type: application/json
+set-cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..oY50HHoLKkNxcnaH.3-uW3Rwao-JmkkhjULT5DQwOl-ErBsfO7uGBzD8pDRZex6GDHBtE4oKWSVX2iEKiP_zfBCGoPRsVeEcwLP4KXLA6eaNJzVy4F754kBhJxRy7mEwSybACEcU2N2p6SLuHxD8sOcjPERAO17LrmuMKWyL23wI1OiBOsKXwucaLoch1-j6SgVUh4oB5j7aKhmd5z1_Nr1ePxy2tPOl5WPnc631Ai8rS55ZTtmVl7Z59ha5byb_2pSdVFUVPn6NZl1FRwpbOGBR9rYbQaK-WnlaDnWo-zIWTn8SBSQHDKAjxhisLiHn5dQnNYPwfyOl5SdtJ5dkKBiuMEYr4B54uO-VJ0MAS1P_0R_3JKY1VMowTlVQPKZqKPQ.y3v7jJyb_7EyFl4dsuwwvQ; Path=/; Expires=Wed, 19 Nov 2025 20:07:29 GMT; HttpOnly; SameSite=Lax
+Date: Mon, 20 Oct 2025 20:07:29 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"user":{"name":"Michel Gauthier","email":"michel.manager@legourmetmoderne.fr","id":"cmgz5b8zn0019n4alta5vhjmq","role":"MANAGER","restaurantId":"cmgz5b8w30000n4alpp1627wa"},"expires":"2025-11-19T20:07:29.479Z"}

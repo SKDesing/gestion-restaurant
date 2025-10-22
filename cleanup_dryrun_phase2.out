@@ -1,0 +1,138 @@
+════════════════════════════════════════════════════════════════
+🔍 DRY-RUN : Fichiers qui SERAIENT retirés du tracking
+════════════════════════════════════════════════════════════════
+
+📦 Pattern: \.apk$
+android-pos-app-clean/release/app-debug.apk
+
+📦 Pattern: eslint_full\.json$
+eslint_full.json
+
+📦 Pattern: ESLINT_RUN.*\.txt$
+ESLINT_RUN.txt
+ESLINT_RUN2.txt
+
+📦 Pattern: \.db$
+db/custom.db
+
+📦 Pattern: android-pos-app/\.gradle/
+android-pos-app/.gradle/4.4.1/fileChanges/last-build.bin
+android-pos-app/.gradle/4.4.1/fileHashes/fileHashes.bin
+android-pos-app/.gradle/4.4.1/fileHashes/fileHashes.lock
+android-pos-app/.gradle/9.0-milestone-1/checksums/checksums.lock
+android-pos-app/.gradle/9.0-milestone-1/checksums/md5-checksums.bin
+android-pos-app/.gradle/9.0-milestone-1/checksums/sha1-checksums.bin
+android-pos-app/.gradle/9.0-milestone-1/fileChanges/last-build.bin
+android-pos-app/.gradle/9.0-milestone-1/fileHashes/fileHashes.lock
+android-pos-app/.gradle/9.0-milestone-1/gc.properties
+android-pos-app/.gradle/9.1.0/checksums/checksums.lock
+android-pos-app/.gradle/9.1.0/checksums/md5-checksums.bin
+android-pos-app/.gradle/9.1.0/checksums/sha1-checksums.bin
+android-pos-app/.gradle/9.1.0/executionHistory/executionHistory.bin
+android-pos-app/.gradle/9.1.0/executionHistory/executionHistory.lock
+android-pos-app/.gradle/9.1.0/fileChanges/last-build.bin
+android-pos-app/.gradle/9.1.0/fileHashes/fileHashes.bin
+android-pos-app/.gradle/9.1.0/fileHashes/fileHashes.lock
+android-pos-app/.gradle/9.1.0/fileHashes/resourceHashesCache.bin
+android-pos-app/.gradle/9.1.0/gc.properties
+android-pos-app/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+android-pos-app/.gradle/buildOutputCleanup/cache.properties
+android-pos-app/.gradle/buildOutputCleanup/outputFiles.bin
+android-pos-app/.gradle/config.properties
+android-pos-app/.gradle/file-system.probe
+android-pos-app/.gradle/vcs-1/gc.properties
+
+📦 Pattern: android-pos-app-clean/\.gradle/
+android-pos-app-clean/.gradle/8.1.1/checksums/checksums.lock
+android-pos-app-clean/.gradle/8.1.1/checksums/md5-checksums.bin
+android-pos-app-clean/.gradle/8.1.1/checksums/sha1-checksums.bin
+android-pos-app-clean/.gradle/8.1.1/dependencies-accessors/dependencies-accessors.lock
+android-pos-app-clean/.gradle/8.1.1/dependencies-accessors/gc.properties
+android-pos-app-clean/.gradle/8.1.1/executionHistory/executionHistory.bin
+android-pos-app-clean/.gradle/8.1.1/executionHistory/executionHistory.lock
+android-pos-app-clean/.gradle/8.1.1/fileChanges/last-build.bin
+android-pos-app-clean/.gradle/8.1.1/fileHashes/fileHashes.bin
+android-pos-app-clean/.gradle/8.1.1/fileHashes/fileHashes.lock
+android-pos-app-clean/.gradle/8.1.1/fileHashes/resourceHashesCache.bin
+android-pos-app-clean/.gradle/8.1.1/gc.properties
+android-pos-app-clean/.gradle/9.1.0/checksums/checksums.lock
+android-pos-app-clean/.gradle/9.1.0/checksums/md5-checksums.bin
+android-pos-app-clean/.gradle/9.1.0/checksums/sha1-checksums.bin
+android-pos-app-clean/.gradle/9.1.0/executionHistory/executionHistory.bin
+android-pos-app-clean/.gradle/9.1.0/executionHistory/executionHistory.lock
+android-pos-app-clean/.gradle/9.1.0/fileChanges/last-build.bin
+android-pos-app-clean/.gradle/9.1.0/fileHashes/fileHashes.bin
+android-pos-app-clean/.gradle/9.1.0/fileHashes/fileHashes.lock
+android-pos-app-clean/.gradle/9.1.0/gc.properties
+android-pos-app-clean/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+android-pos-app-clean/.gradle/buildOutputCleanup/cache.properties
+android-pos-app-clean/.gradle/buildOutputCleanup/outputFiles.bin
+android-pos-app-clean/.gradle/file-system.probe
+android-pos-app-clean/.gradle/vcs-1/gc.properties
+
+📦 Pattern: android-pos-app/build/
+   ✅ Aucun fichier tracké pour ce pattern
+
+📦 Pattern: android-pos-app-clean/build/
+   ✅ Aucun fichier tracké pour ce pattern
+
+
+════════════════════════ SUMMARY: 56 files
+ - android-pos-app-clean/release/app-debug.apk (5,41 MB)
+ - eslint_full.json (6,30 MB)
+ - ESLINT_RUN.txt (1,17 MB)
+ - ESLINT_RUN2.txt (2,19 MB)
+ - db/custom.db (512,00 KB)
+ - android-pos-app/.gradle/4.4.1/fileChanges/last-build.bin (1 B)
+ - android-pos-app/.gradle/4.4.1/fileHashes/fileHashes.bin (18,21 KB)
+ - android-pos-app/.gradle/4.4.1/fileHashes/fileHashes.lock (17 B)
+ - android-pos-app/.gradle/9.0-milestone-1/checksums/checksums.lock (17 B)
+ - android-pos-app/.gradle/9.0-milestone-1/checksums/md5-checksums.bin (23,97 KB)
+ - android-pos-app/.gradle/9.0-milestone-1/checksums/sha1-checksums.bin (33,15 KB)
+ - android-pos-app/.gradle/9.0-milestone-1/fileChanges/last-build.bin (1 B)
+ - android-pos-app/.gradle/9.0-milestone-1/fileHashes/fileHashes.lock (17 B)
+ - android-pos-app/.gradle/9.0-milestone-1/gc.properties (0 B)
+ - android-pos-app/.gradle/9.1.0/checksums/checksums.lock (17 B)
+ - android-pos-app/.gradle/9.1.0/checksums/md5-checksums.bin (25,19 KB)
+ - android-pos-app/.gradle/9.1.0/checksums/sha1-checksums.bin (35,73 KB)
+ - android-pos-app/.gradle/9.1.0/executionHistory/executionHistory.bin (448,25 KB)
+ - android-pos-app/.gradle/9.1.0/executionHistory/executionHistory.lock (17 B)
+ - android-pos-app/.gradle/9.1.0/fileChanges/last-build.bin (1 B)
+ - android-pos-app/.gradle/9.1.0/fileHashes/fileHashes.bin (42,09 KB)
+ - android-pos-app/.gradle/9.1.0/fileHashes/fileHashes.lock (17 B)
+ - android-pos-app/.gradle/9.1.0/fileHashes/resourceHashesCache.bin (18,10 KB)
+ - android-pos-app/.gradle/9.1.0/gc.properties (0 B)
+ - android-pos-app/.gradle/buildOutputCleanup/buildOutputCleanup.lock (17 B)
+ - android-pos-app/.gradle/buildOutputCleanup/cache.properties (52 B)
+ - android-pos-app/.gradle/buildOutputCleanup/outputFiles.bin (19,72 KB)
+ - android-pos-app/.gradle/config.properties (70 B)
+ - android-pos-app/.gradle/file-system.probe (8 B)
+ - android-pos-app/.gradle/vcs-1/gc.properties (0 B)
+ - android-pos-app-clean/.gradle/8.1.1/checksums/checksums.lock (17 B)
+ - android-pos-app-clean/.gradle/8.1.1/checksums/md5-checksums.bin (34,08 KB)
+ - android-pos-app-clean/.gradle/8.1.1/checksums/sha1-checksums.bin (121,89 KB)
+ - android-pos-app-clean/.gradle/8.1.1/dependencies-accessors/dependencies-accessors.lock (17 B)
+ - android-pos-app-clean/.gradle/8.1.1/dependencies-accessors/gc.properties (0 B)
+ - android-pos-app-clean/.gradle/8.1.1/executionHistory/executionHistory.bin (1,01 MB)
+ - android-pos-app-clean/.gradle/8.1.1/executionHistory/executionHistory.lock (17 B)
+ - android-pos-app-clean/.gradle/8.1.1/fileChanges/last-build.bin (1 B)
+ - android-pos-app-clean/.gradle/8.1.1/fileHashes/fileHashes.bin (75,94 KB)
+ - android-pos-app-clean/.gradle/8.1.1/fileHashes/fileHashes.lock (17 B)
+ - android-pos-app-clean/.gradle/8.1.1/fileHashes/resourceHashesCache.bin (18,30 KB)
+ - android-pos-app-clean/.gradle/8.1.1/gc.properties (0 B)
+ - android-pos-app-clean/.gradle/9.1.0/checksums/checksums.lock (17 B)
+ - android-pos-app-clean/.gradle/9.1.0/checksums/md5-checksums.bin (22,65 KB)
+ - android-pos-app-clean/.gradle/9.1.0/checksums/sha1-checksums.bin (29,82 KB)
+ - android-pos-app-clean/.gradle/9.1.0/executionHistory/executionHistory.bin (706,00 KB)
+ - android-pos-app-clean/.gradle/9.1.0/executionHistory/executionHistory.lock (17 B)
+ - android-pos-app-clean/.gradle/9.1.0/fileChanges/last-build.bin (1 B)
+ - android-pos-app-clean/.gradle/9.1.0/fileHashes/fileHashes.bin (37,11 KB)
+ - android-pos-app-clean/.gradle/9.1.0/fileHashes/fileHashes.lock (17 B)
+ - android-pos-app-clean/.gradle/9.1.0/gc.properties (0 B)
+ - android-pos-app-clean/.gradle/buildOutputCleanup/buildOutputCleanup.lock (17 B)
+ - android-pos-app-clean/.gradle/buildOutputCleanup/cache.properties (52 B)
+ - android-pos-app-clean/.gradle/buildOutputCleanup/outputFiles.bin (163,46 KB)
+ - android-pos-app-clean/.gradle/file-system.probe (8 B)
+ - android-pos-app-clean/.gradle/vcs-1/gc.properties (0 B)
+\n════════════════════════════════════════════════════════════════
+DRY-RUN complete. Files list saved to cleanup_dryrun_files.txt

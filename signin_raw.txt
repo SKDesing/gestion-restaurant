@@ -1,0 +1,9 @@
+HTTP/1.1 302 Found
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+location: http://localhost:4000
+set-cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..Ygr0ro9NGK6iNQX2.1bIu8Z5L8jiOMC_q5YJl0A9cFljnHb0gad82rkzngyAzzK6sMm1O54Hk8yrPv2PouPiOepa-hknX9-TcNs6uDp9f5ScYBl7iZ7904XR6Ni2-0I0pNWhvyG40lIfzbf9c_hHT9T4Dt2OSO53dX6YGhkDhB-4_4ba92EiQPmdGFYPrh6jM1I6ZnFSdOkSAYAARhPCVn_Io9v5ERrF-wMI6AXnij3D0-oQ4-kflzzm9A6aOrl3gAp4gp3iRPmgH9NuiiG8jL8q0ebphppbKUhIVJk01_1tMAk5gQBGEYDLHc-UcRUZovQmsL3h41ZKS-Evgqj8xRq-gSOa0R7wAC-1c14GXszKjYsM3yIWdjed6698PIxRf0g.afYSHiHOCTXBhSmsd2ffMw; Path=/; Expires=Wed, 19 Nov 2025 20:07:26 GMT; HttpOnly; SameSite=Lax
+Date: Mon, 20 Oct 2025 20:07:26 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+

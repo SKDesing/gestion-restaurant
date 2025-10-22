@@ -1,0 +1,84 @@
+
+> nextjs_tailwind_shadcn_ts@0.1.0 build
+> next build
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/soufiane/package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /home/soufiane/Bureau/gestion restaurant/package-lock.json
+
+   ▲ Next.js 15.5.6
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 2.9s
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+Mailcow client disabled: MAILCOW_API_URL or MAILCOW_API_KEY not set
+   Generating static pages (0/39) ...
+Mailcow client disabled: MAILCOW_API_URL or MAILCOW_API_KEY not set
+   Generating static pages (9/39) 
+   Generating static pages (19/39) 
+   Generating static pages (29/39) 
+ ✓ Generating static pages (39/39)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                  Size  First Load JS
+┌ ○ /                                     9.95 kB         141 kB
+├ ○ /_not-found                             997 B         103 kB
+├ ○ /accueil                              5.08 kB         116 kB
+├ ○ /admin                                1.94 kB         113 kB
+├ ƒ /api/admin/tenants/create               188 B         102 kB
+├ ƒ /api/analytics                          188 B         102 kB
+├ ƒ /api/auth/[...nextauth]                 188 B         102 kB
+├ ƒ /api/categories                         188 B         102 kB
+├ ƒ /api/cleaning                           188 B         102 kB
+├ ƒ /api/debug-auth                         188 B         102 kB
+├ ƒ /api/employees                          188 B         102 kB
+├ ƒ /api/haccp-alerts                       188 B         102 kB
+├ ƒ /api/health                             188 B         102 kB
+├ ƒ /api/inventory                          188 B         102 kB
+├ ƒ /api/menu                               188 B         102 kB
+├ ƒ /api/newsletter                         188 B         102 kB
+├ ƒ /api/orders                             188 B         102 kB
+├ ƒ /api/orders/takeout                     188 B         102 kB
+├ ƒ /api/quality                            188 B         102 kB
+├ ƒ /api/reservations                       188 B         102 kB
+├ ƒ /api/restaurants                        188 B         102 kB
+├ ƒ /api/socketio                           188 B         102 kB
+├ ƒ /api/suppliers                          188 B         102 kB
+├ ƒ /api/tables                             188 B         102 kB
+├ ƒ /api/temperature                        188 B         102 kB
+├ ○ /auth/login                           9.97 kB         112 kB
+├ ○ /auth/register                          433 B         102 kB
+├ ○ /bar                                  2.09 kB         113 kB
+├ ○ /caisse                               6.13 kB         124 kB
+├ ○ /caisse-avancee                       8.48 kB         150 kB
+├ ○ /cuisine                              5.32 kB         124 kB
+├ ○ /cuisine-alertes                      2.56 kB         137 kB
+├ ○ /cuisine-avancee                      10.3 kB         133 kB
+├ ○ /newsletter-demo                      7.89 kB         123 kB
+├ ○ /personnel                            6.84 kB         148 kB
+├ ○ /serveur                              6.91 kB         125 kB
+└ ○ /service-alertes                      2.44 kB         137 kB
++ First Load JS shared by all              102 kB
+  ├ chunks/1255-5a627a744bb09d12.js       45.7 kB
+  ├ chunks/4bd1b696-f785427dddbba9fb.js   54.2 kB
+  └ other shared chunks (total)           1.94 kB
+
+Route (pages)                                Size  First Load JS
+─ ƒ /api/socket/io                            0 B        98.4 kB
++ First Load JS shared by all             98.4 kB
+  ├ chunks/framework-e54b663a2888b5de.js  59.7 kB
+  ├ chunks/main-39b2190495febac1.js       36.8 kB
+  └ other shared chunks (total)           1.91 kB
+
+ƒ Middleware                              55.1 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -1,0 +1,40 @@
+════════════════════════════════════════════════════════════════
+🔍 ANALYSE TAILLE GIT - HISTORIQUE COMPLET
+════════════════════════════════════════════════════════════════
+
+📊 1. Taille du dossier .git/ :
+─────────────────────────────────────────
+12M	.git
+
+📦 2. Top 30 objets Git les plus volumineux (historique complet) :
+─────────────────────────────────────────
+    6,30 MB  eslint_full.json
+    5,41 MB  android-pos-app-clean/release/app-debug.apk
+    2,19 MB  ESLINT_RUN2.txt
+    1,17 MB  ESLINT_RUN.txt
+    1,01 MB  android-pos-app-clean/.gradle/8.1.1/executionHistory/executionHistory.bin
+  706,00 KB  android-pos-app-clean/.gradle/9.1.0/executionHistory/executionHistory.bin
+  675,60 KB  package-lock.json
+  597,92 KB  package-lock.json
+  512,00 KB  db/custom.db
+  500,49 KB  package-lock.json
+  500,09 KB  package-lock.json
+  498,19 KB  package-lock.json
+  498,19 KB  package-lock.json.backup
+  497,37 KB  package-lock.json
+  491,93 KB  package-lock.json
+  491,35 KB  package-lock.json
+  448,25 KB  android-pos-app/.gradle/9.1.0/executionHistory/executionHistory.bin
+  436,66 KB  public/logo gestion restaurateur.png
+  430,86 KB  pnpm-lock.yaml
+  418,33 KB  pnpm-lock.yaml
+  398,75 KB  pnpm-lock.yaml
+  185,37 KB  android-pos-app-clean/app/src/main/assets/_next/static/chunks/framework-823c6b628bab677c.js
+  171,42 KB  android-pos-app-clean/app/src/main/assets/_next/static/chunks/1684-db3ae46f67d24429.js
+  164,47 KB  android-pos-app-clean/app/src/main/assets/_next/static/chunks/4bd1b696-9a0b9381a2f4a392.js
+  163,46 KB  android-pos-app-clean/.gradle/buildOutputCleanup/outputFiles.bin
+  121,89 KB  android-pos-app-clean/.gradle/8.1.1/checksums/sha1-checksums.bin
+  116,54 KB  android-pos-app-clean/app/src/main/assets/_next/static/chunks/main-b8f2b0fc3240f72d.js
+  114,09 KB  android-pos-app-clean/app/src/main/assets/_next/static/css/1f459f4ec79353f1.css
+  109,96 KB  android-pos-app-clean/app/src/main/assets/_next/static/chunks/polyfills-42372ed130431b0a.js
+  105,03 KB  android-pos-app/app/src/main/assets/_next/static/css/a06b10aa26681d15.css

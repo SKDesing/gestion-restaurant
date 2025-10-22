@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+content-type: application/json
+set-cookie: next-auth.csrf-token=3b7a52124bf7af266a2ad2cfe84088ff5ceb75d8a419fc3b82f742944e153989%7C6bd7e25790153ba81f01be238d3e2ba0e3e2b50cb27aea44b29e2062d9a7e7ac; Path=/; HttpOnly; SameSite=Lax
+set-cookie: next-auth.callback-url=http%3A%2F%2Flocalhost%3A4000; Path=/; HttpOnly; SameSite=Lax
+Date: Mon, 20 Oct 2025 20:07:19 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"csrfToken":"3b7a52124bf7af266a2ad2cfe84088ff5ceb75d8a419fc3b82f742944e153989"}

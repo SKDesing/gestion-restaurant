@@ -1,0 +1,35 @@
+nohup: les entrées sont ignorées
+> Ready on http://127.0.0.1:4000
+> Socket.IO server running at ws://127.0.0.1:4000/api/socketio
+ ✓ Compiled /middleware in 338ms (207 modules)
+ ○ Compiling /auth/login ...
+ ✓ Compiled /auth/login in 2.6s (849 modules)
+ GET /auth/login 200 in 2952ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 818ms (1076 modules)
+ POST /api/auth/callback/credentials 302 in 1841ms
+ POST /api/auth/signin?csrf=true 302 in 36ms
+ POST /api/auth/signin?csrf=true 302 in 17ms
+ POST /api/auth/signin?csrf=true 302 in 14ms
+ POST /api/auth/signin?csrf=true 302 in 10ms
+ POST /api/auth/signin?csrf=true 302 in 10ms
+ POST /api/auth/signin?csrf=true 302 in 9ms
+ POST /api/auth/signin?csrf=true 302 in 11ms
+ POST /api/auth/signin?csrf=true 302 in 15ms
+ POST /api/auth/signin?csrf=true 302 in 11ms
+ POST /api/auth/signin?csrf=true 302 in 14ms
+ GET /api/auth/csrf 200 in 44ms
+prisma:query SELECT "public"."employees"."id", "public"."employees"."name", "public"."employees"."email", "public"."employees"."password", "public"."employees"."phone", "public"."employees"."role"::text, "public"."employees"."salary", "public"."employees"."hireDate", "public"."employees"."status"::text, "public"."employees"."address", "public"."employees"."birthDate", "public"."employees"."notes", "public"."employees"."restaurantId", "public"."employees"."createdAt", "public"."employees"."updatedAt" FROM "public"."employees" WHERE ("public"."employees"."email" = $1 AND 1=1) LIMIT $2 OFFSET $3
+ POST /api/auth/callback/credentials 302 in 207ms
+ ○ Compiling / ...
+ ✓ Compiled / in 791ms (1224 modules)
+ POST / 200 in 1105ms
+prisma:query SELECT 1
+prisma:query SELECT "public"."employees"."id", "public"."employees"."name", "public"."employees"."email", "public"."employees"."password", "public"."employees"."phone", "public"."employees"."role"::text, "public"."employees"."salary", "public"."employees"."hireDate", "public"."employees"."status"::text, "public"."employees"."address", "public"."employees"."birthDate", "public"."employees"."notes", "public"."employees"."restaurantId", "public"."employees"."createdAt", "public"."employees"."updatedAt" FROM "public"."employees" WHERE ("public"."employees"."email" = $1 AND 1=1) LIMIT $2 OFFSET $3
+ POST /api/auth/callback/credentials 302 in 184ms
+ POST / 200 in 47ms
+ GET /api/auth/session 200 in 50ms
+ GET /api/auth/csrf 200 in 34ms
+prisma:query SELECT "public"."employees"."id", "public"."employees"."name", "public"."employees"."email", "public"."employees"."password", "public"."employees"."phone", "public"."employees"."role"::text, "public"."employees"."salary", "public"."employees"."hireDate", "public"."employees"."status"::text, "public"."employees"."address", "public"."employees"."birthDate", "public"."employees"."notes", "public"."employees"."restaurantId", "public"."employees"."createdAt", "public"."employees"."updatedAt" FROM "public"."employees" WHERE ("public"."employees"."email" = $1 AND 1=1) LIMIT $2 OFFSET $3
+ POST /api/auth/callback/credentials 302 in 92ms
+ POST / 200 in 64ms

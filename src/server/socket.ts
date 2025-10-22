@@ -54,10 +54,6 @@ export function createSocketServer(server) {
   return io;
 }
 
-// Provide CommonJS compatibility for legacy require() users
-// This keeps ESM named exports while allowing `require('./socket').createSocketServer`
-// in environments that still use CommonJS.
-declare const module: any
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { createSocketServer };
-}
+// Note: we intentionally export only ESM named exports.
+// Removing assignment to `module.exports` avoids Next.js ESLint rule
+// `no-assign-module-variable` while keeping the function exported.

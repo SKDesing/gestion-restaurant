@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Use standalone output so Docker multi-stage build can copy the standalone app
+  output: "standalone",
   // Removed `output: "export"` to allow dynamic API routes and middleware
   /* config options here */
   typescript: {
@@ -12,7 +14,7 @@ const nextConfig: NextConfig = {
     if (dev) {
       // 禁用 webpack 的热模块替换
       config.watchOptions = {
-        ignored: ['**/*'], // 忽略所有文件变化
+        ignored: ["**/*"], // 忽略所有文件变化
       };
     }
     return config;
