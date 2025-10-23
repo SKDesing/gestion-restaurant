@@ -1,0 +1,151 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, 'audit/**' ]
+  pull_request:
+    name: CI
+
+    on:
+      push:
+        branches: [ main, 'audit/**' ]
+      pull_request:
+        branches: [ main ]
+
+    jobs:
+      build-and-test:
+        name: Build, typecheck, test
+        runs-on: ubuntu-latest
+        services:
+        name: CI
+
+        on:
+          push:
+            branches: [ main, 'audit/**', 'feature/**' ]
+          pull_request:
+            branches: [ main ]
+
+        jobs:
+          build-and-test:
+            name: Build, typecheck, test
+            runs-on: ubuntu-latest
+            services:
+              postgres:
+                image: postgres:14
+                env:
+                  POSTGRES_USER: prisma
+                  POSTGRES_PASSWORD: prisma
+                  POSTGRES_DB: gestion_test
+                ports:
+                  - 5432:5432
+                options: >-
+                  --health-cmd="pg_isready -U prisma -d gestion_test" --health-interval=10s --health-timeout=5s --health-retries=5
+
+            steps:
+              - name: Checkout
+                uses: actions/checkout@v4
+
+              - name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
+                  node-version: '20'
+
+              - name: Install dependencies (pnpm)
+                run: |
+                  corepack enable
+                  corepack prepare pnpm@latest --activate
+                  pnpm install --frozen-lockfile
+
+              - name: Wait for Postgres
+                run: |
+                  for i in {1..30}; do
+                    pg_isready -h localhost -p 5432 -U prisma && break || sleep 1
+                  done
+
+              - name: Generate Prisma client
+                env:
+                  DATABASE_URL: postgresql://prisma:prisma@localhost:5432/gestion_test
+                run: pnpm exec prisma generate
+
+              - name: Apply migrations (best-effort)
+                env:
+                  DATABASE_URL: postgresql://prisma:prisma@localhost:5432/gestion_test
+                run: pnpm exec prisma migrate deploy || true
+
+              - name: Seed database (if present)
+                env:
+                  DATABASE_URL: postgresql://prisma:prisma@localhost:5432/gestion_test
+                run: pnpm exec tsx prisma/seed.ts || true
+
+              - name: TypeScript check
+                run: pnpm exec tsc --noEmit
+
+              - name: Lint
+                run: pnpm run lint --if-present
+
+              - name: Run tests
+                run: pnpm test --if-present
+
+              - name: Build Next.js
+                run: pnpm run build
+
+          build-and-e2e:
+            name: Build + E2E
+            runs-on: ubuntu-latest
+            needs: build-and-test
+            services:
+              postgres:
+                image: postgres:15-alpine
+                env:
+                  POSTGRES_USER: prisma
+                  POSTGRES_PASSWORD: prisma
+                  POSTGRES_DB: gestion_test
+                ports:
+                  - 5432:5432
+                options: >-
+                  --health-cmd="pg_isready -U prisma -d gestion_test" --health-interval=10s --health-timeout=5s --health-retries=5
+
+            steps:
+              - uses: actions/checkout@v4
+
+              - name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
+                  node-version: '20'
+
+              - name: Install dependencies (pnpm)
+                run: |
+                  corepack enable
+                  corepack prepare pnpm@latest --activate
+                  pnpm install --frozen-lockfile
+
+              - name: Generate Prisma client
+                env:
+                  DATABASE_URL: postgresql://prisma:prisma@localhost:5432/gestion_test
+                run: pnpm exec prisma generate
+
+              - name: Build
+                run: pnpm run build
+
+              - name: Start server in background
+                env:
+                  DATABASE_URL: postgresql://prisma:prisma@localhost:5432/gestion_test
+                  NEXTAUTH_URL: http://localhost:4000
+                  NEXTAUTH_SECRET: test_secret
+                run: |
+                  nohup pnpm exec tsx server.ts > server-ci.log 2>&1 &
+                  sleep 6
+
+              - name: E2E - Programmatic signin (CSRF-aware)
+                run: |
+                  set -e
+                  CSRF=$(curl -sS http://localhost:4000/api/auth/csrf | jq -r .csrfToken)
+                  echo "csrf=$CSRF"
+                  curl -sS -c /tmp/cookies.txt -b /tmp/cookies.txt -X POST "http://localhost:4000/api/auth/callback/credentials" \
+                    -H "Content-Type: application/x-www-form-urlencoded" \
+                    --data-urlencode "csrfToken=${CSRF}" --data-urlencode "email=michel.manager@legourmetmoderne.fr" --data-urlencode "password=ChangeMe123!" -L -v || true
+                  sleep 1
+                  curl -sS -b /tmp/cookies.txt http://localhost:4000/api/auth/session | jq . || true
+
+
+            - name: Start server in background

@@ -1,0 +1,1699 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Restaurant
+model Restaurant {
+  id          String   @id @default(cuid())
+  name        String
+  address     String?
+  phone       String?
+  email       String?
+  description String?
+  logo        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  tables      Table[]
+  categories  Category[]
+  menuItems   MenuItem[]
+  orders      Order[]
+  employees   Employee[]
+  suppliers   Supplier[]
+  inventory   InventoryItem[]
+  kitchenStations KitchenStation[]
+  cleaningTasks CleaningTask[]
+  qualityControls QualityControl[]
+  kitchenInventory KitchenInventory[]
+  recipes     Recipe[]
+  kitchenSchedules KitchenSchedule[]
+  productionReports ProductionReport[]
+  beverageCategories BeverageCategory[]
+  beverages   Beverage[]
+  foodCategories FoodCategory[]
+  foodItems   FoodItem[]
+  equipmentCategories EquipmentCategory[]
+  equipment   Equipment[]
+  consumableCategories ConsumableCategory[]
+  consumables Consumable[]
+  bankAccounts BankAccount[]
+  transactions Transaction[]
+  budgets     Budget[]
+  cashRegisters CashRegister[]
+  cashMovements CashMovement[]
+  wasteCategories WasteCategory[]
+  wasteRecords WasteRecord[]
+  dailyReports DailyReport[]
+  performanceMetrics PerformanceMetric[]
+  
+  @@map("restaurants")
+}
+
+// Tables du restaurant
+model Table {
+  id          String   @id @default(cuid())
+  number      String
+  capacity    Int
+  status      TableStatus @default(AVAILABLE)
+  qrCode      String?
+  location    String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+  orders      Order[]
+  
+  @@unique([restaurantId, number])
+  @@map("tables")
+}
+
+enum TableStatus {
+  AVAILABLE
+  OCCUPIED
+  RESERVED
+  MAINTENANCE
+}
+
+// Catégories de menu
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  icon        String?
+  displayOrder Int     @default(0)
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  menuItems   MenuItem[]
+  
+  @@map("categories")
+}
+
+// Items du menu
+model MenuItem {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       Float
+  cost        Float?
+  image       String?
+  category    String?
+  allergens   String?
+  spicy       Boolean  @default(false)
+  vegetarian  Boolean  @default(false)
+  vegan       Boolean  @default(false)
+  glutenFree  Boolean  @default(false)
+  available   Boolean  @default(true)
+  preparationTime Int?
+  calories    Int?
+  categoryId  String
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  categoryRef Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  orderItems  OrderItem[]
+  inventoryIngredients InventoryIngredient[]
+  
+  @@map("menu_items")
+}
+
+// Clients
+model Customer {
+  id          String   @id @default(cuid())
+  name        String
+  email       String?  @unique
+  phone       String?
+  address     String?
+  birthDate   DateTime?
+  loyaltyPoints Int    @default(0)
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  reservations Reservation[]
+  orders      Order[]
+  
+  @@map("customers")
+}
+
+// Réservations
+model Reservation {
+  id          String   @id @default(cuid())
+  customerName String
+  customerPhone String?
+  customerEmail String?
+  date        DateTime
+  time        DateTime
+  partySize   Int
+  status      ReservationStatus @default(PENDING)
+  notes       String?
+  tableId     String
+  customerId  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  table       Table     @relation(fields: [tableId], references: [id], onDelete: Cascade)
+  customer    Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  
+  @@map("reservations")
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+// Commandes
+model Order {
+  id          String   @id @default(cuid())
+  orderNumber String   @unique
+  status      OrderStatus @default(PENDING)
+  type        OrderType @default(DINE_IN)
+  subtotal    Float
+  tax         Float
+  tip         Float    @default(0)
+  total       Float
+  paymentMethod PaymentMethod?
+  paymentStatus PaymentStatus @default(PENDING)
+  notes       String?
+  tableId     String?
+  customerId  String?
+  restaurantId String
+  employeeId  String?
+  estimatedTime DateTime?
+  actualTime   DateTime?
+  priority    OrderPriority @default(NORMAL)
+  pickupTime  DateTime?
+  customerName String? // Pour commandes à emporter
+  customerPhone String? // Pour commandes à emporter
+  notificationsSent Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  table       Table?    @relation(fields: [tableId], references: [id], onDelete: SetNull)
+  customer    Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  employee    Employee? @relation(fields: [employeeId], references: [id], onDelete: SetNull)
+  orderItems  OrderItem[]
+  alerts      Alert[]
+  
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  READY
+  SERVED
+  COMPLETED
+  CANCELLED
+}
+
+enum OrderType {
+  DINE_IN
+  TAKEOUT
+  DELIVERY
+  BAR
+}
+
+enum OrderPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  MOBILE
+  CHECK
+  OTHER
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  PARTIAL
+  REFUNDED
+  FAILED
+}
+
+// Items de commande
+model OrderItem {
+  id          String   @id @default(cuid())
+  quantity    Int
+  unitPrice   Float
+  totalPrice  Float
+  notes       String?
+  orderId     String
+  menuItemId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem    MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+  
+  @@map("order_items")
+}
+
+// Employés
+model Employee {
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @unique
+  password    String
+  phone       String?
+  role        EmployeeRole
+  salary      Float?
+  hireDate    DateTime
+  status      EmployeeStatus @default(ACTIVE)
+  address     String?
+  birthDate   DateTime?
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  orders      Order[]
+  schedules   WorkSchedule[]
+  
+  @@map("employees")
+}
+
+enum EmployeeRole {
+  OWNER
+  MANAGER
+  WAITER
+  BARTENDER
+  CHEF
+  COOK
+  DISHWASHER
+  HOST
+  CASHIER
+}
+
+enum EmployeeStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+  TERMINATED
+}
+
+// Planning de travail
+model WorkSchedule {
+  id          String   @id @default(cuid())
+  employeeId  String
+  date        DateTime
+  startTime   DateTime
+  endTime     DateTime
+  status      ScheduleStatus @default(SCHEDULED)
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  
+  @@map("work_schedules")
+}
+
+enum ScheduleStatus {
+  SCHEDULED
+  CHECKED_IN
+  CHECKED_OUT
+  ABSENT
+  LATE
+}
+
+// Fournisseurs
+model Supplier {
+  id          String   @id @default(cuid())
+  name        String
+  contactPerson String?
+  email       String?
+  phone       String?
+  address     String?
+  category    String?
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  purchases   Purchase[]
+  beverages   Beverage[]
+  foodItems   FoodItem[]
+  consumables Consumable[]
+  
+  @@map("suppliers")
+}
+
+// Items d'inventaire
+model InventoryItem {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  category    String?
+  unit        String
+  currentStock Float
+  minStock    Float
+  maxStock    Float?
+  unitCost    Float
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  purchaseItems PurchaseItem[]
+  menuItemIngredients InventoryIngredient[]
+  
+  @@map("inventory_items")
+}
+
+// Liaison ingrédients - items menu
+model InventoryIngredient {
+  id            String   @id @default(cuid())
+  menuItemId    String
+  inventoryItemId String
+  quantity      Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  menuItem      MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+  inventoryItem InventoryItem @relation(fields: [inventoryItemId], references: [id], onDelete: Cascade)
+  
+  @@unique([menuItemId, inventoryItemId])
+  @@map("inventory_ingredients")
+}
+
+// Achats
+model Purchase {
+  id          String   @id @default(cuid())
+  purchaseNumber String @unique
+  date        DateTime
+  total       Float
+  status      PurchaseStatus @default(PENDING)
+  notes       String?
+  supplierId  String
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  supplier    Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  items       PurchaseItem[]
+  
+  @@map("purchases")
+}
+
+enum PurchaseStatus {
+  PENDING
+  ORDERED
+  RECEIVED
+  CANCELLED
+}
+
+// Items d'achat
+model PurchaseItem {
+  id            String   @id @default(cuid())
+  quantity      Float
+  unitPrice     Float
+  totalPrice    Float
+  purchaseId    String
+  inventoryItemId String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  purchase      Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  inventoryItem InventoryItem @relation(fields: [inventoryItemId], references: [id], onDelete: Cascade)
+  
+  @@map("purchase_items")
+}
+
+// ====== GESTION DE CUISINE ======
+
+// Stations de cuisine
+model KitchenStation {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  type        StationType
+  status      StationStatus @default(ACTIVE)
+  capacity    Int      @default(1)
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  cleaningTasks CleaningTask[]
+  
+  @@map("kitchen_stations")
+}
+
+enum StationType {
+  COLD_STARTER
+  HOT_STARTER
+  MAIN_COURSE
+  GRILL
+  FRYER
+  SAUCE
+  DESSERT
+  BAR
+  PASTRY
+  PREPARATION
+  PLATING
+}
+
+enum StationStatus {
+  ACTIVE
+  INACTIVE
+  MAINTENANCE
+  CLEANING
+}
+
+// Tâches de nettoyage (HACCP)
+model CleaningTask {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  type        CleaningType
+  frequency   CleaningFrequency
+  stationId   String?
+  priority    TaskPriority @default(MEDIUM)
+  estimatedDuration Int // en minutes
+  status      TaskStatus @default(PENDING)
+  assignedTo  String? // Employee ID
+  completedBy String? // Employee ID
+  scheduledFor DateTime?
+  completedAt DateTime?
+  nextDue     DateTime
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  station     KitchenStation? @relation(fields: [stationId], references: [id], onDelete: SetNull)
+  cleaningLogs CleaningLog[]
+  
+  @@map("cleaning_tasks")
+}
+
+enum CleaningType {
+  DAILY_CLEANING
+  WEEKLY_CLEANING
+  MONTHLY_CLEANING
+  DEEP_CLEANING
+  EQUIPMENT_CLEANING
+  SURFACE_DISINFECTION
+  WASTE_DISPOSAL
+  PEST_CONTROL
+  FRIDGE_CLEANING
+  FREEZER_CLEANING
+}
+
+enum CleaningFrequency {
+  HOURLY
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+  AS_NEEDED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  OVERDUE
+  CANCELLED
+}
+
+// Logs de nettoyage
+model CleaningLog {
+  id          String   @id @default(cuid())
+  taskId      String
+  employeeId  String
+  completedAt DateTime @default(now())
+  duration    Int // en minutes
+  notes       String?
+  temperature Float? // pour certaines tâches de nettoyage
+  chemicals   String? // produits utilisés
+  verifiedBy  String? // Employee ID qui vérifie
+  verifiedAt  DateTime?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  task        CleaningTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  @@map("cleaning_logs")
+}
+
+// Contrôle qualité (HACCP)
+model QualityControl {
+  id          String   @id @default(cuid())
+  type        ControlType
+  stationId   String?
+  temperature Float?
+  pH          Float?
+  visual      Boolean?
+  notes       String?
+  status      ControlStatus @default(PASS)
+  checkedBy   String // Employee ID
+  checkedAt   DateTime @default(now())
+  correctiveAction String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("quality_controls")
+}
+
+enum ControlType {
+  FOOD_TEMPERATURE
+  FRIDGE_TEMPERATURE
+  FREEZER_TEMPERATURE
+  COOKING_TEMPERATURE
+  HOT_HOLDING_TEMPERATURE
+  COLD_HOLDING_TEMPERATURE
+  WATER_TEMPERATURE
+  SURFACE_SWAB
+  PEST_CHECK
+  DATING_CHECK
+  ALLERGEN_CHECK
+  VISUAL_INSPECTION
+}
+
+enum ControlStatus {
+  PASS
+  FAIL
+  CRITICAL
+  CORRECTIVE
+}
+
+enum InventoryStatus {
+  AVAILABLE
+  LOW_STOCK
+  OUT_OF_STOCK
+  EXPIRED
+  EXPIRING_SOON
+  QUARANTINE
+  DAMAGED
+}
+
+enum StockStatus {
+  AVAILABLE
+  LOW_STOCK
+  OUT_OF_STOCK
+  EXPIRED
+  EXPIRING_SOON
+  OPENED
+  DAMAGED
+}
+
+// Gestion des stocks en cuisine
+model KitchenInventory {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  batchNumber String?
+  expiryDate  DateTime?
+  openDate    DateTime?
+  location    String? // ex: "Frigo 1", "Étagère A"
+  quantity    Float
+  unit        String
+  minQuantity Float
+  status      InventoryStatus @default(AVAILABLE)
+  supplier    String?
+  storageTemp Float?
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("kitchen_inventory")
+}
+
+// Recettes
+model Recipe {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  category    String
+  portions    Int
+  prepTime    Int // en minutes
+  cookTime    Int // en minutes
+  difficulty  Difficulty
+  cost        Float?
+  sellingPrice Float?
+  allergens   String?
+  instructions String?
+  status      RecipeStatus @default(ACTIVE)
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  ingredients RecipeIngredient[]
+  steps       RecipeStep[]
+  
+  @@map("recipes")
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+  EXPERT
+}
+
+enum RecipeStatus {
+  ACTIVE
+  INACTIVE
+  SEASONAL
+  TEST
+}
+
+// Ingrédients de recette
+model RecipeIngredient {
+  id          String   @id @default(cuid())
+  recipeId    String
+  inventoryId String?
+  name        String
+  quantity    Float
+  unit        String
+  notes       String?
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  recipe      Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  
+  @@map("recipe_ingredients")
+}
+
+// Étapes de recette
+model RecipeStep {
+  id          String   @id @default(cuid())
+  recipeId    String
+  stepNumber  Int
+  title       String
+  description String
+  duration    Int? // en minutes
+  temperature Float?
+  notes       String?
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  recipe      Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  
+  @@map("recipe_steps")
+}
+
+// Planning du personnel de cuisine
+model KitchenSchedule {
+  id          String   @id @default(cuid())
+  employeeId  String
+  stationId   String?
+  date        DateTime
+  startTime   DateTime
+  endTime     DateTime
+  role        KitchenRole
+  status      ScheduleStatus @default(SCHEDULED)
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("kitchen_schedules")
+}
+
+enum KitchenRole {
+  HEAD_CHEF
+  SOUS_CHEF
+  LINE_COOK
+  PREP_COOK
+  DISHWASHER
+  PASTRY_CHEF
+  GRILL_COOK
+  FRY_COOK
+  SAUCE_COOK
+  COMMIS
+}
+
+// Rapports de production
+model ProductionReport {
+  id          String   @id @default(cuid())
+  date        DateTime
+  shift       Shift
+  stationId   String?
+  totalOrders Int
+  completedOrders Int
+  cancelledOrders Int
+  averageTime Int // en minutes
+  issues      String?
+  notes       String?
+  reportedBy  String // Employee ID
+  restaurantId String
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("production_reports")
+}
+
+enum Shift {
+  MORNING
+  AFTERNOON
+  EVENING
+  NIGHT
+}
+
+// ====== SYSTÈME D'ALERTES ======
+
+// Alertes en temps réel
+model Alert {
+  id          String   @id @default(cuid())
+  orderId     String?
+  type        AlertType
+  title       String
+  message     String
+  station     String? // kitchen, bar, server, takeaway
+  priority    AlertPriority @default(NORMAL)
+  status      AlertStatus @default(ACTIVE)
+  acknowledgedBy String? // Employee ID
+  acknowledgedAt DateTime?
+  completedBy String? // Employee ID
+  completedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  order       Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  
+  @@map("alerts")
+}
+
+enum AlertType {
+  NEW_ORDER
+  ORDER_READY
+  ORDER_CANCELLED
+  URGENT_ORDER
+  PAYMENT_REQUEST
+  LOW_STOCK
+  OUT_OF_STOCK
+  EXPIRY_ALERT
+  TEMPERATURE_ALERT
+  EQUIPMENT_FAILURE
+  CLEANING_REQUIRED
+  STAFF_SHORTAGE
+  CUSTOMER_COMPLAINT
+  DELIVERY_DELAY
+  QUALITY_ISSUE
+  MAINTENANCE_DUE
+  SUPPLIER_DELAY
+  WASTE_THRESHOLD
+  ALLERGEN_ALERT
+  HYGIENE_ISSUE
+}
+
+enum AlertPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+  CRITICAL
+}
+
+enum AlertStatus {
+  ACTIVE
+  ACKNOWLEDGED
+  IN_PROGRESS
+  COMPLETED
+  DISMISSED
+}
+
+// ====== GESTION DES BOISSONS ======
+
+// Catégories de boissons
+model BeverageCategory {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  type        BeverageType
+  displayOrder Int     @default(0)
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  beverages   Beverage[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("beverage_categories")
+}
+
+enum BeverageType {
+  ALCOHOLIC
+  NON_ALCOHOLIC
+  HOT
+  COLD
+  FERMENTED
+  DISTILLED
+  MIXED
+}
+
+// Boissons détaillées
+model Beverage {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  brand       String?
+  origin      String?
+  vintage     String? // Millésime pour vins
+  abv         Float?   // Taux d'alcool
+  volume      Int      // Volume en ml
+  category    String
+  price       Float
+  cost        Float?
+  image       String?
+  servingGlass String? // Type de verre
+  garnish     String? // Garniture
+  preparationMethod String?
+  available   Boolean  @default(true)
+  ageRestriction Boolean @default(false)
+  categoryId  String
+  supplierId  String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  categoryRef BeverageCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  supplier    Supplier? @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  stockItems  BeverageStock[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("beverages")
+}
+
+// Stock de boissons
+model BeverageStock {
+  id          String   @id @default(cuid())
+  beverageId  String
+  quantity    Float
+  unit        String
+  location    String? // "Bar", "Cave", "Frigo bar"
+  minStock    Float
+  maxStock    Float?
+  batchNumber String?
+  expiryDate  DateTime?
+  openDate    DateTime?
+  status      StockStatus @default(AVAILABLE)
+  lastUpdated DateTime @default(now())
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  beverage    Beverage @relation(fields: [beverageId], references: [id], onDelete: Cascade)
+  
+  @@unique([beverageId, location])
+  @@map("beverage_stocks")
+}
+
+// ====== GESTION DES DENRÉES ALIMENTAIRES ======
+
+// Catégories de denrées
+model FoodCategory {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  storageType StorageType
+  temperatureRange String? // "2-4°C", "-18°C", "Ambient"
+  shelfLife   Int?     // Durée de conservation en jours
+  allergens   String?  // Liste des allergènes potentiels
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  foodItems   FoodItem[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("food_categories")
+}
+
+enum StorageType {
+  FROZEN
+  REFRIGERATED
+  AMBIENT
+  DRY_STORAGE
+  COOL_STORAGE
+  HOT_HOLDING
+}
+
+// Denrées alimentaires
+model FoodItem {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  brand       String?
+  category    String
+  unit        String
+  weight      Float?   // Poids par unité en g
+  calories    Float?   // Calories par 100g
+  proteins    Float?   // Protéines par 100g
+  carbs       Float?   // Glucides par 100g
+  fats        Float?   // Lipides par 100g
+  fiber       Float?   // Fibres par 100g
+  sodium      Float?   // Sodium par 100g
+  sugar       Float?   // Sucres par 100g
+  allergens   String?  // Allergènes séparés par des virgules
+  origin      String?
+  certification String? // Bio, AOP, IGP, etc.
+  storageRequirements String?
+  categoryId  String
+  supplierId  String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  categoryRef FoodCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  supplier    Supplier? @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  stockItems  FoodStock[]
+  batches     FoodBatch[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("food_items")
+}
+
+// Stock de denrées
+model FoodStock {
+  id          String   @id @default(cuid())
+  foodItemId  String
+  quantity    Float
+  unit        String
+  location    String? // "Frigo 1", "Congélateur", "Étagère sèche"
+  minStock    Float
+  maxStock    Float?
+  status      StockStatus @default(AVAILABLE)
+  lastUpdated DateTime @default(now())
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  foodItem    FoodItem @relation(fields: [foodItemId], references: [id], onDelete: Cascade)
+  
+  @@unique([foodItemId, location])
+  @@map("food_stocks")
+}
+
+// Lots de denrées (traçabilité)
+model FoodBatch {
+  id          String   @id @default(cuid())
+  foodItemId  String
+  batchNumber String
+  quantity    Float
+  unit        String
+  productionDate DateTime?
+  expiryDate  DateTime?
+  deliveryDate DateTime @default(now())
+  supplierBatchNumber String?
+  storageLocation String?
+  status      BatchStatus @default(AVAILABLE)
+  qualityNotes String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  foodItem    FoodItem @relation(fields: [foodItemId], references: [id], onDelete: Cascade)
+  
+  @@map("food_batches")
+}
+
+enum BatchStatus {
+  AVAILABLE
+  IN_USE
+  FINISHED
+  EXPIRED
+  RECALLED
+  QUARANTINE
+  DAMAGED
+}
+
+// ====== GESTION DU MATÉRIEL ======
+
+// Catégories d'équipements
+model EquipmentCategory {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  maintenanceFrequency MaintenanceFrequency
+  expectedLifespan Int? // Durée de vie en mois
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  equipment   Equipment[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("equipment_categories")
+}
+
+enum MaintenanceFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+  AS_NEEDED
+  USAGE_BASED
+}
+
+// Équipements et matériel
+model Equipment {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  brand       String?
+  model       String?
+  serialNumber String?
+  category    String
+  location    String?
+  purchaseDate DateTime?
+  purchasePrice Float?
+  warrantyExpiry DateTime?
+  status      EquipmentStatus @default(OPERATIONAL)
+  lastMaintenanceDate DateTime?
+  nextMaintenanceDate DateTime?
+  usageHours  Float?   // Heures d'utilisation
+  energyConsumption Float? // Consommation en kWh
+  capacity    String?  // Capacité (ex: "500L", "10kg")
+  dimensions  String?  // Dimensions LxlxH
+  weight      Float?   // Poids en kg
+  manuals     String?  // Liens vers les manuels
+  notes       String?
+  categoryId  String
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  categoryRef EquipmentCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  maintenanceRecords MaintenanceRecord[]
+  issues      EquipmentIssue[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@unique([serialNumber])
+  @@map("equipment")
+}
+
+enum EquipmentStatus {
+  OPERATIONAL
+  MAINTENANCE
+  OUT_OF_ORDER
+  DECOMMISSIONED
+  CLEANING
+  CALIBRATION
+  REPAIR
+}
+
+// Historique de maintenance
+model MaintenanceRecord {
+  id          String   @id @default(cuid())
+  equipmentId String
+  type        MaintenanceType
+  description String
+  performedBy String? // Employee ID ou external technician
+  performedAt DateTime @default(now())
+  duration    Int?     // en minutes
+  cost        Float?
+  partsUsed   String?  // Pièces remplacées
+  nextMaintenanceDate DateTime?
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  equipment   Equipment @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  
+  @@map("maintenance_records")
+}
+
+enum MaintenanceType {
+  EQUIPMENT_CHECK
+  EQUIPMENT_REPAIR
+  EQUIPMENT_CALIBRATION
+  PREVENTIVE_MAINTENANCE
+  EMERGENCY_REPAIR
+  REPLACEMENT
+  INSPECTION
+  CERTIFICATION
+}
+
+// Problèmes d'équipement
+model EquipmentIssue {
+  id          String   @id @default(cuid())
+  equipmentId String
+  title       String
+  description String
+  severity    IssueSeverity @default(MEDIUM)
+  status      IssueStatus @default(OPEN)
+  reportedBy  String? // Employee ID
+  reportedAt  DateTime @default(now())
+  resolvedBy  String? // Employee ID
+  resolvedAt  DateTime?
+  resolution  String?
+  cost        Float?
+  downtime    Int?     // Temps d'arrêt en minutes
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  equipment   Equipment @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  
+  @@map("equipment_issues")
+}
+
+enum IssueSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum IssueStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+  ESCALATED
+}
+
+// ====== GESTION DES CONSOMMABLES ======
+
+// Catégories de consommables
+model ConsumableCategory {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  unit        String
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  consumables Consumable[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("consumable_categories")
+}
+
+// Consommables
+model Consumable {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  brand       String?
+  reference   String?
+  categoryId  String
+  unit        String
+  packageSize Int?     // Taille du paquet (ex: 1000 unités)
+  cost        Float?
+  supplierId  String?
+  ecoFriendly Boolean  @default(false)
+  recyclable  Boolean  @default(false)
+  storageRequirements String?
+  usageRate   Float?   // Consommation moyenne par jour/semaine
+  minStock    Float
+  maxStock    Float?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  categoryRef ConsumableCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  supplier    Supplier? @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  stockItems  ConsumableStock[]
+  usageLogs   ConsumableUsage[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("consumables")
+}
+
+// Stock de consommables
+model ConsumableStock {
+  id          String   @id @default(cuid())
+  consumableId String
+  quantity    Float
+  unit        String
+  location    String? // "Stockage", "Cuisine", "Bar", "Salle"
+  batchNumber String?
+  expiryDate  DateTime?
+  status      StockStatus @default(AVAILABLE)
+  lastUpdated DateTime @default(now())
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  consumable  Consumable @relation(fields: [consumableId], references: [id], onDelete: Cascade)
+  
+  @@unique([consumableId, location])
+  @@map("consumable_stocks")
+}
+
+// Journal d'utilisation des consommables
+model ConsumableUsage {
+  id          String   @id @default(cuid())
+  consumableId String
+  quantity    Float
+  unit        String
+  purpose     String? // "Service", "Nettoyage", "Emballage"
+  usedBy      String? // Employee ID
+  usedAt      DateTime @default(now())
+  cost        Float?
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  consumable  Consumable @relation(fields: [consumableId], references: [id], onDelete: Cascade)
+  
+  @@map("consumable_usage")
+}
+
+// ====== GESTION FINANCIÈRE ======
+
+// Comptes bancaires
+model BankAccount {
+  id          String   @id @default(cuid())
+  bankName    String
+  accountNumber String
+  accountType AccountType
+  balance     Float    @default(0)
+  currency    String   @default("EUR")
+  iban        String?
+  bic         String?
+  status      AccountStatus @default(ACTIVE)
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  transactions Transaction[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@unique([accountNumber])
+  @@map("bank_accounts")
+}
+
+enum AccountType {
+  CHECKING
+  SAVINGS
+  BUSINESS
+  CREDIT_CARD
+  CASH
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  FROZEN
+  CLOSED
+}
+
+// Transactions financières
+model Transaction {
+  id          String   @id @default(cuid())
+  reference   String   @unique
+  type        TransactionType
+  category    TransactionCategory
+  amount      Float
+  currency    String   @default("EUR")
+  description String?
+  date        DateTime
+  accountId   String
+  orderId     String?
+  purchaseId  String?
+  supplierId  String?
+  employeeId  String?
+  status      TransactionStatus @default(COMPLETED)
+  paymentMethod PaymentMethod?
+  tags        String?
+  attachments String? // JSON array of file URLs
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  account     BankAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("transactions")
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+  REFUND
+  FEE
+  TAX_PAYMENT
+  SALARY
+  INVESTMENT
+  LOAN
+}
+
+enum TransactionCategory {
+  FOOD_PURCHASE
+  BEVERAGE_PURCHASE
+  EQUIPMENT
+  MAINTENANCE
+  UTILITIES
+  RENT
+  INSURANCE
+  MARKETING
+  SALARIES
+  TAXES
+  SUPPLIES
+  CLEANING
+  REPAIRS
+  LEGAL
+  BANK_FEES
+  CASH_WITHDRAWAL
+  CASH_DEPOSIT
+  SALES_REVENUE
+  DELIVERY_REVENUE
+  CATERING_REVENUE
+  OTHER_REVENUE
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  FAILED
+}
+
+// Budgets
+model Budget {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  category    TransactionCategory
+  amount      Float
+  period      BudgetPeriod
+  startDate   DateTime
+  endDate     DateTime
+  spent       Float    @default(0)
+  remaining   Float
+  status      BudgetStatus @default(ACTIVE)
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("budgets")
+}
+
+enum BudgetPeriod {
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+  CUSTOM
+}
+
+enum BudgetStatus {
+  ACTIVE
+  COMPLETED
+  EXCEEDED
+  CANCELLED
+}
+
+// ====== GESTION DE LA TRÉSORERIE ======
+
+// Mouvements de caisse
+model CashMovement {
+  id          String   @id @default(cuid())
+  type        CashMovementType
+  amount      Float
+  description String?
+  reference   String?
+  employeeId  String?
+  shift       Shift
+  date        DateTime @default(now())
+  verifiedBy  String? // Employee ID
+  verifiedAt  DateTime?
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("cash_movements")
+}
+
+enum CashMovementType {
+  OPENING_BALANCE
+  CLOSING_BALANCE
+  CASH_SALE
+  CASH_REFUND
+  CASH_WITHDRAWAL
+  CASH_DEPOSIT
+  PETTY_CASH
+  SAFE_TRANSFER
+  DISCREPANCY
+}
+
+// Z de caisse
+model CashRegister {
+  id          String   @id @default(cuid())
+  registerNumber String
+  location    String?
+  status      RegisterStatus @default(CLOSED)
+  currentBalance Float @default(0)
+  openingBalance Float?
+  expectedClosing Float?
+  actualClosing Float?
+  discrepancy Float?
+  shift       Shift
+  openedBy    String? // Employee ID
+  openedAt    DateTime?
+  closedBy    String? // Employee ID
+  closedAt    DateTime?
+  verifiedBy  String? // Employee ID
+  verifiedAt  DateTime?
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("cash_registers")
+}
+
+enum RegisterStatus {
+  OPEN
+  CLOSED
+  COUNTING
+  DISCREPANCY
+}
+
+// ====== GESTION DES DÉCHETS ======
+
+// Catégories de déchets
+model WasteCategory {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  type        WasteType
+  disposalMethod String?
+  recycling   Boolean  @default(false)
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  wasteRecords WasteRecord[]
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("waste_categories")
+}
+
+enum WasteType {
+  FOOD_WASTE
+  PACKAGING
+  PAPER
+  GLASS
+  PLASTIC
+  METAL
+  ORGANIC
+  HAZARDOUS
+  ELECTRONIC
+  GENERAL
+}
+
+// Suivi des déchets
+model WasteRecord {
+  id          String   @id @default(cuid())
+  categoryId  String
+  weight      Float    // en kg
+  unit        String   @default("kg")
+  reason      String?  // "Expiration", "Surproduction", "Retour client"
+  cost        Float?   // Coût du gaspillage
+  recordedBy  String?  // Employee ID
+  recordedAt  DateTime @default(now())
+  disposedAt  DateTime?
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  category    WasteCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("waste_records")
+}
+
+// ====== ANALYTIQUES ET RAPPORTS ======
+
+// Rapports quotidiens
+model DailyReport {
+  id          String   @id @default(cuid())
+  date        DateTime @unique
+  totalRevenue Float
+  totalCosts  Float
+  grossProfit Float
+  netProfit   Float
+  totalOrders Int
+  totalCustomers Int
+  averageOrderValue Float
+  coversByMealPeriod String // JSON: {breakfast: 20, lunch: 45, dinner: 60}
+  topSellingItems String // JSON array
+  lowStockItems String // JSON array
+  staffPresent Int
+  staffAbsent Int
+  weather     String?
+  notes       String?
+  reportedBy  String? // Employee ID
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("daily_reports")
+}
+
+// Métriques de performance
+model PerformanceMetric {
+  id          String   @id @default(cuid())
+  name        String
+  category    MetricCategory
+  value       Float
+  target      Float?
+  unit        String?
+  period      MetricPeriod
+  date        DateTime
+  notes       String?
+  restaurantId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  
+  @@map("performance_metrics")
+}
+
+enum MetricCategory {
+  SALES
+  COSTS
+  EFFICIENCY
+  QUALITY
+  CUSTOMER_SATISFACTION
+  STAFF_PERFORMANCE
+  INVENTORY
+  WASTE
+  ENERGY
+  WATER
+}
+
+enum MetricPeriod {
+  HOURLY
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}

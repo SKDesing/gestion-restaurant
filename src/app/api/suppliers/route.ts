@@ -1,0 +1,1 @@
+// export statique : route API désactivée
