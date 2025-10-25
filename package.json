@@ -51,6 +51,7 @@
     "lint-staged": "^13.3.0",
     "pm2": "^6.0.13",
     "postcss": "8",
+    "prettier": "^3.6.2",
     "prisma": "^6.18.0",
     "tailwindcss": "4.1.15",
     "tailwindcss-animate": "^1.0.7",

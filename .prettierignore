@@ -1,0 +1,30 @@
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Databases
+*.db
+*.db-journal
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env*
+!.env.example
+
+# Generated files
+*.generated.*
+.turbo/
+
+# Lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

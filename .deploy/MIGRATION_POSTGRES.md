@@ -136,19 +136,20 @@ curl -X POST http://localhost:3000/api/auth/callback/credentials \
 
 ## 📊 Comparaison SQLite vs PostgreSQL
 
-| Critère | SQLite | PostgreSQL |
-|---------|--------|------------|
-| **Performance** | Excellent (petit volume) | Excellent (gros volume) |
-| **Concurrence** | Limitée | Excellente |
-| **Backup** | Fichier unique | Dump SQL ou backup binaire |
-| **Production** | ❌ Non recommandé | ✅ Recommandé |
-| **Développement** | ✅ Idéal | ⚠️ Setup plus complexe |
+| Critère           | SQLite                   | PostgreSQL                 |
+| ----------------- | ------------------------ | -------------------------- |
+| **Performance**   | Excellent (petit volume) | Excellent (gros volume)    |
+| **Concurrence**   | Limitée                  | Excellente                 |
+| **Backup**        | Fichier unique           | Dump SQL ou backup binaire |
+| **Production**    | ❌ Non recommandé        | ✅ Recommandé              |
+| **Développement** | ✅ Idéal                 | ⚠️ Setup plus complexe     |
 
 ---
 
 ## �� Dépannage
 
 ### Erreur P1001 (connexion impossible)
+
 ```bash
 # Vérifier que PostgreSQL écoute
 sudo systemctl status postgresql
@@ -160,6 +161,7 @@ sudo nano /etc/postgresql/*/main/pg_hba.conf
 ```
 
 ### Erreur P3018 (migrations non appliquées)
+
 ```bash
 # Réinitialiser les migrations
 npx prisma migrate reset
@@ -167,6 +169,7 @@ npx prisma migrate deploy
 ```
 
 ### Performance lente
+
 ```bash
 # Créer les index
 npx prisma db execute --stdin <<< "
