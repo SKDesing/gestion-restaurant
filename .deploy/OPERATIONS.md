@@ -166,3 +166,48 @@ pnpm install
 pnpm build
 npx pm2 reload restaurant-app
 ```
+
+---
+
+## 🔄 MIGRATION VERS PRODUCTION
+
+### Configuration actuelle
+```
+Environnement: DÉVELOPPEMENT
+Base de données: SQLite (prisma/dev.db)
+Schema PostgreSQL: Sauvegardé dans prisma/schema.prisma.postgres.bak
+```
+
+### Pour passer en production
+Voir le guide complet: `.deploy/MIGRATION_POSTGRES.md`
+
+### Credentials de test (développement)
+```
+Email: admin@restaurant.local
+Password: admin123
+```
+
+---
+
+## 📊 MONITORING
+
+### Vérifier l'état de l'application
+```bash
+# Status PM2
+npx pm2 status
+
+# Logs en temps réel
+npx pm2 logs restaurant-app
+
+# Métriques
+npx pm2 monit
+
+# Health check
+curl -I http://localhost:3000/auth/login
+```
+
+### Métriques importantes
+- **Temps de réponse**: < 100ms
+- **Mémoire PM2**: < 200MB par instance
+- **CPU**: < 50% en moyenne
+- **Uptime**: > 99.9%
