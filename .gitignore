@@ -22,3 +22,5 @@ logs/
 # IDE
 .vscode/
 .idea/
+# Next.js TypeScript declarations (auto-generated)
+next-env.d.ts
